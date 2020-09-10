@@ -1,5 +1,5 @@
 {
-  "name": "console",
+  "name": "quirrrel-console",
   "version": "1.0.0",
   "scripts": {
     "start": "blitz start",
