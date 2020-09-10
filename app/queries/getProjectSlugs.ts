@@ -2,7 +2,7 @@ import db from "db"
 import { SessionContext } from "blitz"
 
 export default async function getProjectSlugs(params: any, ctx: { session?: SessionContext } = {}) {
-  if (!ctx.session?.isAuthorized) {
+  if (!ctx.session?.isAuthorized()) {
     return []
   }
 
