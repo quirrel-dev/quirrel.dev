@@ -59,7 +59,7 @@ function Projects() {
       </ul>
       <button
         onClick={async () => {
-          const slug = prompt("Enter Slug for new project", "my-project")
+          const slug = window.prompt("Enter Slug for new project", "my-project")
           if (!slug) {
             return
           }

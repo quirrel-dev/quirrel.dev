@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Project",
+      "field": "tokens",
+      "type": "Token",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Project",
+      "field": "token"
+    }
+  ]
+}

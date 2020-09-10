@@ -3,7 +3,7 @@
 
 datasource db {
   provider = ["sqlite", "postgres"]
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -42,7 +42,7 @@ model Project {
   createdAt DateTime @default(now())
   owner     User     @relation(fields: [ownerId], references: [id])
   ownerId   String
-  tokens     Token[]
+  token     Token[]
 }
 
 model Token {
