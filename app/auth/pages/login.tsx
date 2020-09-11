@@ -1,18 +1,22 @@
-import React from "react"
-import { useRouter, BlitzPage } from "blitz"
+import React, { useEffect } from "react"
+import { useRouter, BlitzPage, Router } from "blitz"
 import Layout from "app/layouts/Layout"
 import { LoginForm } from "app/auth/components/LoginForm"
 
 const LoginPage: BlitzPage = () => {
   const router = useRouter()
 
-  return (
-    <div>
-      <LoginForm onSuccess={() => router.push("/")} />
-    </div>
-  )
+  useEffect(() => {
+    Router.prefetch("/projects")
+  }, [])
+
+  return <LoginForm onSuccess={() => router.push("/projects")} />
 }
 
-LoginPage.getLayout = (page) => <Layout title="Log In">{page}</Layout>
+LoginPage.getLayout = (page) => (
+  <Layout title="Log In" hideLogin>
+    {page}
+  </Layout>
+)
 
 export default LoginPage

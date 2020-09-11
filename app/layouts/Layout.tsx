@@ -1,17 +1,32 @@
-import { ReactNode } from "react"
-import { Head } from "blitz"
+import { ReactNode, Suspense } from "react"
+import { Head, Link } from "blitz"
+import { Header, Anchor } from "grommet"
+import { LoginState } from "app/components/LoginState"
 
-type LayoutProps = {
+interface LayoutProps {
   title?: string
   children: ReactNode
+  hideLogin?: boolean
 }
 
-const Layout = ({ title, children }: LayoutProps) => (
+const Layout = ({ title, children, hideLogin }: LayoutProps) => (
   <>
     <Head>
-      <title>{title || "console"}</title>
+      <title>{title || "Quirrel"}</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
+
+    <Header background="brand" pad="small">
+      <Link href="/">
+        <Anchor>Quirrel</Anchor>
+      </Link>
+
+      {!hideLogin && (
+        <Suspense fallback={null}>
+          <LoginState />
+        </Suspense>
+      )}
+    </Header>
 
     {children}
   </>
