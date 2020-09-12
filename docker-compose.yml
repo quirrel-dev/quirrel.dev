@@ -8,11 +8,20 @@ services:
       REDIS_URL: redis://redis
     ports:
       - 4000:3000
+
   redis:
     image: redis
+
   redis-commander:
     image: rediscommander/redis-commander
     environment:
       - REDIS_HOST=redis
     ports:
       - 8081:8081
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: root
+    ports:
+      - 5432:5432
