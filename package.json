@@ -9,6 +9,11 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "cacheDirectories": [
+    "node_modules",
+    ".blitz",
+    ".next"
+  ],
   "browserslist": [
     "defaults"
   ],
