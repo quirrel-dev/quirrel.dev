@@ -4,7 +4,7 @@
   "scripts": {
     "start": "blitz start",
     "studio": "blitz db studio",
-    "build": "blitz build",
+    "build": "yarn prisma generate --schema ./db/schema.prisma && blitz build",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "test": "jest",
     "test:watch": "jest --watch"
