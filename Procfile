@@ -1,2 +1,2 @@
-web: yarn start --production --port $PORT
+web: yarn next start --port $PORT
 release: yarn blitz db migrate
