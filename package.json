@@ -30,6 +30,7 @@
   "dependencies": {
     "@prisma/cli": "2.6.2",
     "@prisma/client": "2.6.2",
+    "axios": "0.20.0",
     "blitz": "0.21.1",
     "final-form": "4.20.1",
     "grommet": "2.15.0",

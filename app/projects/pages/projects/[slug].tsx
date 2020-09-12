@@ -7,7 +7,40 @@ import { Button, Box, Text, Heading, Accordion, AccordionPanel, DataChart } from
 import { Add, Trash } from "grommet-icons"
 import deleteProject from "app/projects/mutations/deleteProject"
 import { Suspense } from "react"
-import getUsageReports from "app/projects/queries/getUsageRecords"
+import getUsageRecords from "app/projects/queries/getUsageRecords"
+
+function UsageReport({ projectSlug, tokenName }: { projectSlug: string; tokenName?: string }) {
+  const [usageReports] = useQuery(getUsageRecords, { projectSlug, tokenName })
+
+  return (
+    <Box align="center">
+      <Text>The data below is just a dummy.</Text>
+      <DataChart
+        guide
+        data={usageReports}
+        series={["date", "invocations"]}
+        chart={[
+          {
+            property: "invocations",
+            type: "line",
+            thickness: "xsmall",
+          },
+          {
+            property: "invocations",
+            type: "point",
+            thickness: "small",
+            point: "circle",
+          },
+        ]}
+        axis={{
+          x: { property: "date", granularity: "fine" },
+          y: { property: "invocations", granularity: "medium" },
+        }}
+        detail
+      />
+    </Box>
+  )
+}
 
 function TokenInfo({
   projectSlug,
@@ -18,36 +51,11 @@ function TokenInfo({
   tokenName: string
   onDelete: () => void
 }) {
-  const [usageReports] = useQuery(getUsageReports, { projectSlug, tokenName })
   return (
     <Box>
-      <Box align="center">
-        <Text>The data below is just a dummy.</Text>
-        <DataChart
-          guide
-          data={usageReports}
-          series={["date", "calls"]}
-          chart={[
-            {
-              property: "calls",
-              type: "line",
-              thickness: "xsmall",
-            },
-            {
-              property: "calls",
-              type: "point",
-              thickness: "small",
-              point: "circle",
-            },
-          ]}
-          axis={{
-            x: { property: "date", granularity: "fine" },
-            y: { property: "calls", granularity: "medium" },
-          }}
-          detail
-        />
-      </Box>
-
+      <Suspense fallback="Loading ...">
+        <UsageReport projectSlug={projectSlug} tokenName={tokenName} />
+      </Suspense>
       <Button onClick={onDelete} hoverIndicator="light-1" alignSelf="end">
         <Box pad="small" direction="row" align="center" gap="small">
           <Trash />
@@ -61,6 +69,7 @@ function TokenInfo({
 const SpecificProject: BlitzPage = () => {
   const slug = useParam("slug") as string
 
+  const [usageReports] = useQuery(getUsageRecords, { projectSlug: slug })
   const [project, projectMeta] = useQuery(getProject, { slug })
   if (!project) {
     return <p>Not Found.</p>
@@ -71,6 +80,10 @@ const SpecificProject: BlitzPage = () => {
   return (
     <div>
       <Heading level={1}>{project.slug}</Heading>
+
+      <Suspense fallback="Loading ...">
+        <UsageReport projectSlug={slug} />
+      </Suspense>
 
       <Heading level={2}>Tokens</Heading>
 

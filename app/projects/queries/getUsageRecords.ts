@@ -2,11 +2,11 @@ import { SessionContext } from "blitz"
 
 interface TimeSeriesRow {
   date: string
-  calls: number
+  invocations: number
 }
 
-export default async function getUsageReports(
-  {}: { projectSlug: string; tokenName: string },
+export default async function getUsageRecords(
+  { tokenName }: { projectSlug: string; tokenName?: string },
   ctx: { session?: SessionContext } = {}
 ) {
   ctx.session?.authorize()
@@ -16,7 +16,7 @@ export default async function getUsageReports(
     const digits = ((i % 12) + 1).toString().padStart(2, "0")
     data.push({
       date: `2020-05-${digits}T00:00:00`,
-      calls: i * 111111,
+      invocations: i * (!!tokenName ? 111111 : 888888),
     })
   }
 

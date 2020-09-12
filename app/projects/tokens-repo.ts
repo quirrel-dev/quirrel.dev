@@ -1,12 +1,12 @@
 import * as TokensAPI from "./tokens-api"
 import db from "db"
 
-export function describeToken(projectSlug: string, tokenId: string) {
-  return `${projectSlug}.${tokenId}`
+export function describeToken(userId: string, projectSlug: string, name: string) {
+  return `${userId}.${projectSlug}.${name}`
 }
 
 export async function add(projectSlug: string, name: string, userId: string) {
-  const { id } = await db.token.create({
+  await db.token.create({
     data: {
       name,
       project: {
@@ -20,14 +20,26 @@ export async function add(projectSlug: string, name: string, userId: string) {
     },
   })
 
-  const token = await TokensAPI.create(describeToken(projectSlug, id))
+  const token = await TokensAPI.create(describeToken(userId, projectSlug, name))
 
   return token
 }
 
 export async function remove(projectSlug: string, name: string, userId: string) {
-  await TokensAPI.revoke(describeToken(projectSlug, name))
+  await TokensAPI.revoke(describeToken(userId, projectSlug, name))
 
-  await db.token.deleteMany({ where: { projectSlug, name } })
-  return true
+  await db.token.deleteMany({ where: { projectSlug, name, projectOwnerId: userId } })
+}
+
+export async function removeAllFromProject(projectSlug: string, userId: string) {
+  const tokens = await db.token.findMany({
+    where: { projectSlug, projectOwnerId: userId },
+    select: { name: true },
+  })
+
+  await Promise.all(
+    tokens.map((token) => TokensAPI.revoke(describeToken(userId, projectSlug, token.name)))
+  )
+
+  await db.token.deleteMany({ where: { projectSlug, projectOwnerId: userId } })
 }

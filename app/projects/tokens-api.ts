@@ -1,8 +1,18 @@
+import axios from "axios"
+
+const quirrelApi = axios.create({
+  baseURL: process.env.QUIRREL_API || "https://api.quirrel.dev",
+  auth: {
+    username: "ignored",
+    password: process.env.QUIRREL_PASSPHRASE!,
+  },
+})
+
 export async function create(name: string) {
-  // TODO: do something
-  return "my-random-custom-token"
+  const { data: token } = await quirrelApi.put(`/tokens/${name}`, {})
+  return token
 }
 
 export async function revoke(name: string) {
-  // TODO: do something
+  await quirrelApi.delete(`/tokens/${name}`)
 }
