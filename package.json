@@ -46,6 +46,7 @@
     "react-error-boundary": "2.3.1",
     "react-final-form": "6.5.1",
     "secure-password": "4.0.0",
+    "stripe": "8.95.0",
     "styled-components": "5.2.0",
     "zod": "1.11.5"
   },

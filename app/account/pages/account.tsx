@@ -1,7 +1,8 @@
 import { BlitzPage, useQuery } from "blitz"
-import { Box, Heading, Meter } from "grommet"
+import { Anchor, Box, Heading, Meter } from "grommet"
 import Layout from "app/layouts/Layout"
 import getAccountData from "../queries/getAccountData"
+import getBillingPortalLink from "../../stripe/queries/getBillingPortalLink"
 
 const maxFree = 10_000
 
@@ -22,6 +23,18 @@ const Account: BlitzPage = () => {
           },
         ]}
       />
+
+      <Anchor
+        onClick={async () => {
+          const url = await getBillingPortalLink({
+            returnUrl: window.location.href,
+          })
+
+          window.location.href = url
+        }}
+      >
+        Billing Portal
+      </Anchor>
     </Box>
   )
 }
