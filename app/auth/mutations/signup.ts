@@ -20,6 +20,8 @@ export default async function signup(
     email,
   })
 
+  console.log({ customer })
+
   const hashedPassword = await hashPassword(password)
   await db.user.create({
     data: { email, hashedPassword, id: customer.id },
