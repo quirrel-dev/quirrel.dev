@@ -10,7 +10,7 @@ type LoginFormProps = {
 
 export const LoginForm = (props: LoginFormProps) => {
   return (
-    <div className="min-h-screen flex justify-center pt-24">
+    <div className="min-h-screen flex justify-center lg:pt-24">
       <div className="max-w-md w-full py-12 px-6">
         <p className="mt-6 text-sm leading-5 text-center text-gray-900">Log in to your account</p>
 
