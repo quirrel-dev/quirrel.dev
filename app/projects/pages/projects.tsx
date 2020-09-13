@@ -1,6 +1,6 @@
 import { BlitzPage, useQuery, Router } from "blitz"
-import getProjectSlugs from "app/queries/getProjectSlugs"
-import createProject from "app/mutations/createProject"
+import getProjectSlugs from "app/projects/queries/getProjectSlugs"
+import createProject from "app/projects/mutations/createProject"
 import { List, Box, Button, Text, Heading } from "grommet"
 import { useEffect } from "react"
 import { Add } from "grommet-icons"
