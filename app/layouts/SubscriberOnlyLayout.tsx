@@ -4,7 +4,7 @@ import SetupPaymentForm from "app/stripe/components/SetupPaymentForm"
 
 export function SubscriberOnlyLayout(props: LayoutProps) {
   const hasDefaultPaymentMethod = useHasDefaultPaymentMethod()
-  if (!hasDefaultPaymentMethod) {
+  if (hasDefaultPaymentMethod === false) {
     return (
       <Layout title="Please Subscribe">
         <SetupPaymentForm />

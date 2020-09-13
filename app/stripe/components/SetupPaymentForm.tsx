@@ -1,11 +1,6 @@
 import { Elements, useElements, useStripe } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
-import {
-  CardElement,
-  CardNumberElement,
-  CardCvcElement,
-  CardExpiryElement,
-} from "@stripe/react-stripe-js"
+import { CardNumberElement, CardCvcElement, CardExpiryElement } from "@stripe/react-stripe-js"
 import addPaymentMethod from "app/stripe/mutations/addPaymentMethod"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
