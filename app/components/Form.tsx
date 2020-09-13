@@ -1,22 +1,21 @@
 import React, { ReactNode, PropsWithoutRef } from "react"
 import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
 import * as z from "zod"
-import { Button } from "grommet"
 export { FORM_ERROR } from "final-form"
 
 type FormProps<FormValues> = {
   /** All your form fields */
   children: ReactNode
   /** Text to display in the submit button */
-  submitText: string
   onSubmit: FinalFormProps<FormValues>["onSubmit"]
   initialValues?: FinalFormProps<FormValues>["initialValues"]
   schema?: z.ZodType<any, any>
+  submitButton: JSX.Element
 } & Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit">
 
 export function Form<FormValues extends Record<string, unknown>>({
   children,
-  submitText,
+  submitButton,
   schema,
   initialValues,
   onSubmit,
@@ -45,7 +44,7 @@ export function Form<FormValues extends Record<string, unknown>>({
             </div>
           )}
 
-          <Button type="submit" disabled={submitting} label={submitText} />
+          {submitButton}
 
           <style global jsx>{`
             .form > * + * {

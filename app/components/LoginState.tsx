@@ -1,35 +1,28 @@
 import { useCurrentUser } from "app/hooks/useCurrentUser"
-import { Link, Router } from "blitz"
-import { Button, Anchor, Box } from "grommet"
+import { Router } from "blitz"
 import logout from "app/auth/mutations/logout"
 
-export function LoginState() {
+interface LoginStateProps {
+  children: (info: { onClick: () => void; isLoggedIn: boolean }) => JSX.Element
+}
+
+export function LoginState(props: LoginStateProps) {
   const currentUser = useCurrentUser()
 
   if (!currentUser) {
-    return (
-      <Link href="/login">
-        <Button secondary label="sign in" />
-      </Link>
-    )
+    return props.children({
+      onClick: async () => {
+        Router.push("/login")
+      },
+      isLoggedIn: false,
+    })
   } else {
-    return (
-      <Box direction="row" align="center" gap="medium">
-        <Link href="/projects">
-          <Anchor>Projects</Anchor>
-        </Link>
-
-        <Link href="/account">
-          <Anchor>Account</Anchor>
-        </Link>
-        <Button
-          label="logout"
-          onClick={async () => {
-            await logout()
-            Router.push("/")
-          }}
-        />
-      </Box>
-    )
+    return props.children({
+      onClick: async () => {
+        await logout()
+        Router.push("/")
+      },
+      isLoggedIn: true,
+    })
   }
 }
