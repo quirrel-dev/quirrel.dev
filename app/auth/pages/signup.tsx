@@ -1,55 +1,129 @@
 import React from "react"
-import { useRouter, BlitzPage } from "blitz"
+import { useRouter, BlitzPage, Link } from "blitz"
 import Layout from "app/layouts/Layout"
-import { Form, FORM_ERROR } from "app/components/Form"
-import { LabeledTextField } from "app/components/LabeledTextField"
 import signup from "app/auth/mutations/signup"
-import { SignupInput, SignupInputType } from "app/auth/validations"
-import { Heading, Box } from "grommet"
+import { Form, Field } from "react-final-form"
+import { FORM_ERROR } from "final-form"
 
 const SignupPage: BlitzPage = () => {
   const router = useRouter()
 
   return (
-    <Box>
-      <Heading>Create an Account</Heading>
+    <div className="min-h-screen flex justify-center pt-24">
+      <div className="max-w-md w-full py-12 px-6">
+        <p className="mt-6 text-sm leading-5 text-center text-gray-900">
+          Sign Up for a new account
+        </p>
 
-      <Form<SignupInputType>
-        submitText="Create Account"
-        schema={SignupInput}
-        onSubmit={async (values) => {
-          try {
-            const result = await signup({
-              email: values.email,
-              password: values.password,
-            })
+        <Form
+          onSubmit={async (values) => {
+            try {
+              const result = await signup({
+                email: values.email,
+                password: values.password,
+              })
 
-            switch (result) {
-              case "email_exists": {
-                return { email: "This email is already being used" }
+              switch (result) {
+                case "email_exists": {
+                  return { email: "This email is already being used" }
+                }
+                case "success": {
+                  router.push("/projects")
+                  return
+                }
               }
-              case "success": {
-                router.push("/projects")
-                return
-              }
-            }
-          } catch (error) {
-            if (error.code === "P2002" && error.meta?.target?.includes("email")) {
-              // This error comes from Prisma
-              return { email: "This email is already being used" }
-            } else {
+            } catch (error) {
               return { [FORM_ERROR]: error.toString() }
             }
-          }
-        }}
-      >
-        <LabeledTextField name="email" label="Email" placeholder="Email" type="email" />
-        <LabeledTextField name="password" label="Password" placeholder="Password" type="password" />
-      </Form>
-    </Box>
+          }}
+          render={({ handleSubmit }) => (
+            <form className="mt-5" onSubmit={handleSubmit}>
+              <div className="rounded-md shadow-sm">
+                <Field
+                  name="email"
+                  render={({ input, meta }) => (
+                    <div className="-mt-px relative">
+                      <input
+                        {...input}
+                        required
+                        type="email"
+                        placeholder="Email address"
+                        aria-label="Email address"
+                        className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full px-3 py-2 border text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+                      />
+                      {(meta.error || meta.submitError) && meta.touched && (
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-red-500 select-none cursor-default">
+                          {meta.error || meta.submitError}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                />
+
+                <Field
+                  name="password"
+                  render={({ input }) => (
+                    <div>
+                      <input
+                        {...input}
+                        aria-label="Password"
+                        className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full px-3 py-2 border text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+                        placeholder="Password"
+                        type="password"
+                        required
+                      />
+                    </div>
+                  )}
+                />
+              </div>
+              <div className="mt-5">
+                <button
+                  type="submit"
+                  className="relative block w-full py-2 px-3 border border-transparent rounded-md text-white font-semibold bg-gray-700 hover:bg-gray-600 focus:bg-gray-800 focus:outline-none focus:shadow-outline sm:text-sm sm:leading-5"
+                >
+                  <span className="absolute left-0 inset-y pl-3">
+                    <svg className="h-5 w-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                  </span>
+                  Sign up
+                </button>
+              </div>
+            </form>
+          )}
+        />
+
+        <div className="mt-6">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm leading-5">
+              <span className="px-2 bg-white text-black-500">Already have an account?</span>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <Link href="/login">
+              <a className="block w-full text-center py-2 px-3 border border-gray-300 rounded-md text-gray-900 font-medium hover:border-gray-400 focus:outline-none focus:border-gray-400 sm:text-sm sm:leading-5">
+                Log in
+              </a>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
-SignupPage.getLayout = (page) => <Layout title="Sign Up">{page}</Layout>
+SignupPage.getLayout = (page) => (
+  <Layout title="Sign Up" hideLogin>
+    {page}
+  </Layout>
+)
 
 export default SignupPage
