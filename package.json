@@ -52,6 +52,7 @@
     "secure-password": "4.0.0",
     "stripe": "8.95.0",
     "styled-components": "5.2.0",
+    "tailwindcss": "1",
     "zod": "1.11.5"
   },
   "devDependencies": {
@@ -78,6 +79,7 @@
     "jest-environment-jsdom-fourteen": "1.0.1",
     "jest-watch-typeahead": "0.6.1",
     "lint-staged": "10.3.0",
+    "postcss-preset-env": "6.7.0",
     "prettier": "2.1.1",
     "pretty-quick": "2.0.2",
     "react-test-renderer": "16.13.1",
