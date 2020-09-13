@@ -17,6 +17,11 @@ export async function add(projectSlug: string, name: string, userId: string) {
           },
         },
       },
+      projectOwner: {
+        connect: {
+          id: userId,
+        },
+      },
     },
   })
 

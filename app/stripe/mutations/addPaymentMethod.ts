@@ -8,14 +8,9 @@ export default async function addPaymentMethod(
 ) {
   ctx.session?.authorize()
 
-  const user = await db.user.findOne({
-    where: { id: ctx.session?.userId },
-    select: { stripeCustomerId: true },
-  })
+  await stripe.paymentMethods.attach(paymentMethodId, { customer: ctx.session?.userId })
 
-  await stripe.paymentMethods.attach(paymentMethodId, { customer: user!.stripeCustomerId })
-
-  await stripe.customers.update(user!.stripeCustomerId, {
+  await stripe.customers.update(ctx.session?.userId, {
     invoice_settings: {
       default_payment_method: paymentMethodId,
     },
@@ -23,6 +18,6 @@ export default async function addPaymentMethod(
 
   await db.user.update({
     where: { id: ctx.session?.userId },
-    data: { stripeDefaultPaymentMethodId: paymentMethodId },
+    data: { defaultPaymentMethodId: paymentMethodId },
   })
 }

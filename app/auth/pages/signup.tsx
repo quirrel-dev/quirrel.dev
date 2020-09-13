@@ -19,12 +19,20 @@ const SignupPage: BlitzPage = () => {
         schema={SignupInput}
         onSubmit={async (values) => {
           try {
-            await signup({
+            const result = await signup({
               email: values.email,
               password: values.password,
             })
 
-            router.push("/setupPayment")
+            switch (result) {
+              case "email_exists": {
+                return { email: "This email is already being used" }
+              }
+              case "success": {
+                router.push("/projects")
+                return
+              }
+            }
           } catch (error) {
             if (error.code === "P2002" && error.meta?.target?.includes("email")) {
               // This error comes from Prisma

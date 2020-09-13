@@ -7,20 +7,20 @@ export default async function createSubscription(obj?: {}, ctx: { session?: Sess
 
   const user = await db.user.findOne({
     where: { id: ctx.session?.userId },
-    select: { stripeCustomerId: true, stripeSubscriptionId: true },
+    select: { subscriptionId: true },
   })
 
-  if (user?.stripeSubscriptionId) {
+  if (user?.subscriptionId) {
     throw new Error("User already has a subscription")
   }
 
   const subscription = await stripe.subscriptions.create({
-    customer: user!.stripeCustomerId,
+    customer: ctx.session?.userId,
     items: [{ price: process.env.NEXT_PUBLIC_SUBSCRIPTION_PRODUCT_ID }],
   })
 
   await db.user.update({
     where: { id: ctx.session?.userId },
-    data: { stripeSubscriptionId: subscription.id },
+    data: { subscriptionId: subscription.id },
   })
 }

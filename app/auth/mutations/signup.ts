@@ -11,15 +11,22 @@ export default async function signup(
   // This throws an error if input is invalid
   const { email, password } = SignupInput.parse(input)
 
+  const emailExists = await db.user.count({ where: { email } })
+  if (emailExists) {
+    return "email_exists"
+  }
+
   const customer = await stripe.customers.create({
     email,
   })
 
   const hashedPassword = await hashPassword(password)
-  const user = await db.user.create({
-    data: { email, hashedPassword, stripeCustomerId: customer.id },
-    select: { id: true, email: true, stripeCustomerId: true },
+  await db.user.create({
+    data: { email, hashedPassword, id: customer.id },
+    select: { email: true },
   })
 
-  await ctx.session!.create({ userId: user.id, roles: [] })
+  await ctx.session!.create({ userId: customer.id, roles: [] })
+
+  return "success"
 }

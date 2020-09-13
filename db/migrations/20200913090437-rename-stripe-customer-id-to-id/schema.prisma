@@ -13,15 +13,15 @@ generator client {
 // --------------------------------------
 
 model User {
-  id             String    @default(uuid()) @id
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   email          String    @unique
   hashedPassword String?
   sessions       Session[]
 
-  stripeCustomerId String @map("stripeId") @unique
-  stripeSubscriptionId String? @unique
+  id String @unique @id
+  subscriptionId String? @unique
+  defaultPaymentMethodId String? @unique
 
   projects Project[]
 }
@@ -32,7 +32,7 @@ model Session {
   updatedAt          DateTime  @updatedAt
   expiresAt          DateTime?
   handle             String    @unique
-  user               User?     @relation(fields: [userId], references: [id])
+  user               User? @relation(fields: [userId], references: [id])
   userId             String?
   hashedSessionToken String?
   antiCSRFToken      String?
@@ -53,6 +53,7 @@ model Project {
 model Token {
   project        Project @relation(fields: [projectSlug, projectOwnerId], references: [slug, ownerId])
   projectSlug    String
+  projectOwner   User @relation(fields: [projectOwnerId], references: [id])
   projectOwnerId String
   name           String
 

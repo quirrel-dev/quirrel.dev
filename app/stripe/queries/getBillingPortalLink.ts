@@ -1,5 +1,4 @@
 import type { SessionContext } from "blitz"
-import db from "db"
 import { stripe } from "../stripe"
 
 export default async function getCustomerPortalLink(
@@ -8,13 +7,8 @@ export default async function getCustomerPortalLink(
 ) {
   ctx.session?.authorize()
 
-  const user = await db.user.findOne({
-    where: { id: ctx.session?.userId },
-    select: { stripeCustomerId: true },
-  })
-
   const session = await stripe.billingPortal.sessions.create({
-    customer: user!.stripeCustomerId,
+    customer: ctx.session?.userId,
     return_url,
   })
 

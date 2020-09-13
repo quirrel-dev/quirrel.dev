@@ -1,13 +1,14 @@
-import { BlitzPage, useQuery } from "blitz"
-import { Anchor, Box, Heading, Meter } from "grommet"
+import { BlitzPage, Router, useQuery } from "blitz"
+import { Anchor, Box, Heading, Meter, Button } from "grommet"
 import Layout from "app/layouts/Layout"
 import getAccountData from "../queries/getAccountData"
 import getBillingPortalLink from "../../stripe/queries/getBillingPortalLink"
+import deleteAccount from "../mutations/deleteAccount"
 
 const maxFree = 10_000
 
 const Account: BlitzPage = () => {
-  const [accountData] = useQuery(getAccountData, {})
+  const [accountData] = useQuery(getAccountData, null)
   return (
     <Box>
       <Heading>{accountData?.email}'s account</Heading>
@@ -35,6 +36,18 @@ const Account: BlitzPage = () => {
       >
         Billing Portal
       </Anchor>
+
+      <Button
+        onClick={async () => {
+          const sure = window.confirm("You sure?")
+
+          if (sure) {
+            await deleteAccount()
+            Router.push("/")
+          }
+        }}
+        label="Delete Account"
+      />
     </Box>
   )
 }

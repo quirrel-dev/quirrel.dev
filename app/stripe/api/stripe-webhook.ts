@@ -1,5 +1,6 @@
 import { BlitzApiRequest, BlitzApiResponse } from "blitz"
 import type Stripe from "stripe"
+import { deleteCustomer } from "../deleteCustomer"
 import bufferBody from "../middlewares/bufferBody"
 import { stripe } from "../stripe"
 import { unsubscribe } from "../unsubscribe"
@@ -35,6 +36,14 @@ async function stripeWebhook(req: BlitzApiRequest, res: BlitzApiResponse) {
       }
 
       await updateDefaultPaymentMethod(object.id, object.invoice_settings.default_payment_method)
+
+      break
+    }
+
+    case "customer.deleted": {
+      const object = event.data.object as { id: string }
+
+      await deleteCustomer(object.id)
 
       break
     }

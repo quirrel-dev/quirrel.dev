@@ -23,7 +23,10 @@ export const authenticateUser = async (email: string, password: string) => {
     case SecurePassword.VALID_NEEDS_REHASH:
       // Upgrade hashed password with a more secure hash
       const improvedHash = await hashPassword(password)
-      await db.user.update({ where: { id: user.id }, data: { hashedPassword: improvedHash } })
+      await db.user.update({
+        where: { id: user.id },
+        data: { hashedPassword: improvedHash },
+      })
       break
     default:
       throw new AuthenticationError()

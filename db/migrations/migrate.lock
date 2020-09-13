@@ -1,15 +1,3 @@
 # Prisma Migrate lockfile v1
 
-20200905171401-initial-migration
-20200905172348-add-project
-20200905172812-remove-name-and-role-from-user
-20200910175103-add-tokens
-20200910175149
-20200910175205-fix-name-of--tokens--field
-20200911212128
-20200912082716
-20200912094938-use-postgres
-20200912123054
-20200912132202-add-stripe-subscription-id
-20200913074313-make-stripe-data-unique
-20200913080055-add-field-for-paymentmethod
+20200913090437-rename-stripe-customer-id-to-id

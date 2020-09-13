@@ -69,7 +69,6 @@ function TokenInfo({
 const SpecificProject: BlitzPage = () => {
   const slug = useParam("slug") as string
 
-  const [usageReports] = useQuery(getUsageRecords, { projectSlug: slug })
   const [project, projectMeta] = useQuery(getProject, { slug })
   if (!project) {
     return <p>Not Found.</p>
