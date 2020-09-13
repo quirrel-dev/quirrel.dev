@@ -19,8 +19,8 @@ model User {
   hashedPassword String?
   sessions       Session[]
 
-  id String @unique @id
-  subscriptionId String? @unique
+  id                     String  @unique @id
+  subscriptionId         String? @unique
   defaultPaymentMethodId String? @unique
 
   projects Project[]
@@ -32,7 +32,7 @@ model Session {
   updatedAt          DateTime  @updatedAt
   expiresAt          DateTime?
   handle             String    @unique
-  user               User? @relation(fields: [userId], references: [id])
+  user               User?     @relation(fields: [userId], references: [id])
   userId             String?
   hashedSessionToken String?
   antiCSRFToken      String?
@@ -41,21 +41,31 @@ model Session {
 }
 
 model Project {
+  id        String   @unique
   slug      String
   createdAt DateTime @default(now())
   owner     User     @relation(fields: [ownerId], references: [id])
   ownerId   String
   tokens    Token[]
 
-  @@id([slug, ownerId])
+  @@id([id, slug])
 }
 
 model Token {
-  project        Project @relation(fields: [projectSlug, projectOwnerId], references: [slug, ownerId])
-  projectSlug    String
-  projectOwner   User @relation(fields: [projectOwnerId], references: [id])
-  projectOwnerId String
-  name           String
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+  name      String
 
-  @@id([name, projectSlug, projectOwnerId])
+  @@id([projectId, name])
+  UsageRecord UsageRecord[]
+}
+
+model UsageRecord {
+  token            Token    @relation(fields: [tokenProjectId, tokenProjectName], references: [projectId, name])
+  tokenProjectId   String
+  tokenProjectName String
+  timestamp        DateTime
+  invocations      Int
+
+  @@id([tokenProjectId, tokenProjectName, timestamp])
 }

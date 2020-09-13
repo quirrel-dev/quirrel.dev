@@ -1,9 +1,9 @@
 import { BlitzApiRequest, BlitzApiResponse } from "blitz"
 import type Stripe from "stripe"
-import { deleteCustomer } from "../deleteCustomer"
+import { onCustomerDeleted } from "../customer"
 import bufferBody from "../middlewares/bufferBody"
 import { stripe } from "../stripe"
-import { unsubscribe } from "../unsubscribe"
+import { onSubscriptionCanceled } from "../subscription"
 import { updateDefaultPaymentMethod } from "../updateDefaultPaymentMethod"
 
 async function stripeWebhook(req: BlitzApiRequest, res: BlitzApiResponse) {
@@ -24,7 +24,7 @@ async function stripeWebhook(req: BlitzApiRequest, res: BlitzApiResponse) {
   switch (event.type) {
     case "customer.subscription.deleted": {
       const object = event.data.object as { customer: string }
-      await unsubscribe(object.customer)
+      await onSubscriptionCanceled(object.customer)
 
       break
     }
@@ -43,7 +43,7 @@ async function stripeWebhook(req: BlitzApiRequest, res: BlitzApiResponse) {
     case "customer.deleted": {
       const object = event.data.object as { id: string }
 
-      await deleteCustomer(object.id)
+      await onCustomerDeleted(object.id)
 
       break
     }

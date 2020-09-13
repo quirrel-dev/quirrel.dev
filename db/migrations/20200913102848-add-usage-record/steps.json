@@ -1,0 +1,113 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateModel",
+      "model": "UsageRecord"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UsageRecord",
+      "field": "token",
+      "type": "Token",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "UsageRecord",
+          "field": "token"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "UsageRecord",
+          "field": "token"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[tokenProjectId, tokenProjectName]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "UsageRecord",
+          "field": "token"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[projectId, name]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UsageRecord",
+      "field": "tokenProjectId",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UsageRecord",
+      "field": "tokenProjectName",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UsageRecord",
+      "field": "timestamp",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "UsageRecord",
+      "field": "invocations",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "UsageRecord"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "UsageRecord"
+        },
+        "directive": "id"
+      },
+      "argument": "",
+      "value": "[tokenProjectId, tokenProjectName, timestamp]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Token",
+      "field": "UsageRecord",
+      "type": "UsageRecord",
+      "arity": "List"
+    }
+  ]
+}

@@ -5,6 +5,6 @@ export async function invokeCustomerDeletion(customerId: string) {
   await stripe.customers.del(customerId)
 }
 
-export async function deleteCustomer(customerId: string) {
+export async function onCustomerDeleted(customerId: string) {
   await db.user.delete({ where: { id: customerId } })
 }

@@ -9,7 +9,7 @@ export function useCurrentUser() {
   return session.userId ? user : null
 }
 
-export function useIsSubscriber() {
+export function useHasDefaultPaymentMethod() {
   const user = useCurrentUser()
-  return user?.isSubscriber
+  return user?.hasDefaultPaymentMethod
 }

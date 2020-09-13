@@ -1,4 +1,4 @@
-import { invokeCustomerDeletion } from "app/stripe/deleteCustomer"
+import { invokeCustomerDeletion } from "app/stripe/customer"
 import { SessionContext } from "blitz"
 
 export default async function deleteAccount(obj?: any, ctx: { session?: SessionContext } = {}) {

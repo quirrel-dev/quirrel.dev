@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -56,17 +56,5 @@ model Token {
   project   Project @relation(fields: [projectId], references: [id])
   name      String
 
-  UsageRecord UsageRecord[]
-
   @@id([projectId, name])
-}
-
-model UsageRecord {
-  token            Token    @relation(fields: [tokenProjectId, tokenProjectName], references: [projectId, name])
-  tokenProjectId   String
-  tokenProjectName String
-  timestamp        DateTime
-  invocations      Int
-
-  @@id([tokenProjectId, tokenProjectName, timestamp])
 }

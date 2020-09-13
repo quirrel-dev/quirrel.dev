@@ -391,6 +391,24 @@
     {
       "tag": "CreateField",
       "model": "Project",
+      "field": "id",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Project",
+          "field": "id"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "Project",
       "field": "slug",
       "type": "String",
       "arity": "Required"
@@ -508,11 +526,18 @@
         "directive": "id"
       },
       "argument": "",
-      "value": "[slug, ownerId]"
+      "value": "[id, slug]"
     },
     {
       "tag": "CreateModel",
       "model": "Token"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Token",
+      "field": "projectId",
+      "type": "String",
+      "arity": "Required"
     },
     {
       "tag": "CreateField",
@@ -544,7 +569,7 @@
         "directive": "relation"
       },
       "argument": "fields",
-      "value": "[projectSlug, projectOwnerId]"
+      "value": "[projectId]"
     },
     {
       "tag": "CreateArgument",
@@ -558,67 +583,7 @@
         "directive": "relation"
       },
       "argument": "references",
-      "value": "[slug, ownerId]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Token",
-      "field": "projectSlug",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Token",
-      "field": "projectOwner",
-      "type": "User",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Token",
-          "field": "projectOwner"
-        },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Token",
-          "field": "projectOwner"
-        },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[projectOwnerId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Token",
-          "field": "projectOwner"
-        },
-        "directive": "relation"
-      },
-      "argument": "references",
       "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Token",
-      "field": "projectOwnerId",
-      "type": "String",
-      "arity": "Required"
     },
     {
       "tag": "CreateField",
@@ -648,7 +613,7 @@
         "directive": "id"
       },
       "argument": "",
-      "value": "[name, projectSlug, projectOwnerId]"
+      "value": "[projectId, name]"
     }
   ]
 }

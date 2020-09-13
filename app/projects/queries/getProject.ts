@@ -7,8 +7,8 @@ export default async function getProject(
 ) {
   ctx.session?.authorize()
 
-  const project = await db.project.findOne({
-    where: { slug_ownerId: { slug, ownerId: ctx.session?.userId } },
+  const [project] = await db.project.findMany({
+    where: { slug, ownerId: ctx.session?.userId },
     include: {
       tokens: {
         select: {

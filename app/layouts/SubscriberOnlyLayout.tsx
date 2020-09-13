@@ -1,13 +1,13 @@
-import { useIsSubscriber } from "app/hooks/useCurrentUser"
+import { useHasDefaultPaymentMethod } from "app/hooks/useCurrentUser"
 import Layout, { LayoutProps } from "./Layout"
-import { SubscribeForm } from "app/stripe/components/SubscribeForm"
+import SetupPaymentForm from "app/stripe/components/SetupPaymentForm"
 
 export function SubscriberOnlyLayout(props: LayoutProps) {
-  const isSubscriber = useIsSubscriber()
-  if (!isSubscriber) {
+  const hasDefaultPaymentMethod = useHasDefaultPaymentMethod()
+  if (!hasDefaultPaymentMethod) {
     return (
       <Layout title="Please Subscribe">
-        <SubscribeForm />
+        <SetupPaymentForm />
       </Layout>
     )
   }

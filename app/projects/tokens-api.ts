@@ -16,3 +16,8 @@ export async function create(name: string) {
 export async function revoke(name: string) {
   await quirrelApi.delete(`/tokens/${name}`)
 }
+
+export async function getUsage(): Promise<Record<string, number>> {
+  const { data: usage } = await quirrelApi.delete(`/usage`)
+  return usage
+}
