@@ -1,5 +1,5 @@
 import React from "react"
-import { useRouter, BlitzPage, Link } from "blitz"
+import { useRouter, BlitzPage } from "blitz"
 import Layout from "app/layouts/Layout"
 import { Form, FORM_ERROR } from "app/components/Form"
 import { LabeledTextField } from "app/components/LabeledTextField"
@@ -19,8 +19,12 @@ const SignupPage: BlitzPage = () => {
         schema={SignupInput}
         onSubmit={async (values) => {
           try {
-            await signup({ email: values.email, password: values.password })
-            router.push("/projects")
+            await signup({
+              email: values.email,
+              password: values.password,
+            })
+
+            router.push("/setupPayment")
           } catch (error) {
             if (error.code === "P2002" && error.meta?.target?.includes("email")) {
               // This error comes from Prisma

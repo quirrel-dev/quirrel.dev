@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -22,7 +22,6 @@ model User {
 
   stripeCustomerId String @map("stripeId") @unique
   stripeSubscriptionId String? @unique
-  stripeDefaultPaymentMethodId String? @unique
 
   projects Project[]
 }

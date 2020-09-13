@@ -22,6 +22,4 @@ export default async function signup(
   })
 
   await ctx.session!.create({ userId: user.id, roles: [] })
-
-  return user
 }

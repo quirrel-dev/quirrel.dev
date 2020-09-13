@@ -3,7 +3,7 @@ import { Head, Link } from "blitz"
 import { Header, Anchor } from "grommet"
 import { LoginState } from "app/components/LoginState"
 
-interface LayoutProps {
+export interface LayoutProps {
   title?: string
   children: ReactNode
   hideLogin?: boolean

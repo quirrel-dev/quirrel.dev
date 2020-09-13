@@ -1,11 +1,11 @@
-import { BlitzPage, useQuery, Link, Router } from "blitz"
+import { BlitzPage, useQuery, Router } from "blitz"
 import getProjectSlugs from "app/queries/getProjectSlugs"
 import createProject from "app/mutations/createProject"
-import Layout from "app/layouts/Layout"
 import { List, Box, Button, Text, Heading } from "grommet"
 import { useEffect } from "react"
 import { Add } from "grommet-icons"
 import { isValidSlug } from "../slug"
+import { SubscriberOnlyLayout } from "app/layouts/SubscriberOnlyLayout"
 
 const Projects: BlitzPage = () => {
   const [projectSlugs, projectSlugsMeta] = useQuery(getProjectSlugs, {})
@@ -22,8 +22,7 @@ const Projects: BlitzPage = () => {
 
       <List
         data={projectSlugs}
-        onClickItem={(event) => {
-          const slug = event.item
+        onClickItem={({ item: slug }) => {
           Router.push("/projects/[slug]", `/projects/${slug}`)
         }}
       />
@@ -71,6 +70,6 @@ const Projects: BlitzPage = () => {
   )
 }
 
-Projects.getLayout = (page) => <Layout>{page}</Layout>
+Projects.getLayout = (page) => <SubscriberOnlyLayout>{page}</SubscriberOnlyLayout>
 
 export default Projects

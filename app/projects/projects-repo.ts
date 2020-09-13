@@ -12,3 +12,12 @@ export async function remove(slug: string, userId: string) {
     },
   })
 }
+
+export async function removeAllOfUser(userId: string) {
+  await TokensRepo.removeAllFromUser(userId)
+  await db.project.deleteMany({
+    where: {
+      ownerId: userId,
+    },
+  })
+}

@@ -43,3 +43,16 @@ export async function removeAllFromProject(projectSlug: string, userId: string) 
 
   await db.token.deleteMany({ where: { projectSlug, projectOwnerId: userId } })
 }
+
+export async function removeAllFromUser(userId: string) {
+  const tokens = await db.token.findMany({
+    where: { projectOwnerId: userId },
+    select: { name: true, projectSlug: true },
+  })
+
+  await Promise.all(
+    tokens.map((token) => TokensAPI.revoke(describeToken(userId, token.projectSlug, token.name)))
+  )
+
+  await db.token.deleteMany({ where: { projectOwnerId: userId } })
+}

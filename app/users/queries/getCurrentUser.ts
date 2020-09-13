@@ -6,8 +6,18 @@ export default async function getCurrentUser(_ = null, ctx: { session?: SessionC
 
   const user = await db.user.findOne({
     where: { id: ctx.session!.userId },
-    select: { id: true, email: true },
+    select: {
+      id: true,
+      email: true,
+      stripeSubscriptionId: true,
+      stripeDefaultPaymentMethodId: true,
+    },
   })
 
-  return user
+  return {
+    id: user!.id,
+    email: user!.email,
+    isSubscriber: !!user!.stripeSubscriptionId,
+    hasDefaultPaymentMethod: !!user!.stripeDefaultPaymentMethodId,
+  }
 }
