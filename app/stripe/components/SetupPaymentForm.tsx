@@ -3,9 +3,13 @@ import { loadStripe } from "@stripe/stripe-js"
 import { CardNumberElement, CardCvcElement, CardExpiryElement } from "@stripe/react-stripe-js"
 import addPaymentMethod from "app/stripe/mutations/addPaymentMethod"
 
+interface SetupPaymentProps {
+  onSuccess?(): void
+}
+
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
-function SetupPayment() {
+function SetupPayment(props: SetupPaymentProps) {
   const elements = useElements()
   const stripe = useStripe()
 
@@ -43,6 +47,8 @@ function SetupPayment() {
             }
 
             await addPaymentMethod({ paymentMethodId: result.paymentMethod!.id })
+
+            props.onSuccess?.()
           }}
         >
           <div className="rounded-md shadow-sm">
@@ -78,10 +84,10 @@ function SetupPayment() {
   )
 }
 
-export default function SetupPaymentForm() {
+export default function SetupPaymentForm(props: SetupPaymentProps) {
   return (
     <Elements stripe={stripePromise}>
-      <SetupPayment />
+      <SetupPayment {...props} />
     </Elements>
   )
 }

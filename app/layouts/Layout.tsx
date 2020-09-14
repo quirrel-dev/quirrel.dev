@@ -86,14 +86,9 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                   {({ onClick, isLoggedIn }) =>
                     isLoggedIn ? (
                       <span className="float-right">
-                        <Link href="/projects">
+                        <Link href="/dashboard">
                           <a className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out">
                             Dashboard
-                          </a>
-                        </Link>
-                        <Link href="/account">
-                          <a className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out">
-                            Account
                           </a>
                         </Link>
                         <a
@@ -208,14 +203,9 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                       {({ onClick, isLoggedIn }) =>
                         isLoggedIn ? (
                           <span className="flex">
-                            <Link href="/projects">
+                            <Link href="/dashboard">
                               <a className="block w-full px-5 py-3 text-center font-medium bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out">
                                 Dashboard
-                              </a>
-                            </Link>
-                            <Link href="/account">
-                              <a className="block w-full px-5 py-3 text-center font-medium bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out">
-                                Account
                               </a>
                             </Link>
                             <a

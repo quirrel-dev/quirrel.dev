@@ -28,7 +28,7 @@ const SignupPage: BlitzPage = () => {
                   return { email: "This email is already being used" }
                 }
                 case "success": {
-                  router.push("/projects")
+                  router.push("/dashboard")
                   return
                 }
               }

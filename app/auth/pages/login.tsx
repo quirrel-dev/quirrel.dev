@@ -7,10 +7,10 @@ const LoginPage: BlitzPage = () => {
   const router = useRouter()
 
   useEffect(() => {
-    Router.prefetch("/projects")
+    Router.prefetch("/dashboard")
   }, [])
 
-  return <LoginForm onSuccess={() => router.push("/projects")} />
+  return <LoginForm onSuccess={() => router.push("/dashboard")} />
 }
 
 LoginPage.getLayout = (page) => (

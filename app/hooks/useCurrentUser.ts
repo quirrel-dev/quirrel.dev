@@ -8,8 +8,3 @@ export function useCurrentUser() {
   const [user] = useQuery(getCurrentUser, null, { enabled: !!session.userId })
   return session.userId ? user : null
 }
-
-export function useHasDefaultPaymentMethod() {
-  const user = useCurrentUser()
-  return user?.hasDefaultPaymentMethod
-}

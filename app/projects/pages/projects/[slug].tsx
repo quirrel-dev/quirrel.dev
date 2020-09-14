@@ -156,9 +156,9 @@ const SpecificProject: BlitzPage = () => {
           )
 
           if (reallySure) {
-            Router.prefetch("/projects")
+            Router.prefetch("/dashboard")
             await deleteProject({ slug })
-            Router.push("/projects")
+            Router.push("/dashboard")
           }
         }}
         hoverIndicator="light-1"

@@ -3,7 +3,6 @@ import { Transition } from "@tailwindui/react"
 
 interface ModalProps {
   show: boolean
-  onRequestClose(): void
 }
 
 export function Modal(props: PropsWithChildren<ModalProps>) {
