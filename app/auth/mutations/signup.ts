@@ -4,6 +4,19 @@ import { hashPassword } from "app/auth/auth-utils"
 import { SignupInput, SignupInputType } from "app/auth/validations"
 import { stripe } from "app/stripe/stripe"
 
+async function findCustomerOrCreate(email: string) {
+  const existingOnes = await stripe.customers.list({ email })
+  if (existingOnes.data.length > 0) {
+    return existingOnes.data[0]
+  }
+
+  const customer = await stripe.customers.create({
+    email,
+  })
+
+  return customer
+}
+
 export default async function signup(
   input: SignupInputType,
   ctx: { session?: SessionContext } = {}
@@ -11,21 +24,32 @@ export default async function signup(
   // This throws an error if input is invalid
   const { email, password } = SignupInput.parse(input)
 
-  const emailExists = await db.user.count({ where: { email } })
-  if (emailExists) {
+  const existingUser = await db.user.findOne({ where: { email } })
+  if (existingUser?.isActive) {
     return "email_exists"
   }
 
-  const customer = await stripe.customers.create({
-    email,
-  })
-
-  console.log({ customer })
-
   const hashedPassword = await hashPassword(password)
-  await db.user.create({
-    data: { email, hashedPassword, id: customer.id },
-    select: { email: true },
+  const customer = await findCustomerOrCreate(email)
+
+  await db.user.upsert({
+    where: {
+      email,
+    },
+    create: {
+      id: customer.id,
+      email,
+      hashedPassword,
+      subscriptionId: customer.subscriptions?.data[0].id,
+      defaultPaymentMethodId: customer.default_source as string | null,
+    },
+    update: {
+      id: customer.id,
+      hashedPassword,
+      isActive: true,
+      subscriptionId: customer.subscriptions?.data[0].id,
+      defaultPaymentMethodId: customer.default_source as string | null,
+    },
   })
 
   await ctx.session!.create({ userId: customer.id, roles: [] })

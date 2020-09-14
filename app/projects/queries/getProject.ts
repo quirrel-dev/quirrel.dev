@@ -7,20 +7,27 @@ export default async function getProject(
 ) {
   ctx.session?.authorize()
 
-  const [project] = await db.project.findMany({
-    where: { slug, ownerId: ctx.session?.userId },
+  const project = await db.project.findOne({
+    where: {
+      ownerId_slug: {
+        ownerId: ctx.session?.userId,
+        slug,
+      },
+    },
     include: {
       tokens: {
         select: {
           name: true,
         },
+        where: {
+          isActive: true,
+        },
       },
     },
   })
-
-  if (project?.ownerId === ctx.session?.userId) {
-    return project
-  } else {
+  if (!project?.isActive) {
     return null
   }
+
+  return project
 }

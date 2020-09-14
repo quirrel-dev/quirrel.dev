@@ -7,7 +7,7 @@ export default async function getProjectSlugs(params: any, ctx: { session?: Sess
   }
 
   const result = await db.project.findMany({
-    where: { ownerId: ctx.session?.userId },
+    where: { ownerId: ctx.session?.userId, isActive: true },
     select: { slug: true },
   })
 

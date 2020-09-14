@@ -7,6 +7,6 @@ export async function onSubscriptionCanceled(customerId: string) {
       where: { id: customerId },
       data: { subscriptionId: null },
     }),
-    ProjectsRepo.removeByProjectId(customerId),
+    ProjectsRepo.removeByOwnerId(customerId),
   ])
 }

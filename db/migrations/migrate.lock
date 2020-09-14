@@ -1,4 +1,4 @@
 # Prisma Migrate lockfile v1
 
-20200913095923-init
-20200913102848-add-usage-record
+20200914075938-init
+20200914082122-deactive-tokens

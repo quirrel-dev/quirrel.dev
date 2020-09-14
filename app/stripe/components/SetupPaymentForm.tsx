@@ -2,6 +2,7 @@ import { Elements, useElements, useStripe } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import { CardNumberElement, CardCvcElement, CardExpiryElement } from "@stripe/react-stripe-js"
 import addPaymentMethod from "app/stripe/mutations/addPaymentMethod"
+import { useState } from "react"
 
 interface SetupPaymentProps {
   onSuccess?(): void
@@ -10,6 +11,7 @@ interface SetupPaymentProps {
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 function SetupPayment(props: SetupPaymentProps) {
+  const [name, setName] = useState("")
   const elements = useElements()
   const stripe = useStripe()
 
@@ -46,19 +48,29 @@ function SetupPayment(props: SetupPaymentProps) {
               return
             }
 
-            await addPaymentMethod({ paymentMethodId: result.paymentMethod!.id })
+            await addPaymentMethod({ paymentMethodId: result.paymentMethod!.id, name })
 
             props.onSuccess?.()
           }}
         >
           <div className="rounded-md shadow-sm">
             <div>
-              <CardNumberElement className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full px-3 py-2 border text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" />
+              <input
+                type="name"
+                className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full px-3 py-2 border text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+                placeholder="Name"
+                aria-label="name"
+                required
+                onChange={(evt) => setName(evt.target.value)}
+              />
+            </div>
+            <div>
+              <CardNumberElement className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full px-3 py-2 border text-gray-900 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" />
             </div>
 
             <div>
-              <CardExpiryElement className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative inline-block w-1/2 px-3 py-2 border text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" />
-              <CardCvcElement className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative inline-block w-1/2 px-3 py-2 border text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" />
+              <CardExpiryElement className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative inline-block w-1/2 px-3 py-2 border text-gray-900 rounded-bl-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" />
+              <CardCvcElement className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative inline-block w-1/2 px-3 py-2 border text-gray-900 rounded-br-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" />
             </div>
           </div>
           <div className="mt-5">

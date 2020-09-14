@@ -19,6 +19,8 @@ model User {
   hashedPassword String?
   sessions       Session[]
 
+  isActive       Boolean @default(true)
+
   id                     String  @unique @id
   subscriptionId         String? @unique
   defaultPaymentMethodId String? @unique
@@ -41,32 +43,37 @@ model Session {
 }
 
 model Project {
-  id        String   @unique
   slug      String
   createdAt DateTime @default(now())
   owner     User     @relation(fields: [ownerId], references: [id])
   ownerId   String
   tokens    Token[]
 
-  @@id([id, slug])
+  isActive  Boolean @default(true)
+
+  @@id([ownerId, slug])
 }
 
 model Token {
-  projectId String
-  project   Project @relation(fields: [projectId], references: [id])
-  name      String
+  projectSlug    String
+  projectOwnerId String
+  project        Project @relation(fields: [projectSlug, projectOwnerId], references: [slug, ownerId])
+  name           String
+
+  isActive       Boolean @default(true)
 
   UsageRecord UsageRecord[]
 
-  @@id([projectId, name])
+  @@id([projectSlug, projectOwnerId, name])
 }
 
 model UsageRecord {
-  token            Token    @relation(fields: [tokenProjectId, tokenProjectName], references: [projectId, name])
-  tokenProjectId   String
-  tokenProjectName String
-  timestamp        DateTime
-  invocations      Int
+  token               Token    @relation(fields: [tokenProjectSlug, tokenName, tokenProjectOwnerId], references: [projectSlug, name, projectOwnerId])
+  tokenProjectOwnerId String
+  tokenProjectSlug    String
+  tokenName           String
+  timestamp           DateTime
+  invocations         Int
 
-  @@id([tokenProjectId, tokenProjectName, timestamp])
+  @@id([tokenProjectSlug, tokenName, timestamp, tokenProjectOwnerId])
 }

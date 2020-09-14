@@ -6,5 +6,8 @@ export async function invokeCustomerDeletion(customerId: string) {
 }
 
 export async function onCustomerDeleted(customerId: string) {
-  await db.user.delete({ where: { id: customerId } })
+  await db.user.update({
+    where: { id: customerId },
+    data: { isActive: false, subscriptionId: null, defaultPaymentMethodId: null },
+  })
 }

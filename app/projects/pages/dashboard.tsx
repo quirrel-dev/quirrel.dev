@@ -8,6 +8,7 @@ import { Modal } from "app/components/Modal"
 import { Form, Field } from "react-final-form"
 import getBillingPortalLink from "../../stripe/queries/getBillingPortalLink"
 import deleteAccount from "app/account/mutations/deleteAccount"
+import { CardList } from "app/components/CardList"
 
 async function openBillingPortal() {
   const url = await getBillingPortalLink({
@@ -89,6 +90,10 @@ const Dashboard: BlitzPage = () => {
                               <input
                                 {...input}
                                 required
+                                autoCapitalize="off"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                spellCheck={false}
                                 placeholder="Project name"
                                 aria-label="project name"
                                 className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full px-3 py-2 border text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
@@ -127,34 +132,13 @@ const Dashboard: BlitzPage = () => {
 
         <h1 className="text-xl font-semibold text-gray-900 leading-7">Projects</h1>
 
-        <ul>
-          {projectSlugs.length === 0 && (
-            <li className="max-w rounded shadow-sm border py-2 px-4 text-center">
-              Create your first project using the button below.
-            </li>
-          )}
-          {projectSlugs.map((slug) => (
-            <Link href={`/projects/${slug}`}>
-              <li className="max-w rounded shadow-sm border py-2 px-4 flex justify-between items-center hover:bg-gray-200 transition duration-100 text-gray-600 hover:text-gray-800">
-                <span className="text-xl">{slug}</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="inline w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </li>
-            </Link>
-          ))}
-        </ul>
+        <CardList
+          emptyText="Create your first project using the button below."
+          items={projectSlugs.map((slug) => ({
+            title: slug,
+            href: `/projects/${slug}`,
+          }))}
+        />
 
         <button
           className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center float-right"

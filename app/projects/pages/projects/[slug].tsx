@@ -6,6 +6,7 @@ import deleteProject from "app/projects/mutations/deleteProject"
 import { useState } from "react"
 import { Modal } from "app/components/Modal"
 import { Form, Field } from "react-final-form"
+import { CardList } from "app/components/CardList"
 
 const SpecificProject: BlitzPage = () => {
   const slug = useParam("slug") as string
@@ -83,6 +84,10 @@ const SpecificProject: BlitzPage = () => {
                               <input
                                 {...input}
                                 required
+                                autoCapitalize="off"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                spellCheck={false}
                                 placeholder="Client name"
                                 aria-label="client name"
                                 className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full px-3 py-2 border text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
@@ -140,34 +145,13 @@ const SpecificProject: BlitzPage = () => {
 
         <h2 className="text-md font-semibold text-gray-900 leading-7">Clients</h2>
 
-        <ul>
-          {tokenNames.length === 0 && (
-            <li className="max-w rounded shadow-sm border py-2 px-4 text-center">
-              Add a client using the button below.
-            </li>
-          )}
-          {tokenNames.map((tokenName) => (
-            <Link href={`/projects/${project.slug}/clients/${tokenName}`}>
-              <li className="max-w rounded shadow-sm border py-2 px-4 flex justify-between items-center hover:bg-gray-200 transition duration-100 text-gray-600 hover:text-gray-800">
-                <span className="text-xl">{tokenName}</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="inline w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </li>
-            </Link>
-          ))}
-        </ul>
+        <CardList
+          emptyText="Add a client using the button below."
+          items={tokenNames.map((token) => ({
+            title: token,
+            href: `/projects/${project.slug}/clients/${token}`,
+          }))}
+        />
 
         <button
           className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center float-right"

@@ -3,7 +3,7 @@ import db from "db"
 import { stripe } from "../stripe"
 
 export default async function addPaymentMethod(
-  { paymentMethodId }: { paymentMethodId: string },
+  { paymentMethodId, name }: { paymentMethodId: string; name: string },
   ctx: { session?: SessionContext } = {}
 ) {
   ctx.session?.authorize()
@@ -11,6 +11,7 @@ export default async function addPaymentMethod(
   await stripe.paymentMethods.attach(paymentMethodId, { customer: ctx.session?.userId })
 
   await stripe.customers.update(ctx.session?.userId, {
+    name,
     invoice_settings: {
       default_payment_method: paymentMethodId,
     },
