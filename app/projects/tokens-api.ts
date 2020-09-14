@@ -9,7 +9,7 @@ const quirrelApi = axios.create({
 })
 
 export async function create(name: string) {
-  const { data: token } = await quirrelApi.put(`/tokens/${name}`, {})
+  const { data: token } = await quirrelApi.put<string>(`/tokens/${name}`, {})
   return token
 }
 

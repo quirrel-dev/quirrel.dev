@@ -23,7 +23,7 @@ const Dashboard: BlitzPage = () => {
   const [projectSlugs, projectSlugsMeta] = useQuery(getProjectSlugs, {})
 
   return (
-    <div className="mx-8">
+    <div className="mx-8 lg:mx-auto max-w-screen-md">
       <div className="space-y-4">
         <Modal show={showCreateProject}>
           <Form
@@ -125,7 +125,7 @@ const Dashboard: BlitzPage = () => {
           </Form>
         </Modal>
 
-        <h1 className="text-4xl font-semibold text-gray-900 sm:text-xl sm:leading-7">Projects</h1>
+        <h1 className="text-xl font-semibold text-gray-900 leading-7">Projects</h1>
 
         <ul>
           {projectSlugs.length === 0 && (
