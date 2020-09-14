@@ -1,72 +1,11 @@
 import { useParam, useQuery, BlitzPage, Router, Link } from "blitz"
 import getProject from "app/projects/queries/getProject"
 import addToken from "app/projects/mutations/addToken"
-import deleteToken from "app/projects/mutations/deleteToken"
 import Layout from "app/layouts/Layout"
-import { Button, Box, Text, Heading, Accordion, AccordionPanel, DataChart } from "grommet"
-import { Add, Trash } from "grommet-icons"
 import deleteProject from "app/projects/mutations/deleteProject"
-import { Suspense, useState } from "react"
-import getUsageRecords from "app/projects/queries/getUsageRecords"
+import { useState } from "react"
 import { Modal } from "app/components/Modal"
 import { Form, Field } from "react-final-form"
-
-function UsageReport({ projectSlug, tokenName }: { projectSlug: string; tokenName?: string }) {
-  const [usageReports] = useQuery(getUsageRecords, { projectSlug, tokenName })
-
-  return (
-    <Box align="center">
-      <Text>The data below is just a dummy.</Text>
-      <DataChart
-        guide
-        data={usageReports}
-        series={["date", "invocations"]}
-        chart={[
-          {
-            property: "invocations",
-            type: "line",
-            thickness: "xsmall",
-          },
-          {
-            property: "invocations",
-            type: "point",
-            thickness: "small",
-            point: "circle",
-          },
-        ]}
-        axis={{
-          x: { property: "date", granularity: "fine" },
-          y: { property: "invocations", granularity: "medium" },
-        }}
-        detail
-      />
-    </Box>
-  )
-}
-
-function TokenInfo({
-  projectSlug,
-  tokenName,
-  onDelete,
-}: {
-  projectSlug: string
-  tokenName: string
-  onDelete: () => void
-}) {
-  return (
-    <Box>
-      <Suspense fallback="Loading ...">
-        <UsageReport projectSlug={projectSlug} tokenName={tokenName} />
-      </Suspense>
-      <Button onClick={onDelete} hoverIndicator="light-1" alignSelf="end">
-        <Box pad="small" direction="row" align="center" gap="small">
-          <Trash />
-          <Text>Delete Token</Text>
-        </Box>
-      </Button>
-    </Box>
-  )
-}
 
 const SpecificProject: BlitzPage = () => {
   const slug = useParam("slug") as string
@@ -93,7 +32,7 @@ const SpecificProject: BlitzPage = () => {
               const token = await addToken({ projectSlug: project.slug, name })
               await projectMeta.refetch()
 
-              window.alert(token)
+              Router.push(`/projects/${project.slug}/clients/${name}#${token}`)
             }}
           >
             {({ handleSubmit }) => (
