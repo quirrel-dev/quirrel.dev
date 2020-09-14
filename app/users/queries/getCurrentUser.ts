@@ -8,6 +8,7 @@ export default async function getCurrentUser(_ = null, ctx: { session?: SessionC
     where: { id: ctx.session.userId },
     select: {
       email: true,
+      emailIsVerified: true,
       subscriptionId: true,
       defaultPaymentMethodId: true,
     },
@@ -15,6 +16,7 @@ export default async function getCurrentUser(_ = null, ctx: { session?: SessionC
 
   return {
     id: ctx.session.userId,
+    emailIsVerified: user!.emailIsVerified,
     email: user!.email,
     isSubscriber: !!user!.subscriptionId,
     hasDefaultPaymentMethod: !!user!.defaultPaymentMethodId,

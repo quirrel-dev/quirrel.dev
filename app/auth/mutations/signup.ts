@@ -3,6 +3,9 @@ import { SessionContext } from "blitz"
 import { hashPassword } from "app/auth/auth-utils"
 import { SignupInput, SignupInputType } from "app/auth/validations"
 import { stripe } from "app/stripe/stripe"
+import { sendEmailWithTemplate } from "app/postmark"
+import { url } from "app/url"
+import * as verifyEmail from "../verify-email"
 
 async function findCustomerOrCreate(email: string) {
   const existingOnes = await stripe.customers.list({ email })
@@ -50,6 +53,13 @@ export default async function signup(
       subscriptionId: customer.subscriptions?.data[0].id,
       defaultPaymentMethodId: customer.default_source as string | null,
     },
+  })
+
+  const emailCode = await verifyEmail.generateCode(hashedPassword)
+
+  await sendEmailWithTemplate(email, "welcome", {
+    name: email,
+    verify_email_url: url`/verifyEmail/${emailCode}`,
   })
 
   await ctx.session!.create({ userId: customer.id, roles: [] })

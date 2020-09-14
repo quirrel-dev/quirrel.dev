@@ -48,6 +48,7 @@
     "body-parser": "1.19.0",
     "final-form": "4.20.1",
     "polished": "3.6.6",
+    "postmark": "2.5.5",
     "react": "0.0.0-experimental-7f28234f8",
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-error-boundary": "2.3.1",

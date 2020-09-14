@@ -2,3 +2,5 @@
 
 20200914075938-init
 20200914082122-deactive-tokens
+20200914124000-make-hashed-password-required
+20200914124113-add-email-is-verified-field
