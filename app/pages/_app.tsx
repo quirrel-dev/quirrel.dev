@@ -2,7 +2,6 @@ import { AppProps, ErrorComponent } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { queryCache } from "react-query"
 import LoginForm from "app/auth/components/LoginForm"
-import { Grommet, grommet } from "grommet"
 import { Suspense } from "react"
 
 import "app/styles/index.css"
@@ -19,9 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         queryCache.resetErrorBoundaries()
       }}
     >
-      <Suspense fallback={null}>
-        <Grommet theme={grommet}>{getLayout(<Component {...pageProps} />)}</Grommet>
-      </Suspense>
+      <Suspense fallback={null}>{getLayout(<Component {...pageProps} />)}</Suspense>
     </ErrorBoundary>
   )
 }

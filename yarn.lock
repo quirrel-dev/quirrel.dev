@@ -6007,30 +6007,6 @@ graceful-fs@^4.0.0, graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
 
-grommet-icons@4.4.0, grommet-icons@^4.2.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/grommet-icons/-/grommet-icons-4.4.0.tgz#6503a33ca29e3c9d89ba56ef1b2bc786222e62a7"
-  integrity sha512-uOc3rsgIBVOm/iuN8dj2lKuBq0uhIPYxH84zDoY0jrJZLjcVH1bHUQLlv0R/e9oB/pCFYEBse1mnvps+f3ylmw==
-  dependencies:
-    grommet-styles "^0.2.0"
-
-grommet-styles@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/grommet-styles/-/grommet-styles-0.2.0.tgz#b2eac2b7e2747cb523434d21728ce5234f8ce4f4"
-  integrity sha512-0OMSYuGeyifYKpg4Gv2HzL8rUdd0ddnJ5LbCBKgDuloC71XIwr9g/Fxa6rs737MbPV7OZ4pEm4wvrjH4epzf1A==
-
-grommet@2.15.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/grommet/-/grommet-2.15.0.tgz#8bff25b214ff4aa95d9b8452427f3b3e91651e1e"
-  integrity sha512-5TVbiLrMpZOoB9oZAqWVttj6lO4rcKqBW1rWr4iovTuyyfYYOUQbuNfcFtUqp+MdB0fsQ1Vvci4PiTBvhRJqHA==
-  dependencies:
-    grommet-icons "^4.2.0"
-    hoist-non-react-statics "^3.2.0"
-    markdown-to-jsx "^6.11.4"
-    polished "^3.4.1"
-    prop-types "^15.7.2"
-    react-desc "^4.1.2"
-
 growly@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
@@ -6174,7 +6150,7 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.2.0:
+hoist-non-react-statics@^3.0.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -7977,14 +7953,6 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-markdown-to-jsx@^6.11.4:
-  version "6.11.4"
-  resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-6.11.4.tgz#b4528b1ab668aef7fe61c1535c27e837819392c5"
-  integrity sha512-3lRCD5Sh+tfA52iGgfs/XZiw33f7fFX9Bn55aNnVNUd2GzLDkOWyKYYD8Yju2B1Vn+feiEdgJs8T6Tg0xNokPw==
-  dependencies:
-    prop-types "^15.6.2"
-    unquote "^1.1.0"
-
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/md5.js/-/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"
@@ -9221,7 +9189,7 @@ pnp-webpack-plugin@1.6.4:
   dependencies:
     ts-pnp "^1.1.6"
 
-polished@3.6.6, polished@^3.4.1:
+polished@3.6.6:
   version "3.6.6"
   resolved "https://registry.yarnpkg.com/polished/-/polished-3.6.6.tgz#91ef9eface9be5366c07672b63b736f50c151185"
   integrity sha512-yiB2ims2DZPem0kCD6V0wnhcVGFEhNh0Iw0axNpKU+oSAgFt6yx6HxIT23Qg0WWvgS379cS35zT4AOyZZRzpQQ==
@@ -9876,11 +9844,6 @@ raw-body@2.4.0:
     http-errors "1.7.2"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
-
-react-desc@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/react-desc/-/react-desc-4.1.2.tgz#83fc4ede66b2d45ae4ef63c18421474d55972966"
-  integrity sha512-JAVe89uaLr0HZ0IKodnpTPNgNyJ/SPDQnl3VJPVwI+SpebmHvJiBNZEOwX201QmSbsVGqRY8ql/VFPlAx85WzA==
 
 react-dom@0.0.0-experimental-7f28234f8:
   version "0.0.0-experimental-7f28234f8"
@@ -11923,11 +11886,6 @@ unpipe@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
   integrity sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=
-
-unquote@^1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544"
-  integrity sha1-j97XMk7G6IoP+LkF58CYzcCG1UQ=
 
 unset-value@^1.0.0:
   version "1.0.0"

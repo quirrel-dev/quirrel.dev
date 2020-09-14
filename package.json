@@ -47,8 +47,6 @@
     "blitz": "0.21.1",
     "body-parser": "1.19.0",
     "final-form": "4.20.1",
-    "grommet": "2.15.0",
-    "grommet-icons": "4.4.0",
     "polished": "3.6.6",
     "react": "0.0.0-experimental-7f28234f8",
     "react-dom": "0.0.0-experimental-7f28234f8",
