@@ -33,7 +33,9 @@ const SpecificProject: BlitzPage = () => {
               const token = await addToken({ projectSlug: project.slug, name })
               await projectMeta.refetch()
 
-              Router.push(`/projects/${project.slug}/clients/${name}#${token}`)
+              sessionStorage.setItem("created-token-" + project.slug + "-" + name, token)
+
+              Router.push(`/projects/${project.slug}/clients/${name}`)
             }}
           >
             {({ handleSubmit }) => (

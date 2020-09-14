@@ -1,23 +1,23 @@
-import { useParam, useQuery, BlitzPage, Router, Link } from "blitz"
+import { useParam, useQuery, BlitzPage, Router, Link, useRouterQuery } from "blitz"
 import getProject from "app/projects/queries/getProject"
 import deleteToken from "app/projects/mutations/deleteToken"
 import Layout from "app/layouts/Layout"
 import { useState } from "react"
 import { Modal } from "app/components/Modal"
 
-function useHash(): string | undefined {
+function useCreatedToken(slug: string, name: string) {
   if (typeof window !== "undefined") {
-    return window?.location?.hash
+    const tokenToShow = sessionStorage.getItem("created-token-" + slug + "-" + name)
+    return [tokenToShow, () => sessionStorage.removeItem("created-token-" + slug + "-" + name)]
   }
 
-  return undefined
+  return [null, () => {}]
 }
 
 const SpecificClient: BlitzPage = () => {
   const slug = useParam("slug", "string")!
   const client = useParam("client", "string")!
-  const hash = useHash()
-  const tokenToShow = hash?.startsWith("#") ? hash.substring(1) : undefined
+  const [tokenToShow] = useCreatedToken(slug, client)
 
   const [showDeleteClient, setShowDeleteClient] = useState(false)
 
@@ -65,7 +65,7 @@ const SpecificClient: BlitzPage = () => {
 
       {tokenToShow && (
         <div className="rounded border-green-500 border bg-green-100 p-4 mt-4 text-center">
-          This is your token. It'll only displayed once, so take note of it:
+          This is your token. It'll only displayed in this session, so take note of it:
           <br />
           <div className="inline-block bg-white w-auto px-4 py-2 rounded mt-4 select-all">
             {tokenToShow}
