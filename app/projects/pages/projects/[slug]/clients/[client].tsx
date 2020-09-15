@@ -1,4 +1,4 @@
-import { useParam, useQuery, BlitzPage, Router, Link, useRouterQuery } from "blitz"
+import { useParam, useQuery, BlitzPage, Router, Link } from "blitz"
 import getProject from "app/projects/queries/getProject"
 import deleteToken from "app/projects/mutations/deleteToken"
 import Layout from "app/layouts/Layout"

@@ -12,7 +12,7 @@ export interface LayoutProps {
 const Layout = ({ title, children, hideLogin }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   return (
-    <div className="mx-auto xl:mt-6" style={{ maxWidth: "1600px" }}>
+    <div className="mx-auto xl:mt-6">
       <Head>
         <title>{title || "Quirrel"}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -56,15 +56,14 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             </div>
           </div>
           <div className="hidden lg:block md:ml-10 md:pr-4 w-full">
-            <Link href="/#getting-started">
+            <Link href="/#features">
               <a className="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-                Getting Started
+                Features
               </a>
             </Link>
-
-            <Link href="/#features">
+            <Link href="/#pricing">
               <a className="ml-8 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-                Features
+                Pricing
               </a>
             </Link>
             <a
@@ -249,7 +248,144 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
         </div>
       </Transition>
 
-      {children}
+      <main className="my-8" style={{ minHeight: "50vh" }}>
+        {children}
+      </main>
+
+      <footer className="px-8 w-full py-8 bg-gray-100">
+        <div className="mx-auto max-w-screen-xl grid grid-cols-2 md:grid-cols-3 lg:grid-cols-10 gap-10 lg:gap-20 mb-3">
+          <div className="col-span-3">
+            <Link href="/">
+              <a>
+                <img
+                  aria-label="Home"
+                  className="h-8 w-auto sm:h-10 ml-1 inline-block"
+                  src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg"
+                  alt="Logo"
+                />
+                <span className="ml-2 text-xl font-semibold">Quirrel</span>
+              </a>
+            </Link>
+            <p className="text-md my-4 text-gray-500">
+              Job Queueing for Next.js x Vercel.
+              <br />
+              <br />
+              Simon Knott
+              <br />
+              Stahnsdorfer Straße 142b
+              <br />
+              14482 Potsdam
+              <br />
+              Germany
+              <br />
+            </p>
+          </div>
+          <nav className="col-span-1 md:col-span-1 lg:col-span-2">
+            <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
+              Product
+            </p>
+            <Link href="/#features">
+              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in">
+                Features
+              </a>
+            </Link>
+
+            <LoginState>
+              {({ isLoggedIn }) =>
+                isLoggedIn ? (
+                  <Link href="/dashboard">
+                    <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in">
+                      Dashboard
+                    </a>
+                  </Link>
+                ) : (
+                  <Link href="/Sign Up">
+                    <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in">
+                      Sign Up
+                    </a>
+                  </Link>
+                )
+              }
+            </LoginState>
+
+            <a
+              href="https://docs.quirrel.dev"
+              target="blank"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
+            >
+              Documentation
+            </a>
+            <Link href="/#pricing">
+              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in">
+                Pricing
+              </a>
+            </Link>
+          </nav>
+
+          <nav className="col-span-2 md:col-span-1 lg:col-span-2">
+            <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
+              Contact
+            </p>
+            <a
+              href="https://twitter.com/skn0tt"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
+            >
+              Twitter
+            </a>
+            <a
+              href="mailto:info@quirrel.dev"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
+            >
+              Email
+            </a>
+          </nav>
+          <div className="col-span-3">
+            <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
+              SUBSCRIBE TO OUR NEWSLETTER
+            </p>
+            <form
+              className="mb-2"
+              onSubmit={(evt) => {
+                evt.preventDefault()
+                alert("TODO: implement")
+              }}
+            >
+              <label className="tag-label tag-label-sm">
+                <div className="tag-append">
+                  <input
+                    className="tag-input tag-input-sm bg-gray-100"
+                    type="email"
+                    placeholder="Enter your email"
+                  />
+                  <button className="btn btn-light-primary btn-sm" type="submit">
+                    Subscribe
+                  </button>
+                </div>
+              </label>
+            </form>
+            <p className="text-xs text-gray-600">
+              Stay up-to-date on Quirrel development and get exclusive insights.
+            </p>
+          </div>
+        </div>
+        <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center border-t border-gray-200 pt-10 mt-10">
+          <p className="text-gray-700 font-medium text-sm text-left mb-6 md:mb-0">
+            © Copyright 2020 Simon Knott. All Rights Reserved.
+          </p>
+          <div className="flex items-start md:items-center justify-start md:justify-center space-x-6">
+            <Link href="/terms">
+              <a className="font-medium text-sm text-gray-700 hover:text-primary transition-colors duration-100 ease-in">
+                Terms
+              </a>
+            </Link>
+            <Link href="/privacy">
+              <a className="font-medium text-sm text-gray-700 hover:text-primary transition-colors duration-100 ease-in">
+                Privacy
+              </a>
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

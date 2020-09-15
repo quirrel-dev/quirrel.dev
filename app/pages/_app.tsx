@@ -4,6 +4,7 @@ import { queryCache } from "react-query"
 import LoginForm from "app/auth/components/LoginForm"
 import { Suspense } from "react"
 
+import "react-fake-code-typing/style.min.css"
 import "app/styles/index.css"
 
 export default function App({ Component, pageProps }: AppProps) {

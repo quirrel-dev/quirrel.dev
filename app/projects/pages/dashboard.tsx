@@ -1,4 +1,4 @@
-import { BlitzPage, useQuery, Router, Link } from "blitz"
+import { BlitzPage, useQuery, Router } from "blitz"
 import getProjectSlugs from "app/projects/queries/getProjectSlugs"
 import createProject from "app/projects/mutations/createProject"
 import React, { useState } from "react"
