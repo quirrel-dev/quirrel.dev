@@ -13,7 +13,7 @@ const Home: BlitzPage = () => {
       <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 row-gap-10 col-gap-10">
         <main className="mx-auto my-24">
           <div className="sm:text-center lg:text-left">
-            <h2 className="tracking-tight leading-10 font-extrabold text-gray-900 sm:text-6xl sm:leading-none md:text-6xl">
+            <h2 className="tracking-tight leading-10 font-extrabold text-gray-900 text-6xl leading-none">
               Job Queueing for
               <br />
               <span className="text-indigo-600">Next.js x Vercel</span>
