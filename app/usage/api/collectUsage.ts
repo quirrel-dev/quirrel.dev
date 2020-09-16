@@ -55,9 +55,7 @@ export default async function collectUsage(req: BlitzApiRequest, res: BlitzApiRe
         return
       }
 
-      const subscriptionItem = subscription.items.data.find(
-        (i) => i.price.id === process.env.SUBSCRIPTION_PRICE_ID
-      )
+      const [subscriptionItem] = subscription.items.data
       if (!subscriptionItem) {
         console.error("Subscription is missing required item")
         return
