@@ -10,6 +10,11 @@ export async function onCustomerDeleted(customerId: string) {
   await ProjectsRepo.removeByOwnerId(customerId)
   await db.user.update({
     where: { id: customerId },
-    data: { isActive: false, subscriptionId: null, defaultPaymentMethodId: null },
+    data: {
+      isActive: false,
+      subscriptionId: null,
+      defaultPaymentMethodId: null,
+      emailIsVerified: false,
+    },
   })
 }
