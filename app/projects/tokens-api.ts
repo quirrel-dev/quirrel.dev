@@ -14,7 +14,9 @@ export async function create(name: string) {
 }
 
 export async function revoke(name: string) {
-  await quirrelApi.delete(`/tokens/${name}`)
+  await quirrelApi.delete(`/tokens/${name}`, {
+    validateStatus: (status) => [200, 204, 404].includes(status),
+  })
 }
 
 export async function getUsage(): Promise<Record<string, number>> {
