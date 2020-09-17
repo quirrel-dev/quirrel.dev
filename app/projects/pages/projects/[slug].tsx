@@ -9,12 +9,18 @@ import { Form, Field } from "react-final-form"
 import { CardList } from "app/components/CardList"
 
 const SpecificProject: BlitzPage = () => {
-  const slug = useParam("slug") as string
+  const slug = useParam("slug", "string")
 
   const [showCreateToken, setShowCreateToken] = useState(false)
   const [showDeleteProject, setShowDeleteProject] = useState(false)
 
-  const [project, projectMeta] = useQuery(getProject, { slug })
+  const [project, projectMeta] = useQuery(
+    getProject,
+    { slug: slug ?? "" },
+    {
+      enabled: !!slug,
+    }
+  )
   if (!project) {
     return <p>Not Found.</p>
   }
