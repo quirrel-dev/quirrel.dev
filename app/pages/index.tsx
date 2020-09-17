@@ -11,7 +11,7 @@ const Home: BlitzPage = () => {
   return (
     <div className="max-w-screen-xl mx-auto bg-white overflow-hidden space-y-12 px-8">
       <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 row-gap-10 col-gap-10">
-        <main className="mx-auto my-24">
+        <main className="mx-auto my-12">
           <div className="sm:text-center lg:text-left">
             <h2 className="tracking-tight leading-10 font-extrabold text-gray-900 text-6xl leading-none">
               Job Queueing for

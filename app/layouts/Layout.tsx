@@ -249,6 +249,22 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
       </Transition>
 
       <main className="my-8" style={{ minHeight: "50vh" }}>
+        <section
+          id="cta"
+          className="text-center rounded-lg bg-indigo-600 mb-12 text-white py-4 px-6 text-xl max-w-2xl mx-auto"
+        >
+          <span>
+            Quirrel is currently in active development and not yet meant for production usage. Feel
+            free to{" "}
+            <a
+              className="text-yellow-400 hover:text-gray-100 transition-colors duration-200"
+              href="mailto:info@simonknott.de"
+            >
+              reach out
+            </a>{" "}
+            for questions :)
+          </span>
+        </section>
         {children}
       </main>
 
