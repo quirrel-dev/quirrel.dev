@@ -340,7 +340,7 @@ export default Queue(
           </p>
 
           <h1 className="mt-8 text-5xl text-gray-900 font-extrabold mx-auto inline-block">
-            $1<span className="text-gray-600 text-2xl font-medium"> per 1000 invocations.</span>
+            $TBA<span className="text-gray-600 text-2xl font-medium"> per 1000 invocations.</span>
           </h1>
         </div>
       </section>
