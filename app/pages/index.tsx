@@ -90,6 +90,7 @@ interface AdvantagesProps {
     title: string
     description: string
     svg: JSX.Element
+    comingSoon?: boolean
   }[]
 }
 
@@ -110,7 +111,7 @@ function Advantages(props: AdvantagesProps) {
       <div className="mt-10">
         <ul className="md:grid md:grid-cols-2 col-gap-8 row-gap-10">
           {advantages.map((advantage) => {
-            const { title, svg, description } = advantage
+            const { title, svg, description, comingSoon } = advantage
 
             return (
               <li className="mt-10 md:mt-0">
@@ -121,7 +122,17 @@ function Advantages(props: AdvantagesProps) {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <h4 className="text-lg leading-6 font-medium text-gray-900">{title}</h4>
+                    <span>
+                      <h4 className="text-lg leading-6 inline font-medium text-gray-900">
+                        {title}{" "}
+                      </h4>
+                      {comingSoon && (
+                        <span className="bg-gray-300 text-xs p-1 rounded text-gray-600 ml-2">
+                          Coming Soon
+                        </span>
+                      )}
+                    </span>
+
                     <p className="mt-2 text-base leading-6 text-gray-500">{description}</p>
                   </div>
                 </div>
@@ -163,34 +174,6 @@ function Features() {
           ),
         },
         {
-          title: "Cron Jobs",
-          description:
-            "Want to send a message to your customer, one week after they signed up? Use a delayed job.",
-          svg: <span className="text-lg">0 * *</span>,
-        },
-        {
-          title: "Recurring Jobs",
-          description: `Have a recurring task that needs to be setup programmatically? Lorem
-            ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
-            suscipit eaque, iste dolor cupiditate blanditiis ratione.`,
-          svg: (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              />
-            </svg>
-          ),
-        },
-        {
           title: "Fanout Jobs",
           description:
             "Sometimes, you just need to offload some computation onto a diferent lambda. That's what fanout jobs are there for.",
@@ -211,6 +194,36 @@ function Features() {
             </svg>
           ),
         },
+        {
+          title: "Recurring Jobs",
+          description: `Have a recurring task that needs to be setup programmatically? Lorem
+            ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
+            suscipit eaque, iste dolor cupiditate blanditiis ratione.`,
+          comingSoon: true,
+          svg: (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+          ),
+        },
+        {
+          title: "Cron Jobs",
+          description:
+            "Want to send a message to your customer, one week after they signed up? Use a delayed job.",
+          svg: <span className="text-lg">0 * *</span>,
+          comingSoon: true,
+        },
       ]}
     />
   )
@@ -226,7 +239,7 @@ function Perks() {
         {
           title: "Great DX",
           description:
-            "First-class support selected frameworks. Use the development UI to inspect pending jobs during development.",
+            "First-class support selected frameworks. Use the development UI (coming soon) to inspect pending jobs during development.",
           svg: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -311,7 +324,7 @@ function Pricing() {
         </p>
 
         <h1 className="mt-8 text-5xl text-gray-900 font-extrabold mx-auto inline-block">
-          $TBA<span className="text-gray-600 text-2xl font-medium"> per 1000 invocations.</span>
+          $TBA<span className="text-gray-600 text-2xl font-medium"> per 1000 calls.</span>
         </h1>
       </div>
     </section>
