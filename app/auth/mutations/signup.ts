@@ -6,6 +6,7 @@ import { stripe } from "app/stripe/stripe"
 import { sendEmailWithTemplate } from "app/postmark"
 import { url } from "app/url"
 import * as verifyEmail from "../verify-email"
+import subscribeToNewsletter from "app/users/mutations/subscribeToNewsletter"
 
 async function findCustomerOrCreate(email: string) {
   const existingOnes = await stripe.customers.list({ email })
@@ -32,8 +33,10 @@ export default async function signup(
     return "email_exists"
   }
 
-  const hashedPassword = await hashPassword(password)
-  const customer = await findCustomerOrCreate(email)
+  const [hashedPassword, customer] = await Promise.all([
+    hashPassword(password),
+    findCustomerOrCreate(email),
+  ])
 
   await db.user.upsert({
     where: {
@@ -57,12 +60,15 @@ export default async function signup(
 
   const emailCode = await verifyEmail.generateCode(hashedPassword)
 
-  await sendEmailWithTemplate(email, "welcome", {
-    name: email,
-    verify_email_url: url`/verifyEmail/${emailCode}`,
-  })
+  await Promise.all([
+    sendEmailWithTemplate(email, "welcome", {
+      name: email,
+      verify_email_url: url`/verifyEmail/${emailCode}`,
+    }),
+    subscribeToNewsletter({ email, skipConfirm: true }),
 
-  await ctx.session!.create({ userId: customer.id, roles: [] })
+    ctx.session!.create({ userId: customer.id, roles: [] }),
+  ])
 
   return "success"
 }
