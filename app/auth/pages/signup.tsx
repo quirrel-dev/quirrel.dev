@@ -9,8 +9,8 @@ const SignupPage: BlitzPage = () => {
   const router = useRouter()
 
   return (
-    <div className="min-h-screen flex justify-center lg:pt-24">
-      <div className="max-w-md w-full py-12 px-6">
+    <div className="min-h-screen flex justify-center">
+      <div className="max-w-md w-full py-12">
         <p className="mt-6 text-sm leading-5 text-center text-gray-900">
           Sign Up for a new account
         </p>

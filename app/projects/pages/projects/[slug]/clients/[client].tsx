@@ -27,7 +27,7 @@ const SpecificClient: BlitzPage = () => {
   }
 
   return (
-    <div className="mt-4 max-w-screen-md mx-8 lg:mx-auto">
+    <div className="mt-4 max-w-screen-md lg:mx-auto">
       <span className="text-xl  text-gray-900 space-x-2 flex items-center">
         <Link href="/dashboard">
           <a>

@@ -359,7 +359,7 @@ function CTA() {
 
 const Home: BlitzPage = () => {
   return (
-    <div className="max-w-screen-xl mx-auto bg-white overflow-hidden space-y-12 px-8">
+    <div className="max-w-screen-xl mx-auto bg-white overflow-hidden space-y-12">
       <Hero />
       <Features />
       <Perks />

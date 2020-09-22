@@ -28,7 +28,7 @@ const SpecificProject: BlitzPage = () => {
   const tokenNames = project.tokens.map((t) => t.name) ?? []
 
   return (
-    <div className="mt-4 max-w-screen-md mx-8 lg:mx-auto">
+    <div className="mt-4 max-w-screen-md lg:mx-auto">
       <div className="space-y-4">
         <Modal show={showCreateToken}>
           <Form

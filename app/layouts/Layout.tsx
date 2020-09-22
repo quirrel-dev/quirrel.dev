@@ -160,22 +160,21 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 </div>
               </div>
               <div className="px-2 py-3">
-                <Link href="/#getting-started">
-                  <a
-                    href="#"
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                    role="menuitem"
-                  >
-                    Getting Started
-                  </a>
-                </Link>
-
                 <Link href="/#features">
                   <a
                     className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
                     role="menuitem"
                   >
                     Features
+                  </a>
+                </Link>
+
+                <Link href="/#pricing">
+                  <a
+                    className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                    role="menuitem"
+                  >
+                    Pricing
                   </a>
                 </Link>
 
@@ -249,7 +248,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
         </div>
       </Transition>
 
-      <main className="my-8" style={{ minHeight: "50vh" }}>
+      <main className="my-8 mx-8" style={{ minHeight: "50vh" }}>
         <section
           id="cta"
           className="text-center rounded-lg bg-indigo-600 mb-12 text-white py-4 px-6 text-xl max-w-2xl mx-auto"
@@ -326,6 +325,14 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             </LoginState>
 
             <a
+              href="https://github.com/orgs/quirrel-dev/projects/1"
+              target="blank"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
+            >
+              Roadmap
+            </a>
+
+            <a
               href="https://docs.quirrel.dev"
               target="blank"
               className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
@@ -344,13 +351,22 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               Contact
             </p>
             <a
+              href="https://dev.to/quirrel"
+              target="blank"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
+            >
+              Blog
+            </a>
+            <a
               href="https://twitter.com/skn0tt"
+              target="blank"
               className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
             >
               Twitter
             </a>
             <a
               href="mailto:info@quirrel.dev"
+              target="blank"
               className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
             >
               Email

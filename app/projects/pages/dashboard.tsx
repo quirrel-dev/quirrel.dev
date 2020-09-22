@@ -24,7 +24,7 @@ const Dashboard: BlitzPage = () => {
   const [projectSlugs, projectSlugsMeta] = useQuery(getProjectSlugs, {})
 
   return (
-    <div className="mx-8 lg:mx-auto max-w-screen-md">
+    <div className="lg:mx-auto max-w-screen-md">
       <div className="space-y-4">
         <Modal show={showCreateProject}>
           <Form
