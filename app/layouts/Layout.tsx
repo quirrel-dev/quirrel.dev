@@ -403,7 +403,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                     required
                   />
                   <button
-                    className="text-center px-4 py-1 border border-transparent text-base leading-6 font-medium rounded-r-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+                    className="text-center px-4 py-1 border border-transparent text-base leading-6 font-medium rounded-r-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out"
                     type="submit"
                   >
                     Subscribe
