@@ -1,8 +1,9 @@
 import React from "react"
-import { Form, Field } from "react-final-form"
+import { Form, Field, FormSpy } from "react-final-form"
 import { FORM_ERROR } from "final-form"
 import login from "app/auth/mutations/login"
 import { Link } from "blitz"
+import resetPassword from "../mutations/reset-password"
 
 type LoginFormProps = {
   onSuccess?: () => void
@@ -35,6 +36,7 @@ export const LoginForm = (props: LoginFormProps) => {
               <div className="rounded-md shadow-sm">
                 <Field
                   name="email"
+                  type="email"
                   render={({ input }) => (
                     <div>
                       <input
@@ -62,11 +64,29 @@ export const LoginForm = (props: LoginFormProps) => {
                         required
                       />
 
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                        <Link href="/resetPassword">
-                          <a className="text-gray-900 underline">Forgot?</a>
-                        </Link>
-                      </div>
+                      <FormSpy>
+                        {(props) => (
+                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                            <button
+                              className="text-gray-900 underline"
+                              onClick={async (evt) => {
+                                evt.preventDefault()
+                                const { email } = props.values
+
+                                if (!email) {
+                                  props.form.focus("email")
+                                  return
+                                }
+
+                                await resetPassword({ email })
+                                window.alert("You'll receive an e-mail shortly.")
+                              }}
+                            >
+                              Forgot?
+                            </button>
+                          </div>
+                        )}
+                      </FormSpy>
                     </div>
                   )}
                 />
