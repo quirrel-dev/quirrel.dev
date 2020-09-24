@@ -65,7 +65,7 @@ const SpecificClient: BlitzPage = () => {
 
       {tokenToShow && (
         <div className="rounded border-green-500 border bg-green-100 p-4 mt-4 text-center">
-          This is your token. It'll only displayed in this session, so take note of it:
+          This is your token. It'll only be displayed in this session, so take note of it:
           <br />
           <div className="inline-block bg-white w-auto px-4 py-2 rounded mt-4 select-all">
             {tokenToShow}
