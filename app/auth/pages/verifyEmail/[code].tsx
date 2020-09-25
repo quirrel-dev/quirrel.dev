@@ -30,7 +30,7 @@ const VerifyMail: BlitzPage = () => {
         "An Error ocurred"
       ) : (
         <svg
-          className="animate-spin -ml-1 mr-3 h-10 w-10 text-indigo-500"
+          className="animate-spin -ml-1 mr-3 h-10 w-10 text-orange-500"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

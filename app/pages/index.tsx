@@ -12,25 +12,23 @@ function Hero() {
     <section className="mx-auto grid grid-cols-1 lg:grid-cols-2 row-gap-10 col-gap-10">
       <div className="mx-auto my-12">
         <div className="sm:text-center lg:text-left">
-          <h2 className="tracking-tight leading-10 font-extrabold text-gray-900 text-6xl leading-none">
+          <h2 className="tracking-tight font-extrabold text-gray-900 text-6xl leading-none">
             Job Queueing for
             <br />
-            <span className="text-indigo-600">Next.js x Vercel</span>
+            <span className="text-orange-600">Next.js x Vercel</span>
           </h2>
-          <p className="text-base text-gray-500 mt-5 text-xl">
-            Quirrel makes job queues simple as cake.
-          </p>
+          <p className="text-gray-500 mt-5 text-xl">Quirrel makes job queues simple as cake.</p>
           <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
             <div className="rounded-md shadow">
               {isSignedIn ? (
                 <Link href="/dashboard">
-                  <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
+                  <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                     Dashboard
                   </a>
                 </Link>
               ) : (
                 <Link href="/signup">
-                  <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
+                  <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                     Sign Up
                   </a>
                 </Link>
@@ -41,7 +39,7 @@ function Hero() {
                 href="https://demo.quirrel.dev"
                 target="_blank"
                 rel="noreferrer"
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-300 transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-orange-700 bg-orange-200 hover:text-orange-600 hover:bg-orange-50 focus:outline-none focus:shadow-outline-indigo focus:border-orange-300 transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
               >
                 Try the Demo
               </a>
@@ -54,7 +52,7 @@ function Hero() {
         <SyntaxHighlighter
           language="javascript"
           style={github}
-          className="rounded-lg border text-xl"
+          className="rounded-lg border text-xl border-gray-100"
           showLineNumbers
           lineNumberStyle={{
             color: "lightgray",
@@ -99,7 +97,7 @@ function Advantages(props: AdvantagesProps) {
   return (
     <section id={name} className="py-12">
       <div className="lg:text-center">
-        <p className="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">
+        <p className="text-base leading-6 text-orange-600 font-semibold tracking-wide uppercase">
           {name}
         </p>
         <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
@@ -117,7 +115,7 @@ function Advantages(props: AdvantagesProps) {
               <li className="mt-10 md:mt-0">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
                       {svg}
                     </div>
                   </div>
@@ -148,7 +146,7 @@ function Advantages(props: AdvantagesProps) {
 function Features() {
   return (
     <Advantages
-      name="Features"
+      name="features"
       title="Jobs for every occasion."
       subtitle="Whatever job you need, Quirrel supports it."
       advantages={[
@@ -232,7 +230,7 @@ function Features() {
 function Perks() {
   return (
     <Advantages
-      name="Perks"
+      name="perks"
       title="The best solution available."
       subtitle="Deeply integrated and a joy to use."
       advantages={[
@@ -313,7 +311,7 @@ function Pricing() {
   return (
     <section id="pricing" className="py-12 lg:w-1/2 mx-auto">
       <div className="lg:text-center">
-        <p className="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">
+        <p className="text-base leading-6 text-orange-600 font-semibold tracking-wide uppercase">
           Pricing
         </p>
         <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
@@ -336,19 +334,19 @@ function CTA() {
   return (
     <section
       id="cta"
-      className="rounded-lg bg-indigo-600 text-white py-4 px-6 text-xl justify-between flex items-center max-w-4xl mx-auto"
+      className="rounded-lg bg-orange-600 text-white py-4 px-6 text-xl justify-between flex items-center max-w-4xl mx-auto"
     >
       <span>Built for developers. Get started with Quirrel in 5 minutes.</span>
 
       {isSignedIn ? (
         <Link href="/dashboard">
-          <a className="text-center text-indigo-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-indigo-100 transition duration-150 ease-in-out">
+          <a className="text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
             Dashboard
           </a>
         </Link>
       ) : (
         <Link href="/signup">
-          <a className="text-center text-indigo-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-indigo-100 transition duration-150 ease-in-out">
+          <a className="text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
             Sign Up
           </a>
         </Link>
@@ -359,7 +357,7 @@ function CTA() {
 
 const Home: BlitzPage = () => {
   return (
-    <div className="max-w-screen-xl mx-auto bg-white overflow-hidden space-y-12">
+    <div className="max-w-screen-xl mx-auto overflow-hidden space-y-12">
       <Hero />
       <Features />
       <Perks />

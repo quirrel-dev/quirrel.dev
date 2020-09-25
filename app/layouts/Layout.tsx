@@ -13,24 +13,29 @@ export interface LayoutProps {
 const Layout = ({ title, children, hideLogin }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   return (
-    <div className="mx-auto xl:mt-6">
+    <div className="mx-auto mt-4 xl:mt-6">
       <Head>
         <title>{title || "Quirrel"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="relative py-6 px-4 sm:px-6 lg:px-8">
-        <nav className="relative flex items-center justify-between sm:h-10 lg:justify-start">
+      <div className="relative py-2 px-8 max-w-6xl mx-auto">
+        <nav className="relative flex items-center justify-between">
           <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
             <div className="flex items-center justify-between w-full lg:w-auto">
               <Link href="/">
-                <img
-                  aria-label="Home"
-                  className="h-8 w-auto sm:h-10 ml-1"
-                  src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg"
-                  alt="Logo"
-                />
+                <span className="flex items-center">
+                  <img
+                    aria-label="Home"
+                    style={{ transform: "rotate(-4deg)" }}
+                    className="h-10 w-auto ml-1"
+                    src="/img/horn_transparent.png"
+                    alt="Logo"
+                  />
+                  <h1 className="ml-3 text-3xl font-semibold text-orange-800">Quirrel</h1>
+                </span>
               </Link>
+
               {!hideLogin && (
                 <div className="-mr-2 flex items-center lg:hidden">
                   <button
@@ -92,7 +97,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                           </a>
                         </Link>
                         <a
-                          className="ml-8 font-medium text-indigo-600 hover:text-indigo-900 transition duration-150 ease-in-out"
+                          className="ml-8 font-medium text-orange-600 hover:text-orange-900 transition duration-150 ease-in-out"
                           role="menuitem"
                           tabIndex={-1}
                           onClick={onClick}
@@ -103,7 +108,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                       </span>
                     ) : (
                       <Link href="/login">
-                        <a className="ml-8 font-medium text-indigo-600 hover:text-indigo-900 transition duration-150 ease-in-out float-right">
+                        <a className="ml-8 font-medium text-orange-600 hover:text-orange-900 transition duration-150 ease-in-out float-right">
                           Log in
                         </a>
                       </Link>
@@ -133,12 +138,13 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               aria-orientation="vertical"
               aria-labelledby="main-menu"
             >
-              <div className="px-5 pt-4 flex items-center justify-between">
+              <div className="px-5 pt-3 flex items-center justify-between">
                 <div>
                   <img
-                    className="h-8 w-auto sm:h-10"
-                    src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg"
-                    alt=""
+                    className="h-10 w-auto"
+                    src="/img/horn_transparent.png"
+                    style={{ transform: "rotate(-4deg)" }}
+                    alt="Logo"
                   />
                 </div>
                 <div className="-mr-2">
@@ -203,12 +209,12 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                         isLoggedIn ? (
                           <span className="flex">
                             <Link href="/dashboard">
-                              <a className="block w-full px-5 py-3 text-center font-medium bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out">
+                              <a className="block w-full px-5 py-3 text-center font-medium bg-gray-50 hover:bg-gray-100 hover:text-orange-700 focus:outline-none focus:bg-gray-100 focus:text-orange-700 transition duration-150 ease-in-out">
                                 Dashboard
                               </a>
                             </Link>
                             <a
-                              className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out"
+                              className="block w-full px-5 py-3 text-center font-medium text-orange-600 bg-gray-50 hover:bg-gray-100 hover:text-orange-700 focus:outline-none focus:bg-gray-100 focus:text-orange-700 transition duration-150 ease-in-out"
                               role="menuitem"
                               tabIndex={-1}
                               onClick={() => {
@@ -227,7 +233,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                           <div>
                             <a
                               href="#"
-                              className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out"
+                              className="block w-full px-5 py-3 text-center font-medium text-orange-600 bg-gray-50 hover:bg-gray-100 hover:text-orange-700 focus:outline-none focus:bg-gray-100 focus:text-orange-700 transition duration-150 ease-in-out"
                               role="menuitem"
                               onClick={() => {
                                 onClick()
@@ -248,10 +254,10 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
         </div>
       </Transition>
 
-      <main className="my-8 mx-8" style={{ minHeight: "50vh" }}>
+      <main className="my-8 px-8 max-w-6xl mx-auto" style={{ minHeight: "50vh" }}>
         <section
           id="cta"
-          className="text-center rounded-lg bg-indigo-600 mb-12 text-white py-4 px-6 text-xl max-w-2xl mx-auto"
+          className="text-center rounded-lg bg-orange-600 mb-12 text-white py-4 px-6 text-xl max-w-2xl mx-auto"
         >
           <span>
             Quirrel is currently in active development and not yet meant for production usage. Feel
@@ -273,13 +279,16 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
           <div className="col-span-3">
             <Link href="/">
               <a>
-                <img
-                  aria-label="Home"
-                  className="h-8 w-auto sm:h-10 ml-1 inline-block"
-                  src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg"
-                  alt="Logo"
-                />
-                <span className="ml-2 text-xl font-semibold">Quirrel</span>
+                <span className="flex items-center">
+                  <img
+                    aria-label="Home"
+                    style={{ transform: "rotate(-4deg)" }}
+                    className="h-10 w-auto ml-1"
+                    src="/img/horn_transparent.png"
+                    alt="Logo"
+                  />
+                  <h1 className="ml-3 text-3xl font-semibold text-orange-800">Quirrel</h1>
+                </span>
               </a>
             </Link>
             <p className="text-md my-4 text-gray-500">
@@ -403,7 +412,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                     required
                   />
                   <button
-                    className="text-center px-4 py-1 border border-transparent text-base leading-6 font-medium rounded-r-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out"
+                    className="text-center px-4 py-1 border border-transparent text-base leading-6 font-medium rounded-r-md text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-indigo transition duration-150 ease-in-out"
                     type="submit"
                   >
                     Subscribe
