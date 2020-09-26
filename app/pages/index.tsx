@@ -386,7 +386,7 @@ function About() {
             <h5 className="text-md leading-6 font-medium text-gray-700">Creator & Developer</h5>
           </span>
 
-          <p className="mt-2 text-base leading-6 text-gray-500">
+          <p className="mt-2 text-base leading-6 text-gray-600">
             Hi, I'm Simon! I love music, working on developer tooling and giving talks.
             <br />
             You may know me from the Blitz.js ecosystem or SuperJSON. Say <code>Hi</code> on
