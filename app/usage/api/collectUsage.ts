@@ -10,20 +10,7 @@ function getBeginningOfCurrentMonth(now = new Date()) {
   return new Date(now.getFullYear(), now.getMonth(), 1)
 }
 
-function isAuthenticated(req: BlitzApiRequest) {
-  const result = basicAuth(req)
-  if (!result) {
-    return false
-  }
-
-  return result.pass === process.env.COLLECT_USAGE_PASSPHRASE
-}
-
-export default async function collectUsage(req: BlitzApiRequest, res: BlitzApiResponse) {
-  if (!isAuthenticated(req)) {
-    return res.status(401).end()
-  }
-
+async function writeUsageIntoDB() {
   const usage = await TokensAPI.getUsage()
   const timestamp = Date.now()
   const timestampAsISO = new Date(timestamp).toISOString()
@@ -40,26 +27,53 @@ export default async function collectUsage(req: BlitzApiRequest, res: BlitzApiRe
           .join(", \n")}
     `)
   }
+}
 
+async function notifyFreeUsersOfOverage() {
   const trialUsageThisMonth = await db.$queryRaw(
-    `SELECT "tokenProjectOwnerId", SUM("invocations") FROM "UsageRecord"
-    WHERE "timestamp" >= '${getBeginningOfCurrentMonth().toISOString()}'
-    AND "tokenProjectOwnerId" IN (
-      SELECT "id" FROM "User"
-      WHERE "subscriptionId" IS NULL
-      AND "isActive" = true
-    )
-    GROUP BY "tokenProjectOwnerId"
+    `SELECT "User"."id", "User"."email", SUM("invocations") FROM "UsageRecord"
+    JOIN "User" ON "User"."id" = "tokenProjectOwnerId"
+    WHERE "User"."subscriptionId" IS NULL
+    AND "User"."isActive" = true
+    AND "User"."hasBeenWarnedAboutOverage" = false
+
+    AND "timestamp" >= '${getBeginningOfCurrentMonth().toISOString()}'
+
+    GROUP BY "User"."id"
     HAVING SUM("invocations") >= 100;`
   )
 
-  for (const { tokenProjectOwnerId: userId, sum } of trialUsageThisMonth) {
-    const user = await db.user.findOne({ where: { id: userId } })
-    await sendEmailWithTemplate(user!.email, "plan-exceeded", {
-      invocations: sum,
-      action_url: url`/dashboard`,
+  await Promise.all(
+    trialUsageThisMonth.map(async ({ id, email, sum }) => {
+      await Promise.all([
+        sendEmailWithTemplate(email, "plan-exceeded", {
+          invocations: sum,
+          action_url: url`/dashboard`,
+        }),
+        db.user.update({ where: { id }, data: { hasBeenWarnedAboutOverage: true } }),
+      ])
     })
+  )
+}
+
+const passphrase = process.env.CRON_PASSPHRASE || process.env.COLLECT_USAGE_PASSPHRASE
+
+function isAuthenticated(req: BlitzApiRequest) {
+  const result = basicAuth(req)
+  if (!result) {
+    return false
   }
+
+  return result.pass === passphrase
+}
+
+export default async function collectUsage(req: BlitzApiRequest, res: BlitzApiResponse) {
+  if (!isAuthenticated(req)) {
+    return res.status(401).end()
+  }
+
+  await writeUsageIntoDB()
+  await notifyFreeUsersOfOverage()
 
   return res.status(200).end()
 }
