@@ -4,3 +4,5 @@
 20200914082122-deactive-tokens
 20200914124000-make-hashed-password-required
 20200914124113-add-email-is-verified-field
+20200928071732-generate-id-locally--don-t-use-stripe-generated-one
+20200928071823-don-t-save-default-payment-method

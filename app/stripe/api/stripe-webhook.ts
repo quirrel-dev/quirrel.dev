@@ -4,7 +4,6 @@ import { onCustomerDeleted } from "../customer"
 import bufferBody from "../middlewares/bufferBody"
 import { stripe } from "../stripe"
 import { onSubscriptionCanceled } from "../subscription"
-import { updateDefaultPaymentMethod } from "../updateDefaultPaymentMethod"
 
 async function stripeWebhook(req: BlitzApiRequest, res: BlitzApiResponse) {
   let event: Stripe.Event
@@ -25,17 +24,6 @@ async function stripeWebhook(req: BlitzApiRequest, res: BlitzApiResponse) {
     case "customer.subscription.deleted": {
       const object = event.data.object as { customer: string }
       await onSubscriptionCanceled(object.customer)
-
-      break
-    }
-
-    case "customer.updated": {
-      const object = event.data.object as {
-        id: string
-        invoice_settings: { default_payment_method: string | null }
-      }
-
-      await updateDefaultPaymentMethod(object.id, object.invoice_settings.default_payment_method)
 
       break
     }

@@ -13,7 +13,6 @@ export async function onCustomerDeleted(customerId: string) {
     data: {
       isActive: false,
       subscriptionId: null,
-      defaultPaymentMethodId: null,
       emailIsVerified: false,
     },
   })

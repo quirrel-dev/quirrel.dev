@@ -47,14 +47,12 @@ export default async function signup(
       email,
       hashedPassword,
       subscriptionId: customer.subscriptions?.data[0].id,
-      defaultPaymentMethodId: customer.default_source as string | null,
     },
     update: {
       id: customer.id,
       hashedPassword,
       isActive: true,
       subscriptionId: customer.subscriptions?.data[0].id,
-      defaultPaymentMethodId: customer.default_source as string | null,
     },
   })
 
