@@ -8,9 +8,8 @@
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev": "concurrently --raw \"yarn:dev:deps up > /dev/null\" \"yarn:dev:blitz\" \"yarn:dev:stripe\"",
+    "dev": "concurrently --raw \"yarn:dev:deps up > /dev/null\" \"yarn:dev:blitz\"",
     "dev:blitz": "blitz start",
-    "dev:stripe": "stripe listen --forward-to localhost:3000/api/stripe-webhook",
     "dev:deps": "docker-compose --env-file .env.local -f docker-compose.yml"
   },
   "cacheDirectories": [
@@ -39,8 +38,6 @@
   "dependencies": {
     "@prisma/cli": "2.6.2",
     "@prisma/client": "2.6.2",
-    "@stripe/react-stripe-js": "1.1.2",
-    "@stripe/stripe-js": "1.9.0",
     "@tailwindui/react": "0.1.1",
     "axios": "0.20.0",
     "babel-runtime": "6.26.0",
@@ -57,7 +54,6 @@
     "react-syntax-highlighter": "13.5.3",
     "react-typing-animation": "1.6.2",
     "secure-password": "4.0.0",
-    "stripe": "8.95.0",
     "styled-components": "5.2.0",
     "tailwindcss": "1",
     "zod": "1.11.5"

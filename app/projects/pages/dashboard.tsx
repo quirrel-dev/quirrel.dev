@@ -6,17 +6,8 @@ import { isValidSlug } from "../slug"
 import { SubscriberOnlyLayout } from "app/layouts/SubscriberOnlyLayout"
 import { Modal } from "app/components/Modal"
 import { Form, Field } from "react-final-form"
-import getBillingPortalLink from "../../stripe/queries/getBillingPortalLink"
 import deleteAccount from "app/account/mutations/deleteAccount"
 import { CardList } from "app/components/CardList"
-
-async function openBillingPortal() {
-  const url = await getBillingPortalLink({
-    returnUrl: window.location.href,
-  })
-
-  window.location.href = url
-}
 
 const Dashboard: BlitzPage = () => {
   const [showCreateProject, setShowCreateProject] = useState(false)
@@ -165,17 +156,6 @@ const Dashboard: BlitzPage = () => {
         <h1 className="text-4xl font-semibold text-gray-900 sm:text-xl sm:leading-7">Account</h1>
 
         <ul className="space-y-2 mt-2">
-          <li>
-            <a
-              className="font-semibold text-teal-500 hover:text-teal-600 transition ease-in-out duration-150"
-              role="link"
-              tabIndex={-1}
-              onClick={openBillingPortal}
-              onKeyDown={openBillingPortal}
-            >
-              Open billing portal →
-            </a>
-          </li>
           <li>
             <Modal show={showDeleteAccountModal}>
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">

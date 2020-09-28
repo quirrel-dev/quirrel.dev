@@ -7,5 +7,5 @@ export default async function deleteProject(
 ) {
   ctx.session?.authorize()
 
-  await ProjectsRepo.remove(slug, ctx.session?.userId)
+  await ProjectsRepo.deactivate(slug, ctx.session?.userId)
 }
