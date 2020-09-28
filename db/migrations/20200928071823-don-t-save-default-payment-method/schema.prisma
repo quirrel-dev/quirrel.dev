@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -22,8 +22,8 @@ model User {
 
   isActive Boolean @default(true)
 
-  id             String  @unique @id @default(uuid())
-  subscriptionId String? @unique
+  id                     String  @unique @id @default(uuid())
+  subscriptionId         String? @unique
 
   projects Project[]
 }

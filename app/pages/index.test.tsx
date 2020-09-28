@@ -16,8 +16,8 @@ test.skip("renders blitz documentation link", () => {
   mockUseCurrentUser.mockReturnValue({
     id: "cus_1",
     email: "user@email.com",
-    hasDefaultPaymentMethod: true,
     isSubscriber: true,
+    emailIsVerified: true,
   })
 
   const { getByText } = render(<Home />)

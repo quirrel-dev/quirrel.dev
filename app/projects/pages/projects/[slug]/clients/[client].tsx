@@ -2,8 +2,9 @@ import { useParam, useQuery, BlitzPage, Router, Link } from "blitz"
 import getProject from "app/projects/queries/getProject"
 import deleteToken from "app/projects/mutations/deleteToken"
 import Layout from "app/layouts/Layout"
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { Modal } from "app/components/Modal"
+import { UsageGraph } from "app/projects/components/UsageGraph"
 
 function useCreatedToken(slug: string, name: string) {
   if (typeof window !== "undefined") {
@@ -76,11 +77,9 @@ const SpecificClient: BlitzPage = () => {
       <div className="mt-4">
         <h2 className="text-md font-semibold text-gray-900 leading-7">Usage</h2>
 
-        <img
-          src="https://media.giphy.com/media/YnkMcHgNIMW4Yfmjxr/giphy.gif"
-          className="mt-4"
-          alt="the stonks man"
-        ></img>
+        <Suspense fallback="Loading ...">
+          <UsageGraph projectSlug={slug} tokenName={client} />
+        </Suspense>
       </div>
 
       <div className="mt-4">

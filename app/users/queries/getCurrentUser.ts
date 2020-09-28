@@ -10,7 +10,6 @@ export default async function getCurrentUser(_ = null, ctx: { session?: SessionC
       email: true,
       emailIsVerified: true,
       subscriptionId: true,
-      defaultPaymentMethodId: true,
     },
   })
 
@@ -19,6 +18,5 @@ export default async function getCurrentUser(_ = null, ctx: { session?: SessionC
     emailIsVerified: user!.emailIsVerified,
     email: user!.email,
     isSubscriber: !!user!.subscriptionId,
-    hasDefaultPaymentMethod: !!user!.defaultPaymentMethodId,
   }
 }

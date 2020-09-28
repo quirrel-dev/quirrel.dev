@@ -1,24 +1,27 @@
 import { SessionContext } from "blitz"
+import db from "db"
 
 interface TimeSeriesRow {
-  date: string
+  timestamp: Date
   invocations: number
 }
 
 export default async function getUsageRecords(
-  { tokenName }: { projectSlug: string; tokenName?: string },
+  { tokenName, projectSlug }: { projectSlug?: string; tokenName?: string },
   ctx: { session?: SessionContext } = {}
-) {
+): Promise<TimeSeriesRow[]> {
   ctx.session?.authorize()
 
-  const data: TimeSeriesRow[] = []
-  for (let i = 1; i < 8; i += 1) {
-    const digits = ((i % 12) + 1).toString().padStart(2, "0")
-    data.push({
-      date: `2020-05-${digits}T00:00:00`,
-      invocations: i * (!!tokenName ? 111111 : 888888),
-    })
-  }
+  const records = await db.usageRecord.findMany({
+    where: {
+      tokenName,
+      tokenProjectSlug: projectSlug,
+    },
+    select: {
+      invocations: true,
+      timestamp: true,
+    },
+  })
 
-  return data
+  return records
 }
