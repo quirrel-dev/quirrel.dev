@@ -110,11 +110,11 @@ function Advantages(props: AdvantagesProps) {
 
       <div className="mt-10">
         <ul className="md:grid md:grid-cols-2 col-gap-8 row-gap-10">
-          {advantages.map((advantage) => {
+          {advantages.map((advantage, index) => {
             const { title, svg, description, comingSoon } = advantage
 
             return (
-              <li className="mt-10 md:mt-0">
+              <li key={index} className="mt-10 md:mt-0">
                 <div className="flex">
                   <div className="flex-shrink-0">
                     <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">

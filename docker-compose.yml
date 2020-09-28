@@ -7,7 +7,7 @@ services:
       PASSPHRASES: "${QUIRREL_PASSPHRASE}"
       REDIS_URL: redis://redis
     ports:
-      - 4000:3000
+      - 9181:9181
 
   redis:
     image: redis
