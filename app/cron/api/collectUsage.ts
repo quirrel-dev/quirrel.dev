@@ -2,13 +2,10 @@ import { parseToken } from "app/projects/tokens-repo"
 import * as TokensAPI from "app/projects/tokens-api"
 import db from "db"
 import { BlitzApiRequest, BlitzApiResponse } from "blitz"
-import basicAuth from "basic-auth"
 import { sendEmailWithTemplate } from "app/postmark"
 import { url } from "app/url"
-
-function getBeginningOfCurrentMonth(now = new Date()) {
-  return new Date(now.getFullYear(), now.getMonth(), 1)
-}
+import { isAuthenticated } from "../authenticate"
+import { getBeginningOfCurrentMonth } from "../utils"
 
 async function writeUsageIntoDB() {
   const usage = await TokensAPI.getUsage()
@@ -54,17 +51,6 @@ async function notifyFreeUsersOfOverage() {
       ])
     })
   )
-}
-
-const passphrase = process.env.CRON_PASSPHRASE || process.env.COLLECT_USAGE_PASSPHRASE
-
-function isAuthenticated(req: BlitzApiRequest) {
-  const result = basicAuth(req)
-  if (!result) {
-    return false
-  }
-
-  return result.pass === passphrase
 }
 
 export default async function collectUsage(req: BlitzApiRequest, res: BlitzApiResponse) {
