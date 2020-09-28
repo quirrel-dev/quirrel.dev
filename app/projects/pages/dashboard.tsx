@@ -40,11 +40,11 @@ const Dashboard: BlitzPage = () => {
               <form onSubmit={handleSubmit}>
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
-                    <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 sm:mx-0 sm:h-10 sm:w-10">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
-                        className="h-6 w-6 text-indigo-600"
+                        className="h-6 w-6 text-orange-600"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
                       >

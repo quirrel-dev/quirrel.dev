@@ -12,28 +12,28 @@ function Hero() {
     <section className="mx-auto grid grid-cols-1 lg:grid-cols-2 row-gap-10 col-gap-10">
       <div className="mx-auto my-12">
         <div className="sm:text-center lg:text-left">
-          <h2 className="tracking-tight leading-10 font-extrabold text-gray-900 text-6xl leading-none">
+          <h2 className="tracking-tight font-extrabold text-gray-900 text-6xl leading-none">
             Job Queueing for
             <br />
-            <span className="text-indigo-600">Next.js x Vercel</span>
+            <span className="text-orange-600">Next.js x Vercel</span>
           </h2>
-          <p className="text-base text-gray-500 mt-5 text-xl">
-            Quirrel makes job queues simple as cake.
-          </p>
+          <p className="text-gray-500 mt-5 text-xl">Quirrel makes job queues simple as cake.</p>
           <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
             <div className="rounded-md shadow">
               {isSignedIn ? (
                 <Link href="/dashboard">
-                  <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
+                  <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                     Dashboard
                   </a>
                 </Link>
               ) : (
-                <Link href="/signup">
-                  <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
-                    Sign Up
-                  </a>
-                </Link>
+                <a
+                  href="https://docs.quirrel.dev"
+                  target="blank"
+                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+                >
+                  Get Started
+                </a>
               )}
             </div>
             <div className="mt-3 sm:mt-0 sm:ml-3">
@@ -41,7 +41,7 @@ function Hero() {
                 href="https://demo.quirrel.dev"
                 target="_blank"
                 rel="noreferrer"
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-300 transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-orange-700 bg-orange-200 hover:text-orange-600 hover:bg-orange-50 focus:outline-none focus:shadow-outline-indigo focus:border-orange-300 transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
               >
                 Try the Demo
               </a>
@@ -54,7 +54,7 @@ function Hero() {
         <SyntaxHighlighter
           language="javascript"
           style={github}
-          className="rounded-lg border text-xl"
+          className="rounded-lg border text-xl border-gray-100"
           showLineNumbers
           lineNumberStyle={{
             color: "lightgray",
@@ -99,7 +99,7 @@ function Advantages(props: AdvantagesProps) {
   return (
     <section id={name} className="py-12">
       <div className="lg:text-center">
-        <p className="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">
+        <p className="text-base leading-6 text-orange-600 font-semibold tracking-wide uppercase">
           {name}
         </p>
         <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
@@ -117,7 +117,7 @@ function Advantages(props: AdvantagesProps) {
               <li className="mt-10 md:mt-0">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
                       {svg}
                     </div>
                   </div>
@@ -148,7 +148,7 @@ function Advantages(props: AdvantagesProps) {
 function Features() {
   return (
     <Advantages
-      name="Features"
+      name="features"
       title="Jobs for every occasion."
       subtitle="Whatever job you need, Quirrel supports it."
       advantages={[
@@ -232,7 +232,7 @@ function Features() {
 function Perks() {
   return (
     <Advantages
-      name="Perks"
+      name="perks"
       title="The best solution available."
       subtitle="Deeply integrated and a joy to use."
       advantages={[
@@ -313,7 +313,7 @@ function Pricing() {
   return (
     <section id="pricing" className="py-12 lg:w-1/2 mx-auto">
       <div className="lg:text-center">
-        <p className="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">
+        <p className="text-base leading-6 text-orange-600 font-semibold tracking-wide uppercase">
           Pricing
         </p>
         <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
@@ -336,19 +336,19 @@ function CTA() {
   return (
     <section
       id="cta"
-      className="rounded-lg bg-indigo-600 text-white py-4 px-6 text-xl justify-between flex items-center max-w-4xl mx-auto"
+      className="rounded-lg bg-orange-600 text-white py-4 px-6 text-xl justify-between flex items-center max-w-4xl mx-auto"
     >
       <span>Built for developers. Get started with Quirrel in 5 minutes.</span>
 
       {isSignedIn ? (
         <Link href="/dashboard">
-          <a className="text-center text-indigo-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-indigo-100 transition duration-150 ease-in-out">
+          <a className="text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
             Dashboard
           </a>
         </Link>
       ) : (
         <Link href="/signup">
-          <a className="text-center text-indigo-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-indigo-100 transition duration-150 ease-in-out">
+          <a className="text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
             Sign Up
           </a>
         </Link>
@@ -357,13 +357,87 @@ function CTA() {
   )
 }
 
+function About() {
+  return (
+    <section id="about" className="py-12 mx-auto">
+      <div className="lg:text-center">
+        <p className="text-base leading-6 text-orange-600 font-semibold tracking-wide uppercase">
+          About
+        </p>
+        <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+          The pleasant-to-use, open-source job queueing solution.
+        </h3>
+        <p className="mt-4 max-w-xl text-xl leading-7 text-gray-500 lg:mx-auto">
+          The idea to Quirrel came during a holiday in Greece, where Simon started thinking about
+          the easiest way to integrate a Job Queue into Next.js applications.
+        </p>
+      </div>
+
+      <div className="mt-8 flex flex-row justify-center">
+        <img
+          className="rounded h-48"
+          src="https://pbs.twimg.com/profile_images/1308267953515880453/k54az9-2_400x400.jpg"
+          alt="Person"
+        />
+        <div className="ml-4">
+          <span>
+            <h4 className="text-lg leading-6 font-medium text-gray-900">Simon Knott</h4>
+
+            <h5 className="text-md leading-6 font-medium text-gray-700">Creator of Quirrel</h5>
+          </span>
+
+          <p className="mt-2 text-base leading-6 text-gray-600">
+            Hi, I'm Simon! I love music, working on developer tooling and giving talks.
+            <br />
+            You may know me from the Blitz.js ecosystem or SuperJSON. Say <code>Hi</code> on
+            Twitter! :D
+          </p>
+
+          <div className="mt-4 flex items-center space-x-3">
+            <a
+              href="https://twitter.com/skn0tt"
+              target="blank"
+              className="text-gray-600 transition-colors duration-300 hover:text-gray-400"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5">
+                <path d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z" />
+              </svg>
+            </a>
+            <a
+              href="https://simonknott.de"
+              target="blank"
+              className="text-gray-600 transition-colors duration-300 hover:text-gray-400"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 const Home: BlitzPage = () => {
   return (
-    <div className="max-w-screen-xl mx-auto bg-white overflow-hidden space-y-12">
+    <div className="max-w-screen-xl mx-auto overflow-hidden space-y-12">
       <Hero />
       <Features />
       <Perks />
       <Pricing />
+      <About />
       <CTA />
     </div>
   )

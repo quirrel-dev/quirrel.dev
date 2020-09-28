@@ -79,7 +79,7 @@ const SignupPage: BlitzPage = () => {
               <div className="mt-5">
                 <button
                   type="submit"
-                  className="relative block w-full py-2 px-3 border border-transparent rounded-md text-white font-semibold bg-gray-700 hover:bg-gray-600 focus:bg-gray-800 focus:outline-none focus:shadow-outline sm:text-sm sm:leading-5"
+                  className="relative block w-full py-2 px-3 border border-transparent rounded-md text-white font-semibold bg-gray-600 hover:bg-gray-700 focus:bg-gray-800 focus:outline-none focus:shadow-outline sm:text-sm sm:leading-5"
                 >
                   <span className="absolute left-0 inset-y pl-3">
                     <svg className="h-5 w-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
