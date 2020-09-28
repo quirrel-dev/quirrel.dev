@@ -359,7 +359,7 @@ function CTA() {
 
 function About() {
   return (
-    <section id="pricing" className="py-12 mx-auto">
+    <section id="about" className="py-12 mx-auto">
       <div className="lg:text-center">
         <p className="text-base leading-6 text-orange-600 font-semibold tracking-wide uppercase">
           About
@@ -383,7 +383,7 @@ function About() {
           <span>
             <h4 className="text-lg leading-6 font-medium text-gray-900">Simon Knott</h4>
 
-            <h5 className="text-md leading-6 font-medium text-gray-700">Creator & Developer</h5>
+            <h5 className="text-md leading-6 font-medium text-gray-700">Creator of Quirrel</h5>
           </span>
 
           <p className="mt-2 text-base leading-6 text-gray-600">
