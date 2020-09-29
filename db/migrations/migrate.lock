@@ -7,3 +7,4 @@
 20200928071732-generate-id-locally--don-t-use-stripe-generated-one
 20200928071823-don-t-save-default-payment-method
 20200928111847-add-field-about-overage-warning
+20200929081856-add-db-field-on-free-invocations

@@ -37,7 +37,7 @@ async function notifyFreeUsersOfOverage() {
     AND "timestamp" >= '${getBeginningOfCurrentMonth().toISOString()}'
 
     GROUP BY "User"."id"
-    HAVING SUM("invocations") >= 100;`
+    HAVING SUM("invocations") > "User"."freeInvocations";`
   )
 
   await Promise.all(
