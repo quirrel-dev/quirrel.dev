@@ -196,9 +196,9 @@ function Features() {
         },
         {
           title: "Recurring Jobs",
-          description: `Have a recurring task that needs to be setup programmatically? Lorem
-            ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis
-            suscipit eaque, iste dolor cupiditate blanditiis ratione.`,
+          description: `
+          Have a task that needs to be executed multiple times, e.g. reminding your users of something?
+          Recurring tasks make that easy to implement.`,
           comingSoon: true,
           svg: (
             <svg
@@ -220,7 +220,7 @@ function Features() {
         {
           title: "Cron Jobs",
           description:
-            "Want to send a message to your customer, one week after they signed up? Use a delayed job.",
+            "Good old Cron Jobs, coming to Quirrel. Use for once-a-month invoicing, fetching data on a schedule, or analytics to run hourly.",
           svg: <span className="text-lg">0 * *</span>,
           comingSoon: true,
         },
