@@ -1,19 +1,12 @@
-import { Head, ErrorComponent } from "blitz"
+import Layout from "app/layouts/Layout"
+import { BlitzPage } from "blitz"
 
-// ------------------------------------------------------
-// This page is rendered if a route match is not found
-// ------------------------------------------------------
-export default function Page404() {
-  const statusCode = 404
-  const title = "This page could not be found"
+const Page404: BlitzPage = () => {
   return (
-    <>
-      <Head>
-        <title>
-          {statusCode}: {title}
-        </title>
-      </Head>
-      <ErrorComponent statusCode={statusCode} title={title} />
-    </>
+    <h2 className="text-center text-xl font-light text-gray-700">This page could not be found.</h2>
   )
 }
+
+Page404.getLayout = (page) => <Layout title="404: Not found">{page}</Layout>
+
+export default Page404
