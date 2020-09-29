@@ -275,8 +275,8 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
       </main>
 
       <footer className="px-8 w-full py-8 bg-gray-100">
-        <div className="mx-auto max-w-screen-xl grid grid-cols-2 md:grid-cols-3 lg:grid-cols-10 gap-10 lg:gap-20 mb-3">
-          <div className="col-span-3">
+        <div className="mx-auto max-w-screen-xl grid grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-10 lg:gap-20 mb-3">
+          <div className="col-span-4 md:col-span-3">
             <Link href="/">
               <a>
                 <span className="flex items-center">
@@ -305,12 +305,12 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               <br />
             </p>
           </div>
-          <nav className="col-span-1 md:col-span-1 lg:col-span-2">
+          <nav className="col-span-1">
             <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
               Product
             </p>
             <Link href="/#features">
-              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in">
+              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
                 Features
               </a>
             </Link>
@@ -319,13 +319,13 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               {({ isLoggedIn }) =>
                 isLoggedIn ? (
                   <Link href="/dashboard">
-                    <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in">
+                    <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
                       Dashboard
                     </a>
                   </Link>
                 ) : (
                   <Link href="/Sign Up">
-                    <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in">
+                    <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
                       Sign Up
                     </a>
                   </Link>
@@ -336,7 +336,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             <a
               href="https://github.com/orgs/quirrel-dev/projects/1"
               target="blank"
-              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
             >
               Roadmap
             </a>
@@ -344,42 +344,55 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             <a
               href="https://docs.quirrel.dev"
               target="blank"
-              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
             >
               Documentation
             </a>
             <Link href="/#pricing">
-              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in">
+              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
                 Pricing
               </a>
             </Link>
           </nav>
 
-          <nav className="col-span-2 md:col-span-1 lg:col-span-2">
+          <nav className="col-span-1">
             <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
               Contact
             </p>
             <a
               href="https://dev.to/quirrel"
               target="blank"
-              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
             >
               Blog
             </a>
             <a
               href="https://twitter.com/skn0tt"
               target="blank"
-              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
             >
               Twitter
             </a>
             <a
               href="mailto:info@quirrel.dev"
               target="blank"
-              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-primary transition-colors duration-100 ease-in"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
             >
               Email
             </a>
+          </nav>
+          <nav className="col-span-1 lg:col-span-2">
+            <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">Legal</p>
+            <Link href="/terms">
+              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
+                Terms of Use
+              </a>
+            </Link>
+            <Link href="/privacy">
+              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
+                Privacy Policy
+              </a>
+            </Link>
           </nav>
           <div className="col-span-3">
             <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
@@ -431,12 +444,12 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
           </p>
           <div className="flex items-start md:items-center justify-start md:justify-center space-x-6">
             <Link href="/terms">
-              <a className="font-medium text-sm text-gray-700 hover:text-primary transition-colors duration-100 ease-in">
+              <a className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in">
                 Terms
               </a>
             </Link>
             <Link href="/privacy">
-              <a className="font-medium text-sm text-gray-700 hover:text-primary transition-colors duration-100 ease-in">
+              <a className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in">
                 Privacy
               </a>
             </Link>
