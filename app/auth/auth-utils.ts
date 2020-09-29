@@ -35,6 +35,7 @@ export const authenticateUser = async (email: string, password: string) => {
   delete user.hashedPassword
 
   return {
+    id: user.id,
     email: user.email,
     isSubscribed: !!user.subscriptionId,
     emailIsVerified: user.emailIsVerified,
