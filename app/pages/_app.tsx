@@ -10,6 +10,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <script
+        async
+        defer
+        data-website-id="018ba280-dae0-40b3-9af7-5d84b7001bad"
+        src="https://umami.quirrel.dev/umami.js"
+      />
       <ErrorBoundary
         FallbackComponent={RootErrorFallback}
         onReset={() => {
