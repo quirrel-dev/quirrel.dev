@@ -1,4 +1,4 @@
-import { AppProps, ErrorComponent, Router } from "blitz"
+import { AppProps, ErrorComponent, Head, Router } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { queryCache } from "react-query"
 import React, { Suspense, useEffect } from "react"
@@ -10,12 +10,15 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <script
-        async
-        defer
-        data-website-id="018ba280-dae0-40b3-9af7-5d84b7001bad"
-        src="https://umami.quirrel.dev/umami.js"
-      />
+      <Head>
+        <script
+          async
+          defer
+          data-website-id="018ba280-dae0-40b3-9af7-5d84b7001bad"
+          src="https://umami.quirrel.dev/umami.js"
+        />
+      </Head>
+
       <ErrorBoundary
         FallbackComponent={RootErrorFallback}
         onReset={() => {
