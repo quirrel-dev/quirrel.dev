@@ -54,7 +54,7 @@ function Hero() {
         <SyntaxHighlighter
           language="javascript"
           style={github}
-          className="rounded-lg border text-xl border-gray-100"
+          className="rounded-lg border text-lg sm:text-xl border-gray-100"
           showLineNumbers
           lineNumberStyle={{
             color: "lightgray",

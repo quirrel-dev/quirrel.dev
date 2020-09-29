@@ -19,7 +19,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="relative py-2 px-8 max-w-6xl mx-auto">
+      <div className="relative py-2 px-4 sm:px-8 max-w-6xl mx-auto">
         <nav className="relative flex items-center justify-between">
           <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
             <div className="flex items-center justify-between w-full lg:w-auto">
@@ -254,7 +254,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
         </div>
       </Transition>
 
-      <main className="my-16 px-8 max-w-6xl mx-auto" style={{ minHeight: "50vh" }}>
+      <main className="lg:my-16 px-4 sm:px-8 max-w-6xl mx-auto" style={{ minHeight: "50vh" }}>
         {children}
       </main>
 
