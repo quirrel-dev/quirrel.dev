@@ -4,11 +4,9 @@ import Layout from "app/layouts/Layout"
 import signup from "app/auth/mutations/signup"
 import { Form, Field } from "react-final-form"
 import { FORM_ERROR } from "final-form"
-import { useHeap } from "app/hooks/useHeap"
 
 const SignupPage: BlitzPage = () => {
   const router = useRouter()
-  const heap = useHeap()
 
   return (
     <div className="min-h-screen flex justify-center">
@@ -31,7 +29,6 @@ const SignupPage: BlitzPage = () => {
                 }
                 case "success": {
                   router.push("/dashboard")
-                  heap.identify(values.email)
                   return
                 }
               }

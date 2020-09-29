@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
 import { useRouter, BlitzPage, Router } from "blitz"
 import Layout from "app/layouts/Layout"
-import { useHeap } from "app/hooks/useHeap"
 import { Form, Field, FormSpy } from "react-final-form"
 import { FORM_ERROR } from "final-form"
 import login from "app/auth/mutations/login"
@@ -10,7 +9,6 @@ import resetPassword from "../mutations/reset-password"
 
 const LoginPage: BlitzPage = () => {
   const router = useRouter()
-  const heap = useHeap()
 
   useEffect(() => {
     Router.prefetch("/dashboard")
@@ -25,12 +23,6 @@ const LoginPage: BlitzPage = () => {
           onSubmit={async (values) => {
             try {
               const user = await login({ email: values.email, password: values.password })
-              heap.identify(values.email)
-              heap.addUserProperties({
-                createdAt: user.createdAt,
-                isSubscribed: user.isSubscribed,
-                emailIsVerified: user.emailIsVerified,
-              })
               router.push("/dashboard")
             } catch (error) {
               if (error.name === "AuthenticationError") {
