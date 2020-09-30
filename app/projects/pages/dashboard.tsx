@@ -157,6 +157,21 @@ const Dashboard: BlitzPage = () => {
 
         <ul className="space-y-2 mt-2">
           <li>
+            <a
+              className="font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
+              role="button"
+              tabIndex={-1}
+              onClick={() => {
+                window.alert("Not Implemented.")
+              }}
+              onKeyDown={() => {
+                window.alert("Not Implemented.")
+              }}
+            >
+              Upgrade to paid plan
+            </a>
+          </li>
+          <li>
             <Modal show={showDeleteAccountModal}>
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
