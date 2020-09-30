@@ -22,7 +22,7 @@ const LoginPage: BlitzPage = () => {
         <Form
           onSubmit={async (values) => {
             try {
-              const user = await login({ email: values.email, password: values.password })
+              await login({ email: values.email, password: values.password })
               router.push("/dashboard")
             } catch (error) {
               if (error.name === "AuthenticationError") {

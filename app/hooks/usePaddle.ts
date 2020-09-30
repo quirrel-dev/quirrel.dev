@@ -4,6 +4,10 @@ interface Paddle {
   }
 }
 
-export function usePaddle(): Paddle {
-  return (window as any).Paddle
+export function usePaddle(): Paddle | undefined {
+  if (typeof window !== "undefined") {
+    return (window as any).Paddle
+  }
+
+  return undefined
 }

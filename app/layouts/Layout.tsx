@@ -3,6 +3,7 @@ import { Head, Link } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
 import { usePaddle } from "app/hooks/usePaddle"
+import { privacyHref, termsHref } from "app/termly"
 
 export interface LayoutProps {
   title?: string
@@ -387,7 +388,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 const form = new FormData(target)
                 const email = form.get("email") as string
 
-                paddle.Audience.subscribe(email, false, () => {
+                paddle?.Audience.subscribe(email, false, () => {
                   target.reset()
 
                   window.alert("Awesome! You'll receive a confirmation e-mail shortly.")
@@ -422,16 +423,20 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             © Copyright 2020 Simon Knott. All Rights Reserved.
           </p>
           <div className="flex items-start md:items-center justify-start md:justify-center space-x-6">
-            <Link href="/terms">
-              <a className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in">
-                Terms
-              </a>
-            </Link>
-            <Link href="/privacy">
-              <a className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in">
-                Privacy
-              </a>
-            </Link>
+            <a
+              href={termsHref}
+              target="_blank"
+              className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in"
+            >
+              Terms
+            </a>
+            <a
+              href={privacyHref}
+              target="_blank"
+              className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in"
+            >
+              Privacy
+            </a>
           </div>
         </div>
       </footer>

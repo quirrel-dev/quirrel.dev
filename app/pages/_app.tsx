@@ -1,4 +1,4 @@
-import { AppProps, ErrorComponent, Head, Router } from "blitz"
+import { AppProps, ErrorComponent, Router } from "blitz"
 import { ErrorBoundary, FallbackProps } from "react-error-boundary"
 import { queryCache } from "react-query"
 import React, { Suspense, useEffect } from "react"
