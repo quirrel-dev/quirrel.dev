@@ -5,7 +5,6 @@ import { SignupInput, SignupInputType } from "app/auth/validations"
 import { sendEmailWithTemplate } from "app/postmark"
 import { url } from "app/url"
 import * as verifyEmail from "../verify-email"
-import subscribeToNewsletter from "app/users/mutations/subscribeToNewsletter"
 
 export default async function signup(
   input: SignupInputType,
@@ -38,8 +37,6 @@ export default async function signup(
       name: email,
       verify_email_url: url`/verifyEmail/${emailCode}`,
     }),
-    subscribeToNewsletter({ email, skipConfirm: true }),
-
     ctx.session!.create({ userId: user.id, roles: [] }),
   ])
 

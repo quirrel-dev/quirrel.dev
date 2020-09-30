@@ -89,15 +89,10 @@ function AccountSection() {
       <ul className="space-y-2 mt-2">
         <li>
           <a
-            className="font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
+            className="paddle_button font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
             role="button"
             tabIndex={-1}
-            onClick={() => {
-              window.alert("Not Implemented.")
-            }}
-            onKeyDown={() => {
-              window.alert("Not Implemented.")
-            }}
+            data-product="12345"
           >
             Upgrade to paid plan
           </a>

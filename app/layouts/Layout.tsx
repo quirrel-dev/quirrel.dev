@@ -2,7 +2,7 @@ import { ReactNode, Suspense, useState } from "react"
 import { Head, Link } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
-import subscribeToNewsletter from "app/users/mutations/subscribeToNewsletter"
+import { usePaddle } from "app/hooks/usePaddle"
 
 export interface LayoutProps {
   title?: string
@@ -12,6 +12,8 @@ export interface LayoutProps {
 
 const Layout = ({ title, children, hideLogin }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const paddle = usePaddle()
+
   return (
     <div className="mx-auto mt-4 xl:mt-6">
       <Head>
@@ -377,7 +379,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             </p>
             <form
               className="mb-2"
-              onSubmit={async (evt) => {
+              onSubmit={(evt) => {
                 evt.preventDefault()
 
                 const target = evt.target as HTMLFormElement
@@ -385,11 +387,11 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 const form = new FormData(target)
                 const email = form.get("email") as string
 
-                await subscribeToNewsletter({ email })
+                paddle.Audience.subscribe(email, false, () => {
+                  target.reset()
 
-                target.reset()
-
-                window.alert("Awesome! You'll receive a confirmation e-mail shortly.")
+                  window.alert("Awesome! You'll receive a confirmation e-mail shortly.")
+                })
               }}
             >
               <label className="tag-label tag-label-sm">
