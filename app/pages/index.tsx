@@ -382,7 +382,7 @@ function Pricing() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  1000 calls / month.
+                  100 calls / month.
                 </li>
               </ul>
 
