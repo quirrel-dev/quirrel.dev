@@ -27,12 +27,11 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 <span className="flex items-center">
                   <img
                     aria-label="Home"
-                    style={{ transform: "rotate(-4deg)" }}
                     className="h-10 w-auto ml-1"
                     src="/img/horn_transparent.png"
                     alt="Logo"
                   />
-                  <h1 className="ml-3 text-3xl font-semibold text-orange-800">Quirrel</h1>
+                  <h1 className="ml-3 text-3xl font-semibold text-orange-600">Quirrel</h1>
                 </span>
               </Link>
 
@@ -140,12 +139,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             >
               <div className="px-5 pt-3 flex items-center justify-between">
                 <div>
-                  <img
-                    className="h-10 w-auto"
-                    src="/img/horn_transparent.png"
-                    style={{ transform: "rotate(-4deg)" }}
-                    alt="Logo"
-                  />
+                  <img className="h-10 w-auto" src="/img/horn_transparent.png" alt="Logo" />
                 </div>
                 <div className="-mr-2">
                   <button
@@ -266,12 +260,11 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 <span className="flex items-center">
                   <img
                     aria-label="Home"
-                    style={{ transform: "rotate(-4deg)" }}
                     className="h-10 w-auto ml-1"
                     src="/img/horn_transparent.png"
                     alt="Logo"
                   />
-                  <h1 className="ml-3 text-3xl font-semibold text-orange-800">Quirrel</h1>
+                  <h1 className="ml-3 text-3xl font-semibold text-orange-600">Quirrel</h1>
                 </span>
               </a>
             </Link>

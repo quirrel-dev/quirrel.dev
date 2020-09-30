@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-white;
-}
-
 .hero {
   width: 100%;
   color: #333;
