@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -24,9 +24,8 @@ model User {
 
   hasBeenWarnedAboutOverage Boolean @default(false)
 
-  id                    String  @id @default(uuid())
-  subscriptionId        String? @unique
-  subscriptionPaused    Boolean @default(false)
+  id             String  @unique @id @default(uuid())
+  subscriptionId String? @unique
   subscriptionUpdateURL String?
   subscriptionCancelURL String?
 
@@ -36,7 +35,7 @@ model User {
 }
 
 model Session {
-  id                 Int       @id @default(autoincrement())
+  id                 Int       @default(autoincrement()) @id
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   expiresAt          DateTime?

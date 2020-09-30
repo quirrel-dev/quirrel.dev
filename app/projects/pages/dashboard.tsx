@@ -8,6 +8,7 @@ import { Modal } from "app/components/Modal"
 import { Form, Field } from "react-final-form"
 import deleteAccount from "app/account/mutations/deleteAccount"
 import { CardList } from "app/components/CardList"
+import { useCurrentUser } from "app/hooks/useCurrentUser"
 
 function DeleteAccountButton() {
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false)
@@ -82,21 +83,36 @@ function DeleteAccountButton() {
 }
 
 function AccountSection() {
+  const user = useCurrentUser()
   return (
     <section id="account" className="mt-24">
       <h1 className="text-4xl font-semibold text-gray-900 sm:text-xl sm:leading-7">Account</h1>
 
       <ul className="space-y-2 mt-2">
-        <li>
-          <a
-            className="paddle_button font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
-            role="button"
-            tabIndex={-1}
-            data-product="12345"
-          >
-            Upgrade to paid plan
-          </a>
-        </li>
+        {user?.isSubscriber ? (
+          <li>
+            <a
+              href={user.updateURL ?? ""}
+              className="font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
+              role="button"
+              tabIndex={-1}
+            >
+              Update Plan
+            </a>
+          </li>
+        ) : (
+          <li>
+            <a
+              className="paddle_button font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
+              role="button"
+              tabIndex={-1}
+              data-product="12345"
+            >
+              Upgrade to paid plan
+            </a>
+          </li>
+        )}
+
         <li>
           <DeleteAccountButton />
         </li>

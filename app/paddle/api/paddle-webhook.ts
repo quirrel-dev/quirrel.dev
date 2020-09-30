@@ -43,6 +43,8 @@ const hooks: Record<string, (args: any) => Promise<void>> = {
       where: { id: customerId },
       data: {
         subscriptionId: args.subscription_id,
+        subscriptionCancelURL: args.cancel_url,
+        subscriptionUpdateURL: args.update_url,
       },
     })
   },
@@ -56,7 +58,13 @@ const hooks: Record<string, (args: any) => Promise<void>> = {
           data: { subscriptionId: args.subscription_id },
         })
       }
-      case "paused":
+      case "paused": {
+        await db.user.update({
+          where: { id: customerId },
+          data: { subscriptionPaused: true },
+        })
+        break
+      }
       case "deleted": {
         await db.user.update({
           where: { id: customerId },

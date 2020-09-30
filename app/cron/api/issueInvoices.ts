@@ -10,6 +10,7 @@ async function getUsageQuotasPerSubscribedUser(): Promise<
     `SELECT "User"."subscriptionId", SUM("invocations") FROM "UsageRecord"
     JOIN "User" ON "User"."id" = "tokenProjectOwnerId"
     WHERE "User"."subscriptionId" IS NOT NULL
+    AND "User"."subscriptionPaused" IS False
     AND "User"."isActive" = true
 
     AND "timestamp" >= '${getBeginningOfCurrentMonth().toISOString()}'
