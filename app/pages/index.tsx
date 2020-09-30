@@ -309,23 +309,157 @@ function Perks() {
   )
 }
 
+const ossDiscountMail = {
+  to: "info@quirrel.dev",
+  subject: "OSS / Side Project Discount",
+  body: `
+Hi there!
+
+I'd like to apply for Quirrel's OSS / Side Project discount.
+
+Here's a link to my project: [Link]
+This is what I want to use Quirrel for: [...]
+I expect to make [...] monhtly Quirrel calls.
+
+Looking forward to you reply!
+
+Best,
+...
+  `.trim(),
+}
+
+const ossDiscountMailTo = `mailto:${ossDiscountMail.to}?subject=${encodeURIComponent(
+  ossDiscountMail.subject
+)}&body=${encodeURIComponent(ossDiscountMail.body)}`
+
 function Pricing() {
   return (
-    <section id="pricing" className="py-12 lg:w-1/2 mx-auto">
+    <section id="pricing" className="py-12 lg:w-3/4 mx-auto">
       <div className="lg:text-center">
         <p className="text-base leading-6 text-orange-600 font-semibold tracking-wide uppercase">
           Pricing
         </p>
         <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
-          Simple, pay-as-you-go pricing.
+          Start{" "}
+          <span className="bg-clip-text text-transparent rounded bg-gradient-to-r from-orange-300 to-red-400">
+            free
+          </span>
+          , grow with us.
         </h3>
         <p className="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
-          Easy to understand. Because we're not a cloud provider.
+          Two easy-to-understand plans. Because we're not a cloud provider.
         </p>
 
-        <h1 className="mt-8 text-5xl text-gray-900 font-extrabold mx-auto inline-block">
-          $TBA<span className="text-gray-600 text-2xl font-medium"> per 1000 calls.</span>
-        </h1>
+        <div className="mx-auto max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-2 pt-8 text-left h-76">
+          <div className="col-span-1">
+            <div className="p-8 bg-gray-300 rounded-t-lg" style={{ height: "12rem" }}>
+              <h3 className="text-lg font-semibold rounded-full bg-orange-200 inline-block px-2 text-orange-500">
+                Free
+              </h3>
+
+              <br />
+
+              <h1 className="mt-2 text-4xl text-gray-900 font-extrabold mx-auto inline-block">
+                $0<span className="text-gray-600 text-2xl font-medium">, forever.</span>
+              </h1>
+
+              <p className="text-gray-600 mt-2">Try and evaluate Quirrel, as long as you want.</p>
+            </div>
+            <div className="px-8 py-4 bg-gray-200 rounded-b-lg" style={{ height: "8rem" }}>
+              <ul>
+                <li className="flex items-center text-gray-700">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    className="inline w-8 h-8 text-orange-500 mr-2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  1000 calls / month.
+                </li>
+              </ul>
+
+              <Link href="/signup">
+                <a className="block mt-4 text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
+                  Sign Up
+                </a>
+              </Link>
+            </div>
+          </div>
+          <div className="col-span-1">
+            <div className="p-8 bg-gray-300 rounded-t-lg" style={{ height: "12rem" }}>
+              <h3 className="text-lg font-semibold rounded-full bg-orange-200 inline-block px-2 text-orange-500">
+                Paid
+              </h3>
+
+              <br />
+
+              <h1 className="mt-2 text-4xl text-gray-900 font-extrabold mx-auto inline-block">
+                $TBA<span className="text-gray-600 text-2xl font-medium"> per 1000 calls.</span>
+              </h1>
+
+              <p className="text-gray-600 mt-2">Ready for production.</p>
+            </div>
+            <div className="px-8 py-4 bg-gray-200 rounded-b-lg" style={{ height: "8rem" }}>
+              <ul>
+                <li className="flex items-center text-gray-700">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    className="inline w-8 h-8 text-orange-500 mr-2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  billed monthly
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    className="inline w-8 h-8 text-orange-500 mr-2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  credit card / PayPal
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <section
+            id="cta"
+            className="col-span-1 md:col-span-2 rounded-lg py-4 px-6 text-md justify-between flex items-center bg-gray-300 text-gray-700"
+          >
+            <span>OSS & Side Projects are discounted up to 100%.</span>
+            <a
+              href={ossDiscountMailTo}
+              className="text-orange-700 text-base hover:text-orange-500 transition duration-150 ease-in-out"
+            >
+              Get in Contact
+            </a>
+          </section>
+        </div>
       </div>
     </section>
   )
