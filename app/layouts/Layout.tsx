@@ -17,6 +17,15 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
       <Head>
         <title>{title || "Quirrel"}</title>
         <link rel="icon" href="/favicon.ico" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@quirrel_dev" />
+        <meta name="twitter:title" content="Job Queueing for Next.js x Vercel" />
+        <meta
+          name="twitter:description"
+          content="Quirrel makes job queues simple as cake. Set up in 5 minutes - even works locally!"
+        />
+        <meta name="twitter:image" content="https://4ac32697a5b2.ngrok.io/img/twitter.png" />
       </Head>
 
       <div className="relative py-2 px-4 sm:px-8 max-w-6xl mx-auto">
