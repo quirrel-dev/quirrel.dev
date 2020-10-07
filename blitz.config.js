@@ -6,12 +6,18 @@ module.exports = {
       unstable_isAuthorized: unstable_simpleRolesIsAuthorized,
     }),
   ],
-  /* Uncomment this to customize the webpack config
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Note: we provide webpack above so you should not `require` it
-    // Perform customizations to webpack config
-    // Important: return the modified config
-    return config
+  async redirects() {
+    return [
+      {
+        source: "/pricing",
+        destination: "/#pricing",
+        permanent: true,
+      },
+      {
+        source: "/docs",
+        destination: "https://docs.quirrel.dev",
+        permanent: true
+      }
+    ]
   },
-  */
 }
