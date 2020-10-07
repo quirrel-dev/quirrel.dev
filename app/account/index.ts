@@ -7,8 +7,12 @@ export async function deactivate(customerId: string) {
     where: { id: customerId },
     data: {
       isActive: false,
-      subscriptionId: null,
       emailIsVerified: false,
+      subscriptionId: null,
+      subscriptionPaused: false,
+      subscriptionCancelURL: null,
+      subscriptionUpdateURL: null,
+      hashedPassword: "DELETED",
     },
   })
 }

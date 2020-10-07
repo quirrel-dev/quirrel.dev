@@ -1,5 +1,5 @@
 import * as crypto from "crypto"
-import PhpSerialize from "php-serialize"
+import * as PhpSerialize from "php-serialize"
 
 function ksort(obj: Record<string, string>): Record<string, string> {
   const keys = Object.keys(obj).sort()
@@ -9,6 +9,8 @@ function ksort(obj: Record<string, string>): Record<string, string> {
   }
   return sortedObj
 }
+
+const paddlePublicKey = Buffer.from(process.env.PADDLE_PUBLIC_KEY!, "base64")
 
 export function verifyWebhook(query: Record<string, string>) {
   const mySig = Buffer.from(query.p_signature, "base64")
@@ -32,7 +34,7 @@ export function verifyWebhook(query: Record<string, string>) {
   verifier.update(serialized)
   verifier.end()
 
-  const verification = verifier.verify(process.env.PADDLE_PUBLIC_KEY!, mySig)
+  const verification = verifier.verify(paddlePublicKey, mySig)
 
   return verification
 }

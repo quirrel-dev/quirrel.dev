@@ -1,4 +1,5 @@
 import axios from "axios"
+import * as hash from "utils/hash"
 
 const apiKey = process.env.MAILCHIMP_API_KEY!
 const listId = process.env.MAILCHIMP_LIST_ID
@@ -22,6 +23,32 @@ export async function subscribeToNewsletter(email: string, skipConfirm = false) 
         password: apiKey,
       },
       validateStatus: (status) => [200, 400].includes(status),
+    }
+  )
+}
+
+export async function archiveFromNewsletter(email: string) {
+  await mailchimp.delete(`/lists/${listId}/members/${hash.md5(email.toLowerCase())}`, {
+    auth: {
+      username: "key",
+      password: apiKey,
+    },
+    validateStatus: (status) => [204, 400].includes(status),
+  })
+}
+
+export async function updateEmailAddress(oldEmail: string, newEmail: string) {
+  await mailchimp.patch(
+    `/lists/${listId}/members/${hash.md5(oldEmail.toLowerCase())}`,
+    {
+      email: newEmail,
+    },
+    {
+      auth: {
+        username: "key",
+        password: apiKey,
+      },
+      validateStatus: (status) => [204, 400].includes(status),
     }
   )
 }
