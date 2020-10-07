@@ -352,7 +352,7 @@ function Pricing() {
 
         <div className="mx-auto max-w-2xl grid grid-cols-1 md:grid-cols-2 gap-2 pt-8 text-left h-76">
           <div className="col-span-1">
-            <div className="p-8 bg-gray-300 rounded-t-lg" style={{ height: "12rem" }}>
+            <div className="p-8 bg-gray-300 rounded-t-lg" style={{ height: "14rem" }}>
               <h3 className="text-lg font-semibold rounded-full bg-orange-200 inline-block px-2 text-orange-500">
                 Free
               </h3>
@@ -365,7 +365,7 @@ function Pricing() {
 
               <p className="text-gray-600 mt-2">Try and evaluate Quirrel, as long as you want.</p>
             </div>
-            <div className="px-8 py-4 bg-gray-200 rounded-b-lg" style={{ height: "8rem" }}>
+            <div className="px-8 py-4 bg-gray-200 rounded-b-lg" style={{ height: "9rem" }}>
               <ul>
                 <li className="flex items-center text-gray-700">
                   <svg
@@ -387,14 +387,14 @@ function Pricing() {
               </ul>
 
               <Link href="/signup">
-                <a className="block mt-4 text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
+                <a className="block mt-8 text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
                   Sign Up
                 </a>
               </Link>
             </div>
           </div>
           <div className="col-span-1">
-            <div className="p-8 bg-gray-300 rounded-t-lg" style={{ height: "12rem" }}>
+            <div className="p-8 bg-gray-300 rounded-t-lg" style={{ height: "14rem" }}>
               <h3 className="text-lg font-semibold rounded-full bg-orange-200 inline-block px-2 text-orange-500">
                 Pro
               </h3>
@@ -406,16 +406,29 @@ function Pricing() {
               </h1>
 
               <p className="text-gray-600 mt-2">Ready for production.</p>
+
+              <p className="text-gray-600 mt-2">
+                <span className="bg-clip-text text-transparent rounded bg-gradient-to-r from-teal-400 to-blue-500 ">
+                  OSS & Side Projects
+                </span>{" "}
+                are discounted up to 100%.{" "}
+                <a
+                  href={ossDiscountMailTo}
+                  className="text-gray-500 hover:text-gray-700 transition duration-150 ease-in-out"
+                >
+                  Get in touch.
+                </a>
+              </p>
             </div>
-            <div className="px-8 py-4 bg-gray-200 rounded-b-lg" style={{ height: "8rem" }}>
+            <div className="px-8 py-4 bg-gray-200 rounded-b-lg" style={{ height: "9rem" }}>
               <ul>
-                <li className="flex items-center text-gray-700">
+                <li className="text-gray-700">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    className="inline w-8 h-8 text-orange-500 mr-2"
+                    className="inline align-top w-8 h-8 text-orange-500 mr-2"
                   >
                     <path
                       strokeLinecap="round"
@@ -424,7 +437,20 @@ function Pricing() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  10.000 calls included.
+                  <div className="inline-block">
+                    10.000 calls included.
+                    <br />
+                    <span className="text-gray-500 text-sm">
+                      Need more?
+                      <a
+                        className="text-gray-500 hover:text-gray-700"
+                        href="mailto:contact@quirrel.dev"
+                      >
+                        {" "}
+                        Get in touch.
+                      </a>
+                    </span>
+                  </div>
                 </li>
                 <li className="flex items-center text-gray-700">
                   <svg
@@ -463,19 +489,6 @@ function Pricing() {
               </ul>
             </div>
           </div>
-
-          <section
-            id="cta"
-            className="col-span-1 md:col-span-2 rounded-lg py-4 px-6 text-md justify-between flex items-center bg-gray-300 text-gray-700"
-          >
-            <span>OSS & Side Projects are discounted up to 100%.</span>
-            <a
-              href={ossDiscountMailTo}
-              className="text-orange-700 text-base hover:text-orange-500 transition duration-150 ease-in-out"
-            >
-              Get in Contact
-            </a>
-          </section>
         </div>
       </div>
     </section>
