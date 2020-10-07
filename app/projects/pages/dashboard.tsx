@@ -105,16 +105,28 @@ function AccountSection() {
 
       <ul className="space-y-2 mt-2">
         {user?.isSubscriber ? (
-          <li>
-            <a
-              href={user.updateURL ?? ""}
-              className="font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
-              role="button"
-              tabIndex={-1}
-            >
-              Update Plan
-            </a>
-          </li>
+          <>
+            <li>
+              <a
+                href={user.updateURL ?? ""}
+                className="font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
+                role="button"
+                tabIndex={-1}
+              >
+                Update Payment Details
+              </a>
+            </li>
+            <li>
+              <a
+                href={user.cancelURL ?? ""}
+                className="font-semibold text-orange-500 hover:text-orange-700 transition ease-in-out duration-150"
+                role="button"
+                tabIndex={-1}
+              >
+                Downgrade Plan
+              </a>
+            </li>
+          </>
         ) : (
           <li>
             <a
