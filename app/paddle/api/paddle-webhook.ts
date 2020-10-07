@@ -2,6 +2,7 @@ import { BlitzApiRequest, BlitzApiResponse } from "blitz"
 import { verifyWebhook } from "../verifyWebhook"
 import db from "db"
 import * as mailchimp from "app/mailchimp"
+import { SubscriptionPassthrough } from "../subscription-passthrough"
 
 interface SubscriptionCreatedPayload {
   update_url: string
@@ -44,9 +45,6 @@ interface UpdateAudienceMemberPayload {
   new_customer_email: string
 }
 
-export interface SubscriptionPassthrough {
-  customerId: string
-}
 function parsePassthrough(passthrough: string): SubscriptionPassthrough {
   return JSON.parse(passthrough)
 }

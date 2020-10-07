@@ -10,7 +10,7 @@ import deleteAccount from "app/account/mutations/deleteAccount"
 import { CardList } from "app/components/CardList"
 import { useCurrentUser } from "app/hooks/useCurrentUser"
 import { usePaddle } from "app/hooks/usePaddle"
-import { SubscriptionPassthrough } from "app/paddle/api/paddle-webhook"
+import { SubscriptionPassthrough } from "app/paddle/subscription-passthrough"
 
 function DeleteAccountButton() {
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false)

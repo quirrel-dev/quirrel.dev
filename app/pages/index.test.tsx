@@ -18,6 +18,9 @@ test.skip("renders blitz documentation link", () => {
     email: "user@email.com",
     isSubscriber: true,
     emailIsVerified: true,
+    cancelURL: "",
+    isPaused: false,
+    updateURL: "",
   })
 
   const { getByText } = render(<Home />)
