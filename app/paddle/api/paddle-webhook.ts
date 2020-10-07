@@ -29,7 +29,7 @@ interface SubscriptionCanceledPayload {
   passthrough: string
 }
 
-interface SubscriptionPassthrough {
+export interface SubscriptionPassthrough {
   customerId: string
 }
 function parsePassthrough(passthrough: string): SubscriptionPassthrough {
@@ -57,6 +57,7 @@ const hooks: Record<string, (args: any) => Promise<void>> = {
           where: { id: customerId },
           data: { subscriptionId: args.subscription_id },
         })
+        break
       }
       case "paused": {
         await db.user.update({

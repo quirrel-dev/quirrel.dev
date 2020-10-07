@@ -5,11 +5,9 @@ import signup from "app/auth/mutations/signup"
 import { Form, Field } from "react-final-form"
 import { FORM_ERROR } from "final-form"
 import { privacyHref, termsHref } from "app/termly"
-import { usePaddle } from "app/hooks/usePaddle"
 
 const SignupPage: BlitzPage = () => {
   const router = useRouter()
-  const paddle = usePaddle()
 
   return (
     <div className="min-h-screen flex justify-center">
@@ -24,6 +22,7 @@ const SignupPage: BlitzPage = () => {
               const result = await signup({
                 email: values.email,
                 password: values.password,
+                subscribeToNewsletter: values.marketing,
               })
 
               switch (result) {
@@ -31,9 +30,6 @@ const SignupPage: BlitzPage = () => {
                   return { email: "This email is already being used" }
                 }
                 case "success": {
-                  if (values.marketing) {
-                    paddle?.Audience.subscribe(values.email, true, () => {})
-                  }
                   router.push("/dashboard")
                   return
                 }
@@ -91,11 +87,11 @@ const SignupPage: BlitzPage = () => {
                 />
                 <label className="text-gray-600 text-sm" htmlFor="accept_terms">
                   I accept Quirrel's{" "}
-                  <a href={termsHref} target="_blank" className="text-blue-700">
+                  <a href={termsHref} target="_blank" rel="noreferrer" className="text-blue-700">
                     terms of use
                   </a>{" "}
                   and{" "}
-                  <a href={privacyHref} target="_blank" className="text-blue-700">
+                  <a href={privacyHref} target="_blank" rel="noreferrer" className="text-blue-700">
                     privacy policy
                   </a>
                   .

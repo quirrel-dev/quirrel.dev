@@ -12,7 +12,7 @@ class MyDocument extends Document {
       <Html lang="en">
         <DocumentHead>
           <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
-          <script type="text/javascript">{`Paddle.Setup({ vendor: 1234567 });`}</script>
+          <script type="text/javascript">{`Paddle.Setup({ vendor: 121877 });`}</script>
 
           <script
             async

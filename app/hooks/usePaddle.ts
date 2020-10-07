@@ -1,6 +1,6 @@
 interface Paddle {
-  Audience: {
-    subscribe(email: string, consent: boolean, callback: () => void): void
+  Checkout: {
+    open(args: { product: number; passthrough?: string; email?: string })
   }
 }
 

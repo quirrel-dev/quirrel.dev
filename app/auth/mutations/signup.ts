@@ -35,7 +35,7 @@ export default async function signup(
   await Promise.all([
     sendEmailWithTemplate(email, "welcome", {
       name: email,
-      verify_email_url: url`/verifyEmail/${emailCode}`,
+      verify_email_url: url`/verifyEmail/${emailCode}?subscribeToNewsletter=${input.subscribeToNewsletter}`,
     }),
     ctx.session!.create({ userId: user.id, roles: [] }),
   ])

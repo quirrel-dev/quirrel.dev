@@ -2,8 +2,8 @@ import { ReactNode, Suspense, useState } from "react"
 import { Head, Link } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
-import { usePaddle } from "app/hooks/usePaddle"
 import { privacyHref, termsHref } from "app/termly"
+import subscribeToNewsletter from "app/users/mutations/subscribeToNewsletter"
 
 export interface LayoutProps {
   title?: string
@@ -13,7 +13,6 @@ export interface LayoutProps {
 
 const Layout = ({ title, children, hideLogin }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const paddle = usePaddle()
 
   return (
     <div className="mx-auto mt-4 xl:mt-6">
@@ -304,7 +303,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                     </a>
                   </Link>
                 ) : (
-                  <Link href="/Sign Up">
+                  <Link href="/signup">
                     <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
                       Sign Up
                     </a>
@@ -380,7 +379,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             </p>
             <form
               className="mb-2"
-              onSubmit={(evt) => {
+              onSubmit={async (evt) => {
                 evt.preventDefault()
 
                 const target = evt.target as HTMLFormElement
@@ -388,11 +387,14 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 const form = new FormData(target)
                 const email = form.get("email") as string
 
-                paddle?.Audience.subscribe(email, false, () => {
-                  target.reset()
-
-                  window.alert("Awesome! You'll receive a confirmation e-mail shortly.")
+                await subscribeToNewsletter({
+                  email,
+                  hasConsented: false,
                 })
+
+                target.reset()
+
+                window.alert("Awesome! You'll receive a confirmation e-mail shortly.")
               }}
             >
               <label className="tag-label tag-label-sm">
@@ -426,6 +428,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             <a
               href={termsHref}
               target="_blank"
+              rel="noreferrer"
               className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in"
             >
               Terms
@@ -433,6 +436,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             <a
               href={privacyHref}
               target="_blank"
+              rel="noreferrer"
               className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in"
             >
               Privacy

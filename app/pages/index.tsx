@@ -396,19 +396,36 @@ function Pricing() {
           <div className="col-span-1">
             <div className="p-8 bg-gray-300 rounded-t-lg" style={{ height: "12rem" }}>
               <h3 className="text-lg font-semibold rounded-full bg-orange-200 inline-block px-2 text-orange-500">
-                Paid
+                Pro
               </h3>
 
               <br />
 
               <h1 className="mt-2 text-4xl text-gray-900 font-extrabold mx-auto inline-block">
-                $TBA<span className="text-gray-600 text-2xl font-medium"> per 1000 calls.</span>
+                $20<span className="text-gray-600 text-2xl font-medium">/month.</span>
               </h1>
 
               <p className="text-gray-600 mt-2">Ready for production.</p>
             </div>
             <div className="px-8 py-4 bg-gray-200 rounded-b-lg" style={{ height: "8rem" }}>
               <ul>
+                <li className="flex items-center text-gray-700">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    className="inline w-8 h-8 text-orange-500 mr-2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  10.000 calls included.
+                </li>
                 <li className="flex items-center text-gray-700">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
