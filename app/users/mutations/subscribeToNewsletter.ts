@@ -1,33 +1,13 @@
-import axios from "axios"
+import * as mailchimp from "app/mailchimp"
 
-const apiKey = process.env.MAILCHIMP_API_KEY!
-const listId = process.env.MAILCHIMP_NEWSLETTER_ID
-
-const server = apiKey.split("-")[1]
-
-const mailchimp = axios.create({
-  baseURL: `https://${server}.api.mailchimp.com/3.0`,
-})
+interface SubscribeToNewsletterArgs {
+  email: string
+  hasConsented: boolean
+}
 
 export default async function subscribeToNewsletter({
   email,
-  skipConfirm = false,
-}: {
-  email: string
-  skipConfirm?: boolean
-}) {
-  await mailchimp.post(
-    `/lists/${listId}/members`,
-    {
-      email_address: email,
-      status: skipConfirm ? "subscribed" : "pending",
-    },
-    {
-      auth: {
-        username: "key",
-        password: apiKey,
-      },
-      validateStatus: (status) => [200, 400].includes(status),
-    }
-  )
+  hasConsented,
+}: SubscribeToNewsletterArgs) {
+  await mailchimp.subscribeToNewsletter(email, hasConsented)
 }

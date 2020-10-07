@@ -4,6 +4,7 @@ import Layout from "app/layouts/Layout"
 import signup from "app/auth/mutations/signup"
 import { Form, Field } from "react-final-form"
 import { FORM_ERROR } from "final-form"
+import { privacyHref, termsHref } from "app/termly"
 
 const SignupPage: BlitzPage = () => {
   const router = useRouter()
@@ -21,6 +22,7 @@ const SignupPage: BlitzPage = () => {
               const result = await signup({
                 email: values.email,
                 password: values.password,
+                subscribeToNewsletter: values.marketing,
               })
 
               switch (result) {
@@ -38,7 +40,7 @@ const SignupPage: BlitzPage = () => {
           }}
           render={({ handleSubmit }) => (
             <form className="mt-5" onSubmit={handleSubmit}>
-              <div className="rounded-md shadow-sm">
+              <div>
                 <Field
                   name="email"
                   render={({ input, meta }) => (
@@ -75,6 +77,38 @@ const SignupPage: BlitzPage = () => {
                     </div>
                   )}
                 />
+
+                <Field
+                  name="accept_terms"
+                  component="input"
+                  type="checkbox"
+                  className="mx-2 mt-2"
+                  required
+                />
+                <label className="text-gray-600 text-sm" htmlFor="accept_terms">
+                  I accept Quirrel's{" "}
+                  <a href={termsHref} target="_blank" rel="noreferrer" className="text-blue-700">
+                    terms of use
+                  </a>{" "}
+                  and{" "}
+                  <a href={privacyHref} target="_blank" rel="noreferrer" className="text-blue-700">
+                    privacy policy
+                  </a>
+                  .
+                </label>
+
+                <br />
+
+                <Field
+                  name="marketing"
+                  component="input"
+                  type="checkbox"
+                  className="mx-2 mt-2"
+                  initialValue={true}
+                />
+                <label className="text-gray-600 text-sm" htmlFor="marketing">
+                  Send me news & updates on Quirrel.
+                </label>
               </div>
               <div className="mt-5">
                 <button

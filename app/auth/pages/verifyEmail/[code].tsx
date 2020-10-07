@@ -1,10 +1,11 @@
 import verifyEmail from "app/auth/mutations/verify-email"
 import Layout from "app/layouts/Layout"
-import { BlitzPage, Router, useParam } from "blitz"
+import { BlitzPage, Router, useParam, useRouterQuery } from "blitz"
 import { useEffect, useState } from "react"
 
 const VerifyMail: BlitzPage = () => {
   const code = useParam("code", "string")
+  const subscribeToNewsletter = useRouterQuery().subscribeToNewsletter === "true"
 
   const [error, setError] = useState(false)
 
@@ -15,14 +16,14 @@ const VerifyMail: BlitzPage = () => {
 
     Router.prefetch("/dashboard")
 
-    verifyEmail({ code }).then((success) => {
+    verifyEmail({ code, subscribeToNewsletter }).then((success) => {
       if (success) {
         Router.replace("/dashboard")
       } else {
         setError(true)
       }
     })
-  }, [code, setError])
+  }, [code, setError, subscribeToNewsletter])
 
   return (
     <div className="flex justify-center items-center mt-8">
@@ -41,7 +42,7 @@ const VerifyMail: BlitzPage = () => {
             cy="12"
             r="10"
             stroke="currentColor"
-            stroke-width="4"
+            strokeWidth="4"
           ></circle>
           <path
             className="opacity-75"

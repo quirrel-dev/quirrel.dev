@@ -30,7 +30,11 @@ async function notifyFreeUsersOfOverage() {
   const trialUsageThisMonth = await db.$queryRaw(
     `SELECT "User"."id", "User"."email", SUM("invocations") FROM "UsageRecord"
     JOIN "User" ON "User"."id" = "tokenProjectOwnerId"
-    WHERE "User"."subscriptionId" IS NULL
+    WHERE (
+        "User"."subscriptionId" IS NULL
+      OR
+        "User"."subscriptionPaused"
+    )
     AND "User"."isActive" = true
     AND "User"."hasBeenWarnedAboutOverage" = false
 

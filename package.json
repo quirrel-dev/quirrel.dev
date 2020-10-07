@@ -45,6 +45,7 @@
     "blitz": "0.21.1",
     "body-parser": "1.19.0",
     "final-form": "4.20.1",
+    "php-serialize": "4.0.2",
     "polished": "3.6.6",
     "postmark": "2.5.5",
     "react": "0.0.0-experimental-7f28234f8",

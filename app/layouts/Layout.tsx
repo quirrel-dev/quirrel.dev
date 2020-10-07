@@ -2,6 +2,7 @@ import { ReactNode, Suspense, useState } from "react"
 import { Head, Link } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
+import { privacyHref, termsHref } from "app/termly"
 import subscribeToNewsletter from "app/users/mutations/subscribeToNewsletter"
 
 export interface LayoutProps {
@@ -12,6 +13,7 @@ export interface LayoutProps {
 
 const Layout = ({ title, children, hideLogin }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   return (
     <div className="mx-auto mt-4 xl:mt-6">
       <Head>
@@ -310,7 +312,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                     </a>
                   </Link>
                 ) : (
-                  <Link href="/Sign Up">
+                  <Link href="/signup">
                     <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
                       Sign Up
                     </a>
@@ -394,7 +396,10 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 const form = new FormData(target)
                 const email = form.get("email") as string
 
-                await subscribeToNewsletter({ email })
+                await subscribeToNewsletter({
+                  email,
+                  hasConsented: false,
+                })
 
                 target.reset()
 
@@ -429,16 +434,22 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             © Copyright 2020 Simon Knott. All Rights Reserved.
           </p>
           <div className="flex items-start md:items-center justify-start md:justify-center space-x-6">
-            <Link href="/terms">
-              <a className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in">
-                Terms
-              </a>
-            </Link>
-            <Link href="/privacy">
-              <a className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in">
-                Privacy
-              </a>
-            </Link>
+            <a
+              href={termsHref}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in"
+            >
+              Terms
+            </a>
+            <a
+              href={privacyHref}
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in"
+            >
+              Privacy
+            </a>
           </div>
         </div>
       </footer>

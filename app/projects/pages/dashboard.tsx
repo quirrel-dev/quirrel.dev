@@ -8,6 +8,9 @@ import { Modal } from "app/components/Modal"
 import { Form, Field } from "react-final-form"
 import deleteAccount from "app/account/mutations/deleteAccount"
 import { CardList } from "app/components/CardList"
+import { useCurrentUser } from "app/hooks/useCurrentUser"
+import { usePaddle } from "app/hooks/usePaddle"
+import { SubscriptionPassthrough } from "app/paddle/api/paddle-webhook"
 
 function DeleteAccountButton() {
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false)
@@ -24,9 +27,9 @@ function DeleteAccountButton() {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                 />
               </svg>
@@ -82,26 +85,64 @@ function DeleteAccountButton() {
 }
 
 function AccountSection() {
+  const user = useCurrentUser()
+  const paddle = usePaddle()
+
+  function upgrade() {
+    const passthrough: SubscriptionPassthrough = {
+      customerId: user?.id,
+    }
+    paddle?.Checkout.open({
+      product: 631848,
+      email: user?.email,
+      passthrough: JSON.stringify(passthrough),
+    })
+  }
+
   return (
     <section id="account" className="mt-24">
       <h1 className="text-4xl font-semibold text-gray-900 sm:text-xl sm:leading-7">Account</h1>
 
       <ul className="space-y-2 mt-2">
-        <li>
-          <a
-            className="font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
-            role="button"
-            tabIndex={-1}
-            onClick={() => {
-              window.alert("Not Implemented.")
-            }}
-            onKeyDown={() => {
-              window.alert("Not Implemented.")
-            }}
-          >
-            Upgrade to paid plan
-          </a>
-        </li>
+        {user?.isSubscriber ? (
+          <>
+            <li>
+              <a
+                href={user.updateURL ?? ""}
+                className="font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
+                role="button"
+                tabIndex={-1}
+              >
+                Update Payment Details
+              </a>
+            </li>
+            <li>
+              <a
+                href={user.cancelURL ?? ""}
+                className="font-semibold text-orange-500 hover:text-orange-700 transition ease-in-out duration-150"
+                role="button"
+                tabIndex={-1}
+              >
+                Downgrade Plan
+              </a>
+            </li>
+          </>
+        ) : (
+          <li>
+            <a
+              className="font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
+              onClick={upgrade}
+              onKeyDown={upgrade}
+              role="button"
+              tabIndex={-1}
+              data-theme="none"
+              data-product="631848"
+            >
+              Upgrade to Pro plan
+            </a>
+          </li>
+        )}
+
         <li>
           <DeleteAccountButton />
         </li>
