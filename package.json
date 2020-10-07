@@ -1,6 +1,9 @@
 {
   "name": "quirrrel-console",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.13.x"
+  },
   "scripts": {
     "start": "blitz start",
     "studio": "blitz db studio",
