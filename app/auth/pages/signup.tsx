@@ -1,13 +1,14 @@
 import React from "react"
-import { useRouter, BlitzPage, Link } from "blitz"
+import { useRouter, BlitzPage, Link, useMutation } from "blitz"
 import Layout from "app/layouts/Layout"
-import signup from "app/auth/mutations/signup"
+import signupMutation from "app/auth/mutations/signup"
 import { Form, Field } from "react-final-form"
 import { FORM_ERROR } from "final-form"
 import { privacyHref, termsHref } from "app/termly"
 
 const SignupPage: BlitzPage = () => {
   const router = useRouter()
+  const [signup] = useMutation(signupMutation)
 
   return (
     <div className="min-h-screen flex justify-center">

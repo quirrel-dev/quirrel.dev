@@ -1,4 +1,4 @@
-import { SessionContext } from "blitz"
+import { Ctx } from "blitz"
 import db from "db"
 
 interface TimeSeriesRow {
@@ -8,14 +8,15 @@ interface TimeSeriesRow {
 
 export default async function getUsageRecords(
   { tokenName, projectSlug }: { projectSlug?: string; tokenName?: string },
-  ctx: { session?: SessionContext } = {}
+  ctx: Ctx
 ): Promise<TimeSeriesRow[]> {
-  ctx.session?.authorize()
+  ctx.session.authorize()
 
   const records = await db.usageRecord.findMany({
     where: {
       tokenName,
       tokenProjectSlug: projectSlug,
+      tokenProjectOwnerId: ctx.session.userId,
     },
     select: {
       invocations: true,

@@ -1,15 +1,12 @@
 import db from "db"
-import { SessionContext } from "blitz"
+import { Ctx } from "blitz"
 import { hashPassword } from "app/auth/auth-utils"
 import { SignupInput, SignupInputType } from "app/auth/validations"
 import { sendEmailWithTemplate } from "app/postmark"
 import { url } from "app/url"
 import * as verifyEmail from "../verify-email"
 
-export default async function signup(
-  input: SignupInputType,
-  ctx: { session?: SessionContext } = {}
-) {
+export default async function signup(input: SignupInputType, ctx: Ctx) {
   // This throws an error if input is invalid
   const { email, password } = SignupInput.parse(input)
 

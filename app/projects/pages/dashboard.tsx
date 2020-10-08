@@ -1,12 +1,12 @@
-import { BlitzPage, useQuery, Router } from "blitz"
+import { BlitzPage, useQuery, Router, useMutation } from "blitz"
 import getProjectSlugs from "app/projects/queries/getProjectSlugs"
-import createProject from "app/projects/mutations/createProject"
+import createProjectMutation from "app/projects/mutations/createProject"
 import React, { useState } from "react"
 import { isValidSlug } from "../slug"
 import { SubscriberOnlyLayout } from "app/layouts/SubscriberOnlyLayout"
 import { Modal } from "app/components/Modal"
 import { Form, Field } from "react-final-form"
-import deleteAccount from "app/account/mutations/deleteAccount"
+import deleteAccountMutation from "app/account/mutations/deleteAccount"
 import { CardList } from "app/components/CardList"
 import { useCurrentUser } from "app/hooks/useCurrentUser"
 import { usePaddle } from "app/hooks/usePaddle"
@@ -14,6 +14,7 @@ import { SubscriptionPassthrough } from "app/paddle/subscription-passthrough"
 
 function DeleteAccountButton() {
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false)
+  const [deleteAccount] = useMutation(deleteAccountMutation)
   return (
     <>
       <Modal show={showDeleteAccountModal}>
@@ -90,7 +91,7 @@ function AccountSection() {
 
   function upgrade() {
     const passthrough: SubscriptionPassthrough = {
-      customerId: user?.id,
+      customerId: user!.id,
     }
     paddle?.Checkout.open({
       product: 631848,
@@ -154,6 +155,7 @@ function AccountSection() {
 const Dashboard: BlitzPage = () => {
   const [showCreateProject, setShowCreateProject] = useState(false)
   const [projectSlugs, projectSlugsMeta] = useQuery(getProjectSlugs, {})
+  const [createProject] = useMutation(createProjectMutation)
 
   return (
     <div className="lg:mx-auto max-w-screen-md">

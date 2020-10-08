@@ -1,6 +1,6 @@
-import { useParam, useQuery, BlitzPage, Router, Link } from "blitz"
+import { useParam, useQuery, BlitzPage, Router, Link, useMutation } from "blitz"
 import getProject from "app/projects/queries/getProject"
-import deleteToken from "app/projects/mutations/deleteToken"
+import deleteTokenMutation from "app/projects/mutations/deleteToken"
 import Layout from "app/layouts/Layout"
 import { Suspense, useState } from "react"
 import { Modal } from "app/components/Modal"
@@ -20,6 +20,7 @@ const SpecificClient: BlitzPage = () => {
   const client = useParam("client", "string")!
   const [tokenToShow] = useCreatedToken(slug, client)
 
+  const [deleteToken] = useMutation(deleteTokenMutation)
   const [showDeleteClient, setShowDeleteClient] = useState(false)
 
   const [project] = useQuery(getProject, { slug })

@@ -1,11 +1,11 @@
-import { SessionContext } from "blitz"
+import { Ctx } from "blitz"
 import * as TokensRepo from "../tokens-repo"
 
 export default async function deleteToken(
   { projectSlug, name }: { projectSlug: string; name: string },
-  ctx: { session?: SessionContext } = {}
+  ctx: Ctx
 ) {
-  ctx.session?.authorize()
+  ctx.session.authorize()
 
-  return await TokensRepo.remove(projectSlug, name, ctx.session?.userId)
+  return await TokensRepo.remove(projectSlug, name, ctx.session.userId)
 }

@@ -1,10 +1,7 @@
 import db from "db"
-import { SessionContext } from "blitz"
+import { Ctx } from "blitz"
 
-export default async function getProject(
-  { slug }: { slug: string },
-  ctx: { session?: SessionContext } = {}
-) {
+export default async function getProject({ slug }: { slug: string }, ctx: Ctx) {
   ctx.session?.authorize()
 
   const project = await db.project.findOne({

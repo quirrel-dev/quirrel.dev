@@ -1,9 +1,9 @@
 import { ReactNode, Suspense, useState } from "react"
-import { Head, Link } from "blitz"
+import { Head, Link, useMutation } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
 import { privacyHref, termsHref } from "app/termly"
-import subscribeToNewsletter from "app/users/mutations/subscribeToNewsletter"
+import subscribeToNewsletterMutation from "app/users/mutations/subscribeToNewsletter"
 
 export interface LayoutProps {
   title?: string
@@ -13,6 +13,7 @@ export interface LayoutProps {
 
 const Layout = ({ title, children, hideLogin }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [subscribeToNewsletter] = useMutation(subscribeToNewsletterMutation)
 
   return (
     <div className="mx-auto mt-4 xl:mt-6">

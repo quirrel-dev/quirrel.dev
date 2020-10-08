@@ -1,4 +1,4 @@
-import { SessionContext } from "blitz"
+import { Ctx } from "blitz"
 import * as passwordReset from "../reset-password"
 
 export default async function setNewPassword(
@@ -11,7 +11,7 @@ export default async function setNewPassword(
     code: string
     newPassword: string
   },
-  ctx: { session?: SessionContext } = {}
+  ctx: Ctx
 ) {
   const userId = await passwordReset.setPassword(email, code, newPassword)
   if (userId) {

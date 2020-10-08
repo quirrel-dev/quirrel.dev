@@ -1,8 +1,14 @@
 import Layout from "app/layouts/Layout"
-import { BlitzPage, GetServerSideProps, InferGetServerSidePropsType, useRouter } from "blitz"
+import {
+  BlitzPage,
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  useMutation,
+  useRouter,
+} from "blitz"
 import * as passwordReset from "../../../reset-password"
 import { Form, Field } from "react-final-form"
-import setNewPassword from "../../../mutations/set-new-password"
+import setNewPasswordMutation from "../../../mutations/set-new-password"
 import { FORM_ERROR } from "final-form"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -24,6 +30,7 @@ const ResetPassword: BlitzPage<InferGetServerSidePropsType<typeof getServerSideP
   const { found, code, email } = props
 
   const router = useRouter()
+  const [setNewPassword] = useMutation(setNewPasswordMutation)
 
   if (!found) {
     return <div>"Not Found"</div>

@@ -1,10 +1,10 @@
 import * as account from "../"
-import { SessionContext } from "blitz"
+import { Ctx } from "blitz"
 
-export default async function deleteAccount(obj?: any, ctx: { session?: SessionContext } = {}) {
-  ctx.session?.authorize()
+export default async function deleteAccount(obj = undefined, ctx: Ctx) {
+  ctx.session.authorize()
 
-  await account.deactivate(ctx.session?.userId)
+  await account.deactivate(ctx.session.userId)
 
   await ctx.session!.revoke()
 }

@@ -1,6 +1,6 @@
 import { useCurrentUser } from "app/hooks/useCurrentUser"
-import { Router } from "blitz"
-import logout from "app/auth/mutations/logout"
+import { Router, useMutation } from "blitz"
+import logoutMutation from "app/auth/mutations/logout"
 
 interface LoginStateProps {
   children: (info: { onClick: () => void; isLoggedIn: boolean }) => JSX.Element
@@ -8,6 +8,7 @@ interface LoginStateProps {
 
 export function LoginState(props: LoginStateProps) {
   const currentUser = useCurrentUser()
+  const [logout] = useMutation(logoutMutation)
 
   if (!currentUser) {
     return props.children({

@@ -1,8 +1,8 @@
-import { useParam, useQuery, BlitzPage, Router, Link } from "blitz"
+import { useParam, useQuery, BlitzPage, Router, Link, useMutation } from "blitz"
 import getProject from "app/projects/queries/getProject"
-import addToken from "app/projects/mutations/addToken"
+import addTokenMutation from "app/projects/mutations/addToken"
 import Layout from "app/layouts/Layout"
-import deleteProject from "app/projects/mutations/deleteProject"
+import deleteProjectMutation from "app/projects/mutations/deleteProject"
 import { useState } from "react"
 import { Modal } from "app/components/Modal"
 import { Form, Field } from "react-final-form"
@@ -11,6 +11,8 @@ import { CardList } from "app/components/CardList"
 const SpecificProject: BlitzPage = () => {
   const slug = useParam("slug", "string")
 
+  const [addToken] = useMutation(addTokenMutation)
+  const [deleteProject] = useMutation(deleteProjectMutation)
   const [showCreateToken, setShowCreateToken] = useState(false)
   const [showDeleteProject, setShowDeleteProject] = useState(false)
 

@@ -1,14 +1,16 @@
 import React, { useEffect } from "react"
-import { useRouter, BlitzPage, Router } from "blitz"
+import { useRouter, BlitzPage, Router, useMutation } from "blitz"
 import Layout from "app/layouts/Layout"
 import { Form, Field, FormSpy } from "react-final-form"
 import { FORM_ERROR } from "final-form"
-import login from "app/auth/mutations/login"
+import loginMutation from "app/auth/mutations/login"
 import { Link } from "blitz"
-import resetPassword from "../mutations/reset-password"
+import resetPasswordMutation from "../mutations/reset-password"
 
 const LoginPage: BlitzPage = () => {
   const router = useRouter()
+  const [login] = useMutation(loginMutation)
+  const [resetPassword] = useMutation(resetPasswordMutation)
 
   useEffect(() => {
     Router.prefetch("/dashboard")

@@ -1,11 +1,13 @@
-import verifyEmail from "app/auth/mutations/verify-email"
+import verifyEmailMutation from "app/auth/mutations/verify-email"
 import Layout from "app/layouts/Layout"
-import { BlitzPage, Router, useParam, useRouterQuery } from "blitz"
+import { BlitzPage, Router, useMutation, useParam, useRouterQuery } from "blitz"
 import { useEffect, useState } from "react"
 
 const VerifyMail: BlitzPage = () => {
   const code = useParam("code", "string")
   const subscribeToNewsletter = useRouterQuery().subscribeToNewsletter === "true"
+
+  const [verifyEmail] = useMutation(verifyEmailMutation)
 
   const [error, setError] = useState(false)
 
@@ -23,7 +25,7 @@ const VerifyMail: BlitzPage = () => {
         setError(true)
       }
     })
-  }, [code, setError, subscribeToNewsletter])
+  }, [code, setError, subscribeToNewsletter, verifyEmail])
 
   return (
     <div className="flex justify-center items-center mt-8">
