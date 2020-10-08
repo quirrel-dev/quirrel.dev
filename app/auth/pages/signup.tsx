@@ -34,12 +34,15 @@ const SignupPage: BlitzPage = () => {
                   router.push("/dashboard")
                   return
                 }
+                default: {
+                  return { [FORM_ERROR]: result }
+                }
               }
             } catch (error) {
               return { [FORM_ERROR]: error.toString() }
             }
           }}
-          render={({ handleSubmit }) => (
+          render={({ handleSubmit, submitError }) => (
             <form className="mt-5" onSubmit={handleSubmit}>
               <div>
                 <Field
@@ -111,6 +114,8 @@ const SignupPage: BlitzPage = () => {
                   Send me news & updates on Quirrel.
                 </label>
               </div>
+
+              {submitError && <div className="text-red-500 m-4">{submitError}</div>}
               <div className="mt-5">
                 <button
                   type="submit"
