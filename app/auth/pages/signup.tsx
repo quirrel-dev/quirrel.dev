@@ -5,6 +5,7 @@ import signupMutation from "app/auth/mutations/signup"
 import { Form, Field } from "react-final-form"
 import { FORM_ERROR } from "final-form"
 import { privacyHref, termsHref } from "app/termly"
+import { SignupInput } from "../validations"
 
 const SignupPage: BlitzPage = () => {
   const router = useRouter()
@@ -42,6 +43,28 @@ const SignupPage: BlitzPage = () => {
               return { [FORM_ERROR]: error.toString() }
             }
           }}
+          validate={(values) => {
+            const errors: Record<string, string[]> = {}
+
+            const result = SignupInput.safeParse({
+              email: values.email,
+              password: values.password,
+              subscribeToNewsletter: values.marketing,
+            })
+
+            if (!result.success) {
+              Object.assign(errors, result.error.flatten().fieldErrors)
+            }
+
+            if (!values.accept_terms) {
+              errors.accept_terms = ["👈"]
+            }
+
+            console.log({ errors })
+
+            return errors
+          }}
+          validateOnBlur
           render={({ handleSubmit, submitError }) => (
             <form className="mt-5" onSubmit={handleSubmit}>
               <div>
@@ -68,8 +91,8 @@ const SignupPage: BlitzPage = () => {
 
                 <Field
                   name="password"
-                  render={({ input }) => (
-                    <div>
+                  render={({ input, meta }) => (
+                    <div className="-mt-px relative">
                       <input
                         {...input}
                         aria-label="Password"
@@ -78,6 +101,11 @@ const SignupPage: BlitzPage = () => {
                         type="password"
                         required
                       />
+                      {(meta.error || meta.submitError) && meta.touched && (
+                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 text-red-500 select-none cursor-default">
+                          {meta.error || meta.submitError}
+                        </div>
+                      )}
                     </div>
                   )}
                 />
