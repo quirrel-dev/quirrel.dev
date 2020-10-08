@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   quirrel:
-    image: docker.pkg.github.com/quirrel-dev/quirrel/quirrel
+    image: ghcr.io/quirrel-dev/quirrel
     environment:
       PASSPHRASES: "${QUIRREL_PASSPHRASE}"
       REDIS_URL: redis://redis
