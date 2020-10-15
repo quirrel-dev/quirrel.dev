@@ -257,9 +257,9 @@ function Perks() {
           ),
         },
         {
-          title: "Set up in 5 minutes",
+          title: "End-to-end encrypted",
           description:
-            "Setting up is as easy as pasting a client secret into the environment variables.",
+            "Quirrel payloads are end-to-end-encrypted, so your data never gets in the wrong hands.",
           svg: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -272,7 +272,7 @@ function Perks() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
               />
             </svg>
           ),
