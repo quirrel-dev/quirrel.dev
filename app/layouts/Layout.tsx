@@ -36,15 +36,17 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
           <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
             <div className="flex items-center justify-between w-full lg:w-auto">
               <Link href="/">
-                <span className="flex items-center">
-                  <img
-                    aria-label="Home"
-                    className="h-10 w-auto ml-1"
-                    src="/img/horn_transparent.png"
-                    alt="Logo"
-                  />
-                  <h1 className="ml-3 text-3xl font-semibold text-orange-600">Quirrel</h1>
-                </span>
+                <a>
+                  <span className="flex items-center">
+                    <img
+                      aria-label="Home"
+                      className="h-10 w-auto ml-1"
+                      src="/img/horn_transparent.png"
+                      alt="Logo"
+                    />
+                    <h1 className="ml-3 text-3xl font-semibold text-orange-600">Quirrel</h1>
+                  </span>
+                </a>
               </Link>
 
               {!hideLogin && (
