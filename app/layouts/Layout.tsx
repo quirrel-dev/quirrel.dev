@@ -383,7 +383,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               </a>
             </Link>
           </nav>
-          <div className="col-span-3">
+          <div className="col-span-4 sm:col-span-3">
             <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
               SUBSCRIBE TO OUR NEWSLETTER
             </p>
@@ -411,13 +411,13 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 <div className="tag-append">
                   <input
                     name="email"
-                    className="inline-block placeholder-gray-500 appearance-none px-3 py-2 text-gray-900 rounded-l-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+                    className="w-40 inline-block placeholder-gray-500 appearance-none px-3 py-2 text-gray-900 rounded-l-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
                     type="email"
                     placeholder="Enter your email"
                     required
                   />
                   <button
-                    className="text-center px-4 py-1 border border-transparent text-base leading-6 font-medium rounded-r-md text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-indigo transition duration-150 ease-in-out"
+                    className="text-center px-2 py-1 border border-transparent text-sm leading-6 font-medium rounded-r-md text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-indigo transition duration-150 ease-in-out"
                     type="submit"
                   >
                     Subscribe

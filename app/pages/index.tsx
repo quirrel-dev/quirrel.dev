@@ -499,19 +499,19 @@ function CTA() {
   return (
     <section
       id="cta"
-      className="rounded-lg bg-orange-600 text-white py-4 px-6 text-xl justify-between flex items-center max-w-4xl mx-auto"
+      className="rounded-lg bg-orange-600 text-white py-4 px-6 text-xl justify-between sm:flex items-center max-w-4xl mx-auto"
     >
       <span>Built for developers. Get started with Quirrel in 5 minutes.</span>
 
       {isSignedIn ? (
         <Link href="/dashboard">
-          <a className="text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
+          <a className="block mt-4 sm:mt-0 text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
             Dashboard
           </a>
         </Link>
       ) : (
         <Link href="/signup">
-          <a className="text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
+          <a className="block mt-4 sm:mt-0 text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
             Sign Up
           </a>
         </Link>
