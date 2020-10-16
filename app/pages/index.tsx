@@ -90,7 +90,6 @@ interface AdvantagesProps {
     title: string
     description: string
     svg: JSX.Element
-    comingSoon?: boolean
   }[]
 }
 
@@ -111,7 +110,7 @@ function Advantages(props: AdvantagesProps) {
       <div className="mt-10">
         <ul className="md:grid md:grid-cols-2 col-gap-8 row-gap-10">
           {advantages.map((advantage, index) => {
-            const { title, svg, description, comingSoon } = advantage
+            const { title, svg, description } = advantage
 
             return (
               <li key={index} className="mt-10 md:mt-0">
@@ -122,16 +121,7 @@ function Advantages(props: AdvantagesProps) {
                     </div>
                   </div>
                   <div className="ml-4">
-                    <span>
-                      <h4 className="text-lg leading-6 inline font-medium text-gray-900">
-                        {title}{" "}
-                      </h4>
-                      {comingSoon && (
-                        <span className="bg-gray-300 text-xs p-1 rounded text-gray-600 ml-2">
-                          Coming Soon
-                        </span>
-                      )}
-                    </span>
+                    <h4 className="text-lg leading-6 inline font-medium text-gray-900">{title}</h4>
 
                     <p className="mt-2 text-base leading-6 text-gray-500">{description}</p>
                   </div>
@@ -221,7 +211,6 @@ function Features() {
           description:
             "Good old Cron Jobs, coming to Quirrel. Use for once-a-month invoicing, fetching data on a schedule, or analytics to run hourly.",
           svg: <span className="text-lg">0 * *</span>,
-          comingSoon: true,
         },
       ]}
     />
