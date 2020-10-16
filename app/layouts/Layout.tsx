@@ -300,6 +300,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
               Product
             </p>
+
             <Link href="/#features">
               <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
                 Features
@@ -324,6 +325,24 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               }
             </LoginState>
 
+            <Link href="/#pricing">
+              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
+                Pricing
+              </a>
+            </Link>
+
+            <a
+              href="https://status.quirrel.dev"
+              target="blank"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
+            >
+              Status
+            </a>
+          </nav>
+
+          <nav className="col-span-1">
+            <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">Links</p>
+
             <a
               href="https://github.com/orgs/quirrel-dev/projects/1"
               target="blank"
@@ -339,11 +358,14 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             >
               Documentation
             </a>
-            <Link href="/#pricing">
-              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
-                Pricing
-              </a>
-            </Link>
+
+            <a
+              href="https://status.quirrel.dev"
+              target="blank"
+              className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
+            >
+              Status: <span className="text-green-400">&nbsp;Up!</span>
+            </a>
           </nav>
 
           <nav className="col-span-1">
@@ -372,7 +394,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               Email
             </a>
           </nav>
-          <nav className="col-span-1 lg:col-span-2">
+          <nav className="col-span-1">
             <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">Legal</p>
             <Link href="/terms">
               <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
