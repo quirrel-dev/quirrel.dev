@@ -164,7 +164,7 @@ const SpecificProject: BlitzPage = () => {
         <h2 className="text-md font-semibold text-gray-900 leading-7">Environments</h2>
 
         <CardList
-          emptyText="Add an environment using the button below."
+          emptyText="To get this project started, add your first environment using the button below."
           items={tokenNames.map((token) => ({
             title: token,
             href: `/projects/${project.slug}/environments/${token}`,
