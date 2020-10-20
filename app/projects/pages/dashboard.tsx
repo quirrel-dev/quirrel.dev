@@ -264,10 +264,48 @@ const Dashboard: BlitzPage = () => {
           </Form>
         </Modal>
 
+        {projectSlugs.length === 0 && (
+          <div className="rounded border-orange-300 border bg-orange-100 p-4 text-center max-w-lg m-auto">
+            <p>Thanks for signing up to Quirrel! Glad to have you here.</p>
+
+            <p className="pt-4">
+              To get started, check out the{" "}
+              <a
+                href="https://docs.quirrel.dev"
+                target="_blank"
+                className="text-orange-600 hover:text-orange-900"
+              >
+                Quirrel Docs
+              </a>
+              .
+            </p>
+
+            <p className="pt-4">
+              If you've got any questions (or just wanna chat), reach out via{" "}
+              <a
+                href="https://twitter.com/skn0tt"
+                target="_blank"
+                className="text-orange-600 hover:text-orange-900"
+              >
+                Twitter
+              </a>{" "}
+              or{" "}
+              <a
+                href="mailto:support@quirrel.dev"
+                target="_blank"
+                className="text-orange-600 hover:text-orange-900"
+              >
+                email
+              </a>
+              .
+            </p>
+          </div>
+        )}
+
         <h1 className="text-xl font-semibold text-gray-900 leading-7">Projects</h1>
 
         <CardList
-          emptyText="Create your first project using the button below."
+          emptyText="Once your ready to deploy, create your first project using the button below."
           items={projectSlugs.map((slug) => ({
             title: slug,
             href: `/projects/${slug}`,
