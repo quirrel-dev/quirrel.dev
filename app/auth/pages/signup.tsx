@@ -60,8 +60,6 @@ const SignupPage: BlitzPage = () => {
               errors.accept_terms = ["👈"]
             }
 
-            console.log({ errors })
-
             return errors
           }}
           validateOnBlur

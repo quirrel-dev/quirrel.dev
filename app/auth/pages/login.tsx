@@ -28,7 +28,7 @@ const LoginPage: BlitzPage = () => {
               router.push("/dashboard")
             } catch (error) {
               if (error.name === "AuthenticationError") {
-                return { [FORM_ERROR]: "Sorry, those credentials are invalid" }
+                return { [FORM_ERROR]: "Sorry, those credentials are invalid." }
               } else {
                 return {
                   [FORM_ERROR]:
@@ -37,7 +37,7 @@ const LoginPage: BlitzPage = () => {
               }
             }
           }}
-          render={({ handleSubmit }) => (
+          render={({ handleSubmit, submitError }) => (
             <form className="mt-5" data-bitwarden-watching="1" onSubmit={handleSubmit}>
               <div className="rounded-md shadow-sm">
                 <Field
@@ -97,6 +97,7 @@ const LoginPage: BlitzPage = () => {
                   )}
                 />
               </div>
+              {submitError && <div className="text-red-500 m-4">{submitError}</div>}
               <div className="mt-5">
                 <button
                   type="submit"
