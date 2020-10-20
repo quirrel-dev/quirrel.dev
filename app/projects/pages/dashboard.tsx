@@ -154,7 +154,7 @@ function AccountSection() {
 
 const Dashboard: BlitzPage = () => {
   const [showCreateProject, setShowCreateProject] = useState(false)
-  const [projectSlugs, projectSlugsMeta] = useQuery(getProjectSlugs, {})
+  const [projectSlugs] = useQuery(getProjectSlugs, {})
   const [createProject] = useMutation(createProjectMutation)
 
   return (
@@ -165,9 +165,13 @@ const Dashboard: BlitzPage = () => {
             onSubmit={async (values) => {
               const { name } = values
 
+              const url = "/projects/" + name
+
+              Router.prefetch(url)
+
               await createProject(name)
-              await projectSlugsMeta.refetch()
-              setShowCreateProject(false)
+
+              Router.push(url)
             }}
           >
             {({ handleSubmit }) => (
