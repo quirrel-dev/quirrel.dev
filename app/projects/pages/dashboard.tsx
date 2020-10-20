@@ -41,7 +41,7 @@ function DeleteAccountButton() {
               </h3>
               <div className="mt-2">
                 <p className="text-sm leading-5 text-gray-500">
-                  Are you sure you want to delete your account? Your clients will lose Quirrel
+                  Are you sure you want to delete your account? Your projects will lose Quirrel
                   access immediately. This action cannot be undone.
                 </p>
               </div>

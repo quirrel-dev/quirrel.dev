@@ -43,7 +43,7 @@ const SpecificProject: BlitzPage = () => {
 
               sessionStorage.setItem("created-token-" + project.slug + "-" + name, token)
 
-              Router.push(`/projects/${project.slug}/clients/${name}`)
+              Router.push(`/projects/${project.slug}/environments/${name}`)
             }}
           >
             {({ handleSubmit }) => (
@@ -71,21 +71,29 @@ const SpecificProject: BlitzPage = () => {
                         className="text-lg leading-6 font-medium text-gray-900"
                         id="modal-headline"
                       >
-                        Add client
+                        Add environment
                       </h3>
-                      <div className="mt-4">
-                        <p className="text-md leading-5 text-gray-500">Give your client a name.</p>
+                      <div className="mt-4 text-md leading-5 text-gray-500">
+                        <p>
+                          Environments allow you to get individual usage statistics from your
+                          different deployments.
+                        </p>
+                        <p className="mt-2">
+                          If you don't know what to put in there, we recommend something like{" "}
+                          <code>Production</code> or <code>Staging</code>.
+                        </p>
                       </div>
                       <div className="mt-4">
                         <Field
                           name="name"
+                          defaultValue={tokenNames.length === 0 ? "Production" : undefined}
                           validate={(value) => {
                             if (!value) {
                               return "must not be empty"
                             }
 
                             if (tokenNames.includes(value)) {
-                              return "Project already exists"
+                              return "Environment already exists"
                             }
                           }}
                         >
@@ -98,9 +106,9 @@ const SpecificProject: BlitzPage = () => {
                                 autoComplete="off"
                                 autoCorrect="off"
                                 spellCheck={false}
-                                placeholder="Client name"
-                                aria-label="client name"
-                                className="border-gray-300 placeholder-gray-500 appearance-none rounded-none relative block w-full px-3 py-2 border text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+                                placeholder="Environment name"
+                                aria-label="environment name"
+                                className="border-gray-300 placeholder-gray-500 appearance-none relative block w-full px-3 py-2 border text-gray-900 rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
                               />
                               {meta.touched && meta.error && <span>{meta.error}</span>}
                             </div>
@@ -153,13 +161,13 @@ const SpecificProject: BlitzPage = () => {
           <span>{project.slug}</span>
         </span>
 
-        <h2 className="text-md font-semibold text-gray-900 leading-7">Clients</h2>
+        <h2 className="text-md font-semibold text-gray-900 leading-7">Environments</h2>
 
         <CardList
-          emptyText="Add a client using the button below."
+          emptyText="Add an environment using the button below."
           items={tokenNames.map((token) => ({
             title: token,
-            href: `/projects/${project.slug}/clients/${token}`,
+            href: `/projects/${project.slug}/environments/${token}`,
           }))}
         />
 
@@ -181,7 +189,7 @@ const SpecificProject: BlitzPage = () => {
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             />
           </svg>
-          <span>Add Client</span>
+          <span>Add Environment</span>
         </button>
       </div>
 
@@ -214,8 +222,8 @@ const SpecificProject: BlitzPage = () => {
                     </h3>
                     <div className="mt-2">
                       <p className="text-sm leading-5 text-gray-500">
-                        Are you sure you want to delete this project? This project's clients will
-                        lose Quirrel access immediately. This action cannot be undone.
+                        Are you sure you want to delete this project? This project will lose Quirrel
+                        access immediately. This action cannot be undone.
                       </p>
                     </div>
                   </div>
