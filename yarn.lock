@@ -1371,6 +1371,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@feedback-fish/react@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@feedback-fish/react/-/react-1.1.0.tgz#757ab82312dde534d380fb5afb45b1df810c1aa1"
+  integrity sha512-npbRNUmLwOHe2ysjQLlrlMTdp8LOSFH3maIc0uKSexbpQDj99lHDUwOfhgSjWzT6LTz/MZlQkmRoj7AOTuEqPQ==
+
 "@fullhuman/postcss-purgecss@^2.1.2":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@fullhuman/postcss-purgecss/-/postcss-purgecss-2.3.0.tgz#50a954757ec78696615d3e118e3fee2d9291882e"

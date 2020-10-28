@@ -3,7 +3,7 @@ import { Router, useMutation } from "blitz"
 import logoutMutation from "app/auth/mutations/logout"
 
 interface LoginStateProps {
-  children: (info: { onClick: () => void; isLoggedIn: boolean }) => JSX.Element
+  children: (info: { onClick: () => void; isLoggedIn: boolean; email?: string }) => JSX.Element
 }
 
 export function LoginState(props: LoginStateProps) {
@@ -16,6 +16,7 @@ export function LoginState(props: LoginStateProps) {
         Router.push("/login")
       },
       isLoggedIn: false,
+      email: undefined,
     })
   } else {
     return props.children({
@@ -24,6 +25,7 @@ export function LoginState(props: LoginStateProps) {
         Router.push("/")
       },
       isLoggedIn: true,
+      email: currentUser.email,
     })
   }
 }

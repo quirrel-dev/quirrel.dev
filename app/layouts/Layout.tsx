@@ -4,6 +4,7 @@ import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
 import { privacyHref, termsHref } from "app/termly"
 import subscribeToNewsletterMutation from "app/users/mutations/subscribeToNewsletter"
+import { FeedbackFish } from "@feedback-fish/react"
 
 export interface LayoutProps {
   title?: string
@@ -101,32 +102,39 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             {!hideLogin && (
               <Suspense fallback={null}>
                 <LoginState>
-                  {({ onClick, isLoggedIn }) =>
-                    isLoggedIn ? (
-                      <span className="float-right">
-                        <Link href="/dashboard">
-                          <a className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out">
-                            Dashboard
+                  {({ onClick, isLoggedIn, email }) => (
+                    <span className="float-right">
+                      <FeedbackFish projectId="d9abf0d633a954" userId={email}>
+                        <a className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out">
+                          Feedback
+                        </a>
+                      </FeedbackFish>
+                      {isLoggedIn ? (
+                        <>
+                          <Link href="/dashboard">
+                            <a className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out">
+                              Dashboard
+                            </a>
+                          </Link>
+                          <a
+                            className="ml-8 font-medium text-orange-600 hover:text-orange-900 transition duration-150 ease-in-out"
+                            role="menuitem"
+                            tabIndex={-1}
+                            onClick={onClick}
+                            onKeyDown={onClick}
+                          >
+                            Log Out
+                          </a>
+                        </>
+                      ) : (
+                        <Link href="/login">
+                          <a className="ml-8 font-medium text-orange-600 hover:text-orange-900 transition duration-150 ease-in-out float-right">
+                            Log in
                           </a>
                         </Link>
-                        <a
-                          className="ml-8 font-medium text-orange-600 hover:text-orange-900 transition duration-150 ease-in-out"
-                          role="menuitem"
-                          tabIndex={-1}
-                          onClick={onClick}
-                          onKeyDown={onClick}
-                        >
-                          Log Out
-                        </a>
-                      </span>
-                    ) : (
-                      <Link href="/login">
-                        <a className="ml-8 font-medium text-orange-600 hover:text-orange-900 transition duration-150 ease-in-out float-right">
-                          Log in
-                        </a>
-                      </Link>
-                    )
-                  }
+                      )}
+                    </span>
+                  )}
                 </LoginState>
               </Suspense>
             )}
