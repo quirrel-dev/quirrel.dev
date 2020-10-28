@@ -5,6 +5,7 @@ import { Transition } from "@tailwindui/react"
 import { privacyHref, termsHref } from "app/termly"
 import subscribeToNewsletterMutation from "app/users/mutations/subscribeToNewsletter"
 import { FeedbackFish } from "@feedback-fish/react"
+import { useBetterUptime } from "app/hooks/useBetterUptime"
 
 export interface LayoutProps {
   title?: string
@@ -15,6 +16,7 @@ export interface LayoutProps {
 const Layout = ({ title, children, hideLogin }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [subscribeToNewsletter] = useMutation(subscribeToNewsletterMutation)
+  const systemState = useBetterUptime()
 
   return (
     <div className="mx-auto mt-4 xl:mt-6">
@@ -383,7 +385,14 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               target="blank"
               className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
             >
-              Status: <span className="text-green-400">&nbsp;Up!</span>
+              Status:{" "}
+              {typeof systemState === "undefined" ? (
+                <span className="text-gray-400">&nbsp;...</span>
+              ) : systemState ? (
+                <span className="text-green-400">&nbsp;Up!</span>
+              ) : (
+                <span className="text-red-400">&nbsp;Down</span>
+              )}
             </a>
           </nav>
 
