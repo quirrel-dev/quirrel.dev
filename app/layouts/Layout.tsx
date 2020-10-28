@@ -221,46 +221,57 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 {!hideLogin && (
                   <Suspense fallback={null}>
                     <LoginState>
-                      {({ onClick, isLoggedIn }) =>
-                        isLoggedIn ? (
-                          <span className="flex">
-                            <Link href="/dashboard">
-                              <a className="block w-full px-5 py-3 text-center font-medium bg-gray-50 hover:bg-gray-100 hover:text-orange-700 focus:outline-none focus:bg-gray-100 focus:text-orange-700 transition duration-150 ease-in-out">
-                                Dashboard
+                      {({ onClick, isLoggedIn, email }) => (
+                        <>
+                          <FeedbackFish projectId="d9abf0d633a954" userId={email}>
+                            <a
+                              className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                              role="menuitem"
+                            >
+                              Feedback
+                            </a>
+                          </FeedbackFish>
+
+                          {isLoggedIn ? (
+                            <span className="flex">
+                              <Link href="/dashboard">
+                                <a className="block w-full px-5 py-3 text-center font-medium bg-gray-50 hover:bg-gray-100 hover:text-orange-700 focus:outline-none focus:bg-gray-100 focus:text-orange-700 transition duration-150 ease-in-out">
+                                  Dashboard
+                                </a>
+                              </Link>
+                              <a
+                                className="block w-full px-5 py-3 text-center font-medium text-orange-600 bg-gray-50 hover:bg-gray-100 hover:text-orange-700 focus:outline-none focus:bg-gray-100 focus:text-orange-700 transition duration-150 ease-in-out"
+                                role="menuitem"
+                                tabIndex={-1}
+                                onClick={() => {
+                                  onClick()
+                                  setMobileMenuOpen(false)
+                                }}
+                                onKeyDown={() => {
+                                  onClick()
+                                  setMobileMenuOpen(false)
+                                }}
+                              >
+                                Log Out
                               </a>
-                            </Link>
-                            <a
-                              className="block w-full px-5 py-3 text-center font-medium text-orange-600 bg-gray-50 hover:bg-gray-100 hover:text-orange-700 focus:outline-none focus:bg-gray-100 focus:text-orange-700 transition duration-150 ease-in-out"
-                              role="menuitem"
-                              tabIndex={-1}
-                              onClick={() => {
-                                onClick()
-                                setMobileMenuOpen(false)
-                              }}
-                              onKeyDown={() => {
-                                onClick()
-                                setMobileMenuOpen(false)
-                              }}
-                            >
-                              Log Out
-                            </a>
-                          </span>
-                        ) : (
-                          <div>
-                            <a
-                              href="#"
-                              className="block w-full px-5 py-3 text-center font-medium text-orange-600 bg-gray-50 hover:bg-gray-100 hover:text-orange-700 focus:outline-none focus:bg-gray-100 focus:text-orange-700 transition duration-150 ease-in-out"
-                              role="menuitem"
-                              onClick={() => {
-                                onClick()
-                                setMobileMenuOpen(false)
-                              }}
-                            >
-                              {isLoggedIn ? "Log Out" : "Log In"}
-                            </a>
-                          </div>
-                        )
-                      }
+                            </span>
+                          ) : (
+                            <div>
+                              <a
+                                href="#"
+                                className="block w-full px-5 py-3 text-center font-medium text-orange-600 bg-gray-50 hover:bg-gray-100 hover:text-orange-700 focus:outline-none focus:bg-gray-100 focus:text-orange-700 transition duration-150 ease-in-out"
+                                role="menuitem"
+                                onClick={() => {
+                                  onClick()
+                                  setMobileMenuOpen(false)
+                                }}
+                              >
+                                {isLoggedIn ? "Log Out" : "Log In"}
+                              </a>
+                            </div>
+                          )}
+                        </>
+                      )}
                     </LoginState>
                   </Suspense>
                 )}
