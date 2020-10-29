@@ -520,7 +520,7 @@ function About() {
           The pleasant-to-use, open-source job queueing solution.
         </h3>
         <p className="mt-4 max-w-xl text-xl leading-7 text-gray-500 lg:mx-auto">
-          The idea to Quirrel came during a holiday in Greece, where Simon started thinking about
+          The idea to Quirrel came during a holiday in Croatia, where Simon started thinking about
           the easiest way to integrate a Job Queue into Next.js applications.
         </p>
       </div>
