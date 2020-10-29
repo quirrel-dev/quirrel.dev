@@ -2,7 +2,6 @@ import { ReactNode, Suspense, useState } from "react"
 import { Head, Link, useMutation } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
-import { privacyHref, termsHref } from "app/termly"
 import subscribeToNewsletterMutation from "app/users/mutations/subscribeToNewsletter"
 import { FeedbackFish } from "@feedback-fish/react"
 import { useBetterUptime } from "app/hooks/useBetterUptime"
@@ -396,7 +395,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             </a>
           </nav>
 
-          <nav className="col-span-1">
+          <nav className="col-span-2">
             <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
               Contact
             </p>
@@ -421,19 +420,6 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             >
               Email
             </a>
-          </nav>
-          <nav className="col-span-1">
-            <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">Legal</p>
-            <Link href="/terms">
-              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
-                Terms of Use
-              </a>
-            </Link>
-            <Link href="/privacy">
-              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
-                Privacy Policy
-              </a>
-            </Link>
           </nav>
           <div className="col-span-4 sm:col-span-3">
             <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
@@ -487,22 +473,17 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             © Copyright 2020 Simon Knott. All Rights Reserved.
           </p>
           <div className="flex items-start md:items-center justify-start md:justify-center space-x-6">
-            <a
-              href={termsHref}
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in"
-            >
-              Terms
-            </a>
-            <a
-              href={privacyHref}
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in"
-            >
-              Privacy
-            </a>
+            <Link href="/terms">
+              <a className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in">
+                Terms
+              </a>
+            </Link>
+
+            <Link href="/privacy">
+              <a className="font-medium text-sm text-gray-700 hover:text-gray-600 transition-colors duration-100 ease-in">
+                Privacy
+              </a>
+            </Link>
           </div>
         </div>
       </footer>

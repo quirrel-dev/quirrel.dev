@@ -4,7 +4,6 @@ import Layout from "app/layouts/Layout"
 import signupMutation from "app/auth/mutations/signup"
 import { Form, Field } from "react-final-form"
 import { FORM_ERROR } from "final-form"
-import { privacyHref, termsHref } from "app/termly"
 import { SignupInput } from "../validations"
 
 const SignupPage: BlitzPage = () => {
@@ -117,11 +116,11 @@ const SignupPage: BlitzPage = () => {
                 />
                 <label className="text-gray-600 text-sm" htmlFor="accept_terms">
                   I accept Quirrel's{" "}
-                  <a href={termsHref} target="_blank" rel="noreferrer" className="text-blue-700">
+                  <a href="/terms" target="_blank" rel="noreferrer" className="text-blue-700">
                     terms of use
                   </a>{" "}
                   and{" "}
-                  <a href={privacyHref} target="_blank" rel="noreferrer" className="text-blue-700">
+                  <a href="/privacy" target="_blank" rel="noreferrer" className="text-blue-700">
                     privacy policy
                   </a>
                   .
