@@ -24,6 +24,8 @@ class MyDocument extends Document {
         <body>
           <Main />
           <BlitzScript />
+
+          <script async data-id="122499" src="https://betteruptime.com/widgets/announcement.js" />
         </body>
       </Html>
     )
