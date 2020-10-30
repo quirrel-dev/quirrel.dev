@@ -16,8 +16,23 @@ module.exports = {
       {
         source: "/docs",
         destination: "https://docs.quirrel.dev",
-        permanent: true
-      }
+        permanent: true,
+      },
+      {
+        source: "/roadmap",
+        destination: "https://github.com/orgs/quirrel-dev/projects/1",
+        permanent: true,
+      },
+      {
+        source: "/gh",
+        destination: "https://github.com/quirrel-dev",
+        permanent: true,
+      },
+      {
+        source: "/github",
+        destination: "https://github.com/quirrel-dev",
+        permanent: true,
+      },
     ]
   },
 }
