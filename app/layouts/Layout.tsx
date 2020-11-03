@@ -106,7 +106,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                   {({ onClick, isLoggedIn, email }) => (
                     <span className="float-right">
                       <FeedbackFish projectId="d9abf0d633a954" userId={email}>
-                        <a className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out">
+                        <a className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out cursor-pointer">
                           Feedback
                         </a>
                       </FeedbackFish>
@@ -226,7 +226,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                         <>
                           <FeedbackFish projectId="d9abf0d633a954" userId={email}>
                             <a
-                              className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                              className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out cursor-pointer"
                               role="menuitem"
                             >
                               Feedback
