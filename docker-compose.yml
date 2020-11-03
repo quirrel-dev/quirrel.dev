@@ -1,23 +1,10 @@
 version: "3.7"
 
 services:
-  quirrel:
-    image: ghcr.io/quirrel-dev/quirrel
-    environment:
-      PASSPHRASES: "${QUIRREL_PASSPHRASE}"
-      REDIS_URL: redis://redis
-    ports:
-      - 9181:9181
-
   redis:
     image: redis
-
-  redis-commander:
-    image: rediscommander/redis-commander
-    environment:
-      - REDIS_HOST=redis
     ports:
-      - 8081:8081
+      - 6379:6379
 
   db:
     image: postgres
