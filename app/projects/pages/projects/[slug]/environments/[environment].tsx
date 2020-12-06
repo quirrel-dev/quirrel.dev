@@ -5,6 +5,7 @@ import Layout from "app/layouts/Layout"
 import { Suspense, useState } from "react"
 import { Modal } from "app/components/Modal"
 import { UsageGraph } from "app/projects/components/UsageGraph"
+import areThereIncidentsForEnvironment from "app/incidents/queries/areThereIncidentsForEnvironment"
 
 function useCreatedToken(slug: string, name: string) {
   if (typeof window !== "undefined") {
@@ -22,6 +23,11 @@ const SpecificEnvironment: BlitzPage = () => {
 
   const [deleteToken] = useMutation(deleteTokenMutation)
   const [showDeleteEnv, setShowDeleteEnv] = useState(false)
+
+  const [thereAreIncidents] = useQuery(areThereIncidentsForEnvironment, {
+    projectSlug: slug,
+    environmentName: environment,
+  })
 
   const [project] = useQuery(getProject, { slug })
   if (!project) {
@@ -74,6 +80,18 @@ const SpecificEnvironment: BlitzPage = () => {
           </div>
         </div>
       )}
+
+      <div className="mt-4">
+        <Link href={`/projects/${slug}/environments/${environment}/incidents`}>
+          <a
+            className={`text-${
+              thereAreIncidents ? "red-500" : "grey-900"
+            } hover:text-gray-700 transition duration-150 ease-in-out`}
+          >
+            Incidents
+          </a>
+        </Link>
+      </div>
 
       <div className="mt-4">
         <h2 className="text-md font-semibold text-gray-900 leading-7">Usage</h2>
