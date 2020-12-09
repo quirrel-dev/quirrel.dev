@@ -1,7 +1,8 @@
 import { PromiseReturnType } from "@prisma/client"
+import deleteIncidentMutation from "app/incidents/mutations/deleteIncident"
 import getIncidents from "app/incidents/queries/getIncidents"
 import Layout from "app/layouts/Layout"
-import { BlitzPage, Link, useParam, useQuery } from "blitz"
+import { BlitzPage, Link, useMutation, useParam, useQuery, invalidateQuery } from "blitz"
 import { useCallback, useState } from "react"
 import { BrowserEncryptor } from "secure-e2ee"
 
@@ -77,12 +78,41 @@ interface IncidentTableProps {
 
 function IncidentTable(props: IncidentTableProps) {
   const { incidents } = props
+  const [deleteIncident] = useMutation(deleteIncidentMutation)
 
   return (
     <ul className="space-y-2">
       {incidents.map((row) => {
         return (
           <li className="rounded-md p-4 bg-gray-200" key={row.id}>
+            <button
+              className="float-right"
+              onClick={async () => {
+                const sure = window.confirm(
+                  "Are you sure? You won't be able to recover the incident data."
+                )
+
+                if (sure) {
+                  await deleteIncident({ id: row.id })
+                  invalidateQuery(getIncidents)
+                }
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="h-5 w-5 text-gray-700 hover:text-red-700"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                />
+              </svg>
+            </button>
             <strong>Endpoint:</strong> {row.jobData.endpoint} <br />
             <strong>Date:</strong> {row.jobData.runAt.toLocaleString()} <br />
             <strong>Payload:</strong>{" "}
