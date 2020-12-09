@@ -206,7 +206,16 @@ const IncidentsDashboard: BlitzPage = () => {
         <span className="flex justify-between items-center my-4">
           <span>{/* Placeholder for Flex */}</span>
 
-          <DecryptButton onDecrypt={decrypt} isEncrypted={isEncrypted} />
+          <span>
+            <a
+              download="incidents.json"
+              href={"data:application/json;base64," + btoa(JSON.stringify(incidentsToUse))}
+              className="px-8 font-semibold text-gray-500 hover:text-gray-700 transition ease-in-out duration-150 cursor-pointer"
+            >
+              Download as JSON
+            </a>
+            <DecryptButton onDecrypt={decrypt} isEncrypted={isEncrypted} />
+          </span>
         </span>
 
         <IncidentTable incidents={incidentsToUse} isEncrypted={isEncrypted} />
