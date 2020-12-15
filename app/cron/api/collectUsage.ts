@@ -4,8 +4,8 @@ import db from "db"
 import { BlitzApiRequest, BlitzApiResponse } from "blitz"
 import { sendEmailWithTemplate } from "app/postmark"
 import { url } from "app/url"
-import { isAuthenticated } from "../authenticate"
-import { getBeginningOfCurrentMonth } from "../utils"
+import { isAuthenticated } from "app/cron/authenticate"
+import { getBeginningOfCurrentMonth } from "app/cron/utils"
 
 async function writeUsageIntoDB() {
   const usage = await TokensAPI.getUsage()

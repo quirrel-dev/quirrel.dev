@@ -1,7 +1,7 @@
 import { BlitzApiRequest, BlitzApiResponse } from "blitz"
-import { isAuthenticated } from "../authenticate"
+import { isAuthenticated } from "app/cron/authenticate"
 import db from "db"
-import { getBeginningOfCurrentMonth } from "../utils"
+import { getBeginningOfCurrentMonth } from "app/cron/utils"
 
 async function getUsageQuotasPerSubscribedUser(): Promise<
   { subscriptionId: string; invocations: number }[]

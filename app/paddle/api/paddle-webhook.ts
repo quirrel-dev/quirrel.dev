@@ -1,8 +1,8 @@
 import { BlitzApiRequest, BlitzApiResponse } from "blitz"
-import { verifyWebhook } from "../verifyWebhook"
+import { verifyWebhook } from "app/paddle/verifyWebhook"
 import db from "db"
 import * as mailchimp from "app/mailchimp"
-import { SubscriptionPassthrough } from "../subscription-passthrough"
+import { SubscriptionPassthrough } from "app/paddle/subscription-passthrough"
 
 interface SubscriptionCreatedPayload {
   update_url: string
