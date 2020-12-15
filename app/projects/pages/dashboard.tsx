@@ -1,7 +1,7 @@
 import { BlitzPage, useQuery, Router, useMutation } from "blitz"
 import getProjectSlugs from "app/projects/queries/getProjectSlugs"
 import createProjectMutation from "app/projects/mutations/createProject"
-import React, { useState } from "react"
+import React, { Suspense, useState } from "react"
 import { isValidSlug } from "../slug"
 import { SubscriberOnlyLayout } from "app/layouts/SubscriberOnlyLayout"
 import { Modal } from "app/components/Modal"
@@ -11,6 +11,7 @@ import { CardList } from "app/components/CardList"
 import { useCurrentUser } from "app/hooks/useCurrentUser"
 import { usePaddle } from "app/hooks/usePaddle"
 import { SubscriptionPassthrough } from "app/paddle/subscription-passthrough"
+import { UsageQuota } from "../components/UsageQuota"
 
 function DeleteAccountButton() {
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false)
@@ -105,6 +106,12 @@ function AccountSection() {
       <h1 className="text-4xl font-semibold text-gray-900 sm:text-xl sm:leading-7">Account</h1>
 
       <ul className="space-y-2 mt-2">
+        <li>
+          <Suspense fallback="Loading usage Quota ...">
+            <UsageQuota />
+          </Suspense>
+        </li>
+
         {user?.isSubscriber ? (
           <>
             <li>

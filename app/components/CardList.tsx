@@ -17,7 +17,7 @@ export function CardList(props: CardListProps) {
         <li className="max-w rounded shadow-sm border py-2 px-4 text-center">{props.emptyText}</li>
       )}
       {props.items.map((item, index, arr) => (
-        <Link href={item.href}>
+        <Link key={item.href} href={item.href}>
           <li
             className={`max-w shadow-sm border py-2 px-4 flex justify-between items-center hover:bg-gray-200 transition duration-100 text-gray-600 hover:text-gray-800 ${
               index === 0 ? "rounded-t" : ""
