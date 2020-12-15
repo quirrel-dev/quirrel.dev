@@ -9,6 +9,8 @@ import {
   VictoryLabel,
   VictoryTheme,
 } from "victory"
+import { addZeroRecords } from "../utils/add-zero-records"
+import { useMemo } from "react"
 
 interface UsageGraphProps {
   projectSlug?: string
@@ -19,6 +21,8 @@ export function UsageGraph(props: UsageGraphProps) {
   const { projectSlug, tokenName } = props
 
   const [usage] = useQuery(getUsageRecords, { tokenName, projectSlug })
+
+  const usageWithZeroes = useMemo(() => addZeroRecords(usage), [usage])
 
   return (
     <VictoryChart
@@ -35,7 +39,7 @@ export function UsageGraph(props: UsageGraphProps) {
         style={{
           data: { stroke: "tomato" },
         }}
-        data={usage}
+        data={usageWithZeroes}
         x="timestamp"
         y="invocations"
       />

@@ -1,7 +1,7 @@
 import { Ctx } from "blitz"
 import db from "db"
 
-interface TimeSeriesRow {
+export interface TimeSeriesRow {
   timestamp: Date
   invocations: number
 }
