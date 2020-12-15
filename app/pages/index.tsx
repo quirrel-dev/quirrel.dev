@@ -54,27 +54,35 @@ function Hero() {
         <SyntaxHighlighter
           language="javascript"
           style={github}
-          className="rounded-lg border text-lg sm:text-xl border-gray-100"
+          className="rounded-lg border text-md sm:text-lg border-gray-100"
           showLineNumbers
           lineNumberStyle={{
             color: "lightgray",
           }}
           customStyle={{
             padding: "0.5em",
-            width: "20em",
+            width: "22em",
           }}
         >
           {`
+// Define your queue ...
 export default Queue(
-  "queues/email",
+  "queues/someBackgroundTask",
   async (job) => {
-    await smtp.dispatch(
-      job.recipient,
-      job.subject,
-      job.name
-    )
+    // do your thing
   }
 )
+
+// ... and use it!
+await queue.enqueue({ ... }, {
+  delay: "1d",
+  repeat: {
+    every: "1h",
+    times: 2
+  }
+})
+
+// That's it! 🥳
 `.trim()}
         </SyntaxHighlighter>
       </div>
