@@ -1,7 +1,6 @@
-import { BlitzApiRequest, BlitzApiResponse } from "blitz"
-import { isAuthenticated } from "app/cron/authenticate"
 import db from "db"
 import { getBeginningOfCurrentMonth } from "app/cron/utils"
+import { Queue } from "@quirrel/next"
 
 async function getUsageQuotasPerSubscribedUser(): Promise<
   { subscriptionId: string; invocations: number }[]
@@ -28,11 +27,7 @@ async function resetOverageWarnings() {
   await db.user.updateMany({ data: { hasBeenWarnedAboutOverage: false } })
 }
 
-export default async function issueInvoices(req: BlitzApiRequest, res: BlitzApiResponse) {
-  if (!isAuthenticated(req)) {
-    return res.status(401).end()
-  }
-
+export default Queue("issueInvoices", async () => {
   await resetOverageWarnings()
 
   const usage = await getUsageQuotasPerSubscribedUser()
@@ -40,6 +35,4 @@ export default async function issueInvoices(req: BlitzApiRequest, res: BlitzApiR
   for (const {} of usage) {
     // call paddle / fastspring
   }
-
-  return res.status(200).end()
-}
+})

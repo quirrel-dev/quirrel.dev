@@ -11,7 +11,7 @@
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev": "concurrently --raw \"npm run dev:deps up > /dev/null\" \"blitz start\" \"quirrel -r localhost:6379 --passphrase=iamsecret\"",
+    "dev": "concurrently --raw \"npm run dev:deps up > /dev/null\" \"blitz start\" \"quirrel -r localhost:6379 -p 4000 --passphrase=iamsecret\" \"quirrel\"",
     "dev:blitz": "blitz start",
     "dev:deps": "docker-compose --env-file .env.local"
   },
@@ -45,6 +45,7 @@
     "@feedback-fish/react": "1.1.0",
     "@prisma/cli": "2.9.0",
     "@prisma/client": "2.9.0",
+    "@quirrel/next": "0.10.0",
     "@tailwindcss/typography": "0.2.0",
     "@tailwindui/react": "0.1.1",
     "axios": "0.20.0",
@@ -98,7 +99,7 @@
     "postcss-preset-env": "6.7.0",
     "prettier": "2.1.1",
     "pretty-quick": "2.0.2",
-    "quirrel": "0.8.2",
+    "quirrel": "0.10.1",
     "react-test-renderer": "16.13.1",
     "ts-jest": "26.3.0",
     "typescript": "3.9.7"

@@ -1,11 +1,11 @@
 import { parseToken } from "app/projects/tokens-repo"
 import * as TokensAPI from "app/projects/tokens-api"
 import db from "db"
-import { BlitzApiRequest, BlitzApiResponse } from "blitz"
 import { sendEmailWithTemplate } from "app/postmark"
 import { url } from "app/url"
-import { isAuthenticated } from "app/cron/authenticate"
 import { getBeginningOfCurrentMonth } from "app/cron/utils"
+import { Queue } from "@quirrel/next"
+import { sendHeartbeat } from "app/cron/heartbeat"
 
 async function writeUsageIntoDB() {
   const usage = await TokensAPI.getUsage()
@@ -57,13 +57,9 @@ async function notifyFreeUsersOfOverage() {
   )
 }
 
-export default async function collectUsage(req: BlitzApiRequest, res: BlitzApiResponse) {
-  if (!isAuthenticated(req)) {
-    return res.status(401).end()
-  }
-
+export default Queue("collectUsage", async () => {
   await writeUsageIntoDB()
   await notifyFreeUsersOfOverage()
 
-  return res.status(200).end()
-}
+  await sendHeartbeat(() => process.env.COLLECT_USAGE_HEARTBEAT_URL)
+})
