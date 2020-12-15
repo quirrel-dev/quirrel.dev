@@ -29,7 +29,7 @@ export function UsageGraph(props: UsageGraphProps) {
       theme={VictoryTheme.material}
     >
       <VictoryAxis dependentAxis />
-      <VictoryLabel x={25} y={24} text="API Calls" />
+      <VictoryLabel x={25} y={24} text="API Calls (updated once an hour)" />
       <VictoryAxis />
       <VictoryLine
         style={{
