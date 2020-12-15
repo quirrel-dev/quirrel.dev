@@ -594,8 +594,8 @@ const Home: BlitzPage = () => {
   return (
     <div className="max-w-screen-xl mx-auto overflow-hidden space-y-12">
       <Hero />
-      <Features />
       <Perks />
+      <Features />
       <Pricing />
       <About />
       <CTA />
