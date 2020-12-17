@@ -1,5 +1,5 @@
 import { ReactNode, Suspense, useState } from "react"
-import { Head, Link, useMutation } from "blitz"
+import { Head, Link, useMutation, Image } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
 import subscribeToNewsletterMutation from "app/users/mutations/subscribeToNewsletter"
@@ -39,10 +39,11 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             <div className="flex items-center justify-between w-full lg:w-auto">
               <Link href="/">
                 <a>
-                  <span className="flex items-center">
-                    <img
+                  <span className="flex items-center ml-1">
+                    <Image
                       aria-label="Home"
-                      className="h-10 w-auto ml-1"
+                      width={40}
+                      height={40}
                       src="/img/horn_transparent.png"
                       alt="Logo"
                     />
@@ -162,7 +163,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             >
               <div className="px-5 pt-3 flex items-center justify-between">
                 <div>
-                  <img className="h-10 w-auto" src="/img/horn_transparent.png" alt="Logo" />
+                  <Image width={40} height={40} src="/img/horn_transparent.png" alt="Logo" />
                 </div>
                 <div className="-mr-2">
                   <button
@@ -291,10 +292,11 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
           <div className="col-span-4 md:col-span-3">
             <Link href="/">
               <a>
-                <span className="flex items-center">
-                  <img
+                <span className="flex items-center ml-1">
+                  <Image
+                    height={40}
+                    width={40}
                     aria-label="Home"
-                    className="h-10 w-auto ml-1"
                     src="/img/horn_transparent.png"
                     alt="Logo"
                   />

@@ -1,4 +1,4 @@
-import { BlitzPage, Link, useSession } from "blitz"
+import { BlitzPage, Link, useSession, Image } from "blitz"
 import Layout from "app/layouts/Layout"
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter"
 import js from "react-syntax-highlighter/dist/cjs/languages/hljs/javascript"
@@ -534,8 +534,10 @@ function About() {
       </div>
 
       <div className="mt-8 flex flex-row justify-center">
-        <img
+        <Image
           className="rounded h-48"
+          height={192}
+          width={192}
           src="https://pbs.twimg.com/profile_images/1308267953515880453/k54az9-2_400x400.jpg"
           alt="Person"
         />

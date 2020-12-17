@@ -6,6 +6,9 @@ module.exports = {
       unstable_isAuthorized: unstable_simpleRolesIsAuthorized,
     }),
   ],
+  images: {
+    domains: ["pbs.twimg.com"],
+  },
   async redirects() {
     return [
       {
