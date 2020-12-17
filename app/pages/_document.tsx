@@ -11,9 +11,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <DocumentHead>
-          <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
-          <script type="text/javascript">{`Paddle.Setup({ vendor: 121877 });`}</script>
-
           <script
             async
             defer

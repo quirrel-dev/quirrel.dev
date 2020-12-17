@@ -2,6 +2,7 @@ interface Paddle {
   Checkout: {
     open(args: { product: number; passthrough?: string; email?: string })
   }
+  Setup(args: { vendor: number }): void
 }
 
 export function usePaddle(): Paddle | undefined {

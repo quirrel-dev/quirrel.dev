@@ -1,7 +1,7 @@
-import { BlitzPage, useQuery, Router, useMutation } from "blitz"
+import { BlitzPage, useQuery, Router, useMutation, Head } from "blitz"
 import getProjectSlugs from "app/projects/queries/getProjectSlugs"
 import createProjectMutation from "app/projects/mutations/createProject"
-import React, { Suspense, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import { isValidSlug } from "../slug"
 import { SubscriberOnlyLayout } from "app/layouts/SubscriberOnlyLayout"
 import { Modal } from "app/components/Modal"
@@ -86,9 +86,21 @@ function DeleteAccountButton() {
   )
 }
 
+function PaddleScripts() {
+  return (
+    <Head>
+      <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
+    </Head>
+  )
+}
+
 function AccountSection() {
   const user = useCurrentUser()
   const paddle = usePaddle()
+
+  useEffect(() => {
+    paddle?.Setup({ vendor: 121877 })
+  }, [paddle])
 
   function upgrade() {
     const passthrough: SubscriptionPassthrough = {
@@ -103,6 +115,8 @@ function AccountSection() {
 
   return (
     <section id="account" className="mt-24">
+      <PaddleScripts />
+
       <h1 className="text-4xl font-semibold text-gray-900 sm:text-xl sm:leading-7">Account</h1>
 
       <ul className="space-y-2 mt-2">
