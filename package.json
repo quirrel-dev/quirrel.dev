@@ -45,7 +45,6 @@
     "@feedback-fish/react": "1.1.0",
     "@prisma/cli": "2.9.0",
     "@prisma/client": "2.9.0",
-    "@quirrel/next": "0.10.0",
     "@tailwindcss/typography": "0.2.0",
     "@tailwindui/react": "0.1.1",
     "axios": "0.20.0",
@@ -57,6 +56,7 @@
     "php-serialize": "4.0.2",
     "polished": "3.6.6",
     "postmark": "2.5.5",
+    "quirrel": "1.0.0-alpha-1",
     "react": "0.0.0-experimental-7f28234f8",
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-error-boundary": "2.3.1",
@@ -99,7 +99,6 @@
     "postcss-preset-env": "6.7.0",
     "prettier": "2.1.1",
     "pretty-quick": "2.0.2",
-    "quirrel": "0.10.1",
     "react-test-renderer": "16.13.1",
     "ts-jest": "26.3.0",
     "typescript": "3.9.7"

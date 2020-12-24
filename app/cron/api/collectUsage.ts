@@ -4,7 +4,7 @@ import db from "db"
 import { sendEmailWithTemplate } from "app/postmark"
 import { url } from "app/url"
 import { getBeginningOfCurrentMonth } from "app/cron/utils"
-import { Queue } from "@quirrel/next"
+import { CronJob } from "quirrel/next"
 import { sendHeartbeat } from "app/cron/heartbeat"
 
 async function writeUsageIntoDB() {
@@ -57,7 +57,7 @@ async function notifyFreeUsersOfOverage() {
   )
 }
 
-export default Queue("collectUsage", async () => {
+export default CronJob("collectUsage", "@hourly", async () => {
   await writeUsageIntoDB()
   await notifyFreeUsersOfOverage()
 

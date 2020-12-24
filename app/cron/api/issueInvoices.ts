@@ -1,6 +1,6 @@
 import db from "db"
 import { getBeginningOfCurrentMonth } from "app/cron/utils"
-import { Queue } from "@quirrel/next"
+import { CronJob } from "quirrel/next"
 
 async function getUsageQuotasPerSubscribedUser(): Promise<
   { subscriptionId: string; invocations: number }[]
@@ -27,7 +27,7 @@ async function resetOverageWarnings() {
   await db.user.updateMany({ data: { hasBeenWarnedAboutOverage: false } })
 }
 
-export default Queue("issueInvoices", async () => {
+export default CronJob("issueInvoices", "skip", async () => {
   await resetOverageWarnings()
 
   const usage = await getUsageQuotasPerSubscribedUser()
