@@ -57,7 +57,7 @@ async function notifyFreeUsersOfOverage() {
   )
 }
 
-export default CronJob("collectUsage", "@hourly", async () => {
+export default CronJob("api/collectUsage", "@hourly", async () => {
   await writeUsageIntoDB()
   await notifyFreeUsersOfOverage()
 

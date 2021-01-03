@@ -27,7 +27,7 @@ async function resetOverageWarnings() {
   await db.user.updateMany({ data: { hasBeenWarnedAboutOverage: false } })
 }
 
-export default CronJob("issueInvoices", "skip", async () => {
+export default CronJob("api/issueInvoices", "skip", async () => {
   await resetOverageWarnings()
 
   const usage = await getUsageQuotasPerSubscribedUser()
