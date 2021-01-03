@@ -538,6 +538,7 @@ function About() {
           className="rounded h-48"
           height={192}
           width={192}
+          objectFit="cover"
           src="https://pbs.twimg.com/profile_images/1308267953515880453/k54az9-2_400x400.jpg"
           alt="Person"
         />
