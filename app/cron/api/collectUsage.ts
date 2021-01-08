@@ -27,7 +27,7 @@ async function writeUsageIntoDB() {
 }
 
 async function notifyFreeUsersOfOverage() {
-  const trialUsageThisMonth = await db.$queryRaw(
+  const trialUsageThisMonth: { id: string; email: string; sum: number }[] = await db.$queryRaw(
     `SELECT "User"."id", "User"."email", SUM("invocations") FROM "UsageRecord"
     JOIN "User" ON "User"."id" = "tokenProjectOwnerId"
     WHERE (

@@ -8,8 +8,8 @@ if (process.env.NODE_ENV === "production") {
 } else {
   // Ensure the prisma instance is re-used during hot-reloading
   // Otherwise, a new client will be created on every reload
-  globalThis["prisma"] = globalThis["prisma"] || new PrismaClient()
-  prisma = globalThis["prisma"]
+  ;(globalThis as any)["prisma"] = (globalThis as any)["prisma"] || new PrismaClient()
+  prisma = (globalThis as any)["prisma"]
 }
 
 export default prisma

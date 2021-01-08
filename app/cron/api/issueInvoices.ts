@@ -5,7 +5,7 @@ import { CronJob } from "quirrel/next"
 async function getUsageQuotasPerSubscribedUser(): Promise<
   { subscriptionId: string; invocations: number }[]
 > {
-  const result = await db.$queryRaw(
+  const result: { subscriptionId: string; sum: number }[] = await db.$queryRaw(
     `SELECT "User"."subscriptionId", SUM("invocations") FROM "UsageRecord"
     JOIN "User" ON "User"."id" = "tokenProjectOwnerId"
     WHERE "User"."subscriptionId" IS NOT NULL

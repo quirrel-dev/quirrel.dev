@@ -1,6 +1,6 @@
 interface Paddle {
   Checkout: {
-    open(args: { product: number; passthrough?: string; email?: string })
+    open(args: { product: number; passthrough?: string; email?: string }): void
   }
   Setup(args: { vendor: number }): void
 }

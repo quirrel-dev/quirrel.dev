@@ -3,7 +3,7 @@ import * as PhpSerialize from "php-serialize"
 
 function ksort(obj: Record<string, string>): Record<string, string> {
   const keys = Object.keys(obj).sort()
-  let sortedObj = {}
+  let sortedObj: Record<string, string> = {}
   for (let i in keys) {
     sortedObj[keys[i]] = obj[keys[i]]
   }
