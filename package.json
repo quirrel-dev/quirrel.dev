@@ -104,6 +104,6 @@
     "pretty-quick": "2.0.2",
     "react-test-renderer": "16.13.1",
     "ts-jest": "26.3.0",
-    "typescript": "3.9.7"
+    "typescript": "4.1.3"
   }
 }

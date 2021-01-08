@@ -32,8 +32,6 @@ export const authenticateUser = async (email: string, password: string) => {
       throw new AuthenticationError()
   }
 
-  delete user.hashedPassword
-
   return {
     id: user.id,
     email: user.email,
