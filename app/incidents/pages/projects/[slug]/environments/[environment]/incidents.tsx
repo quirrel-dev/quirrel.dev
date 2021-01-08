@@ -4,34 +4,27 @@ import getIncidents from "app/incidents/queries/getIncidents"
 import Layout from "app/layouts/Layout"
 import { BlitzPage, Link, useMutation, useParam, useQuery, invalidateQuery } from "blitz"
 import { useCallback, useState } from "react"
-import { BrowserEncryptor } from "secure-e2ee"
+import Encryptor from "secure-e2ee"
+
+function keyBy<T>(arr: T[], keyer: (v: T) => string): Record<string, T> {
+  const result: Record<string, T> = {}
+
+  for (const item of arr) {
+    result[keyer(item)] = item
+  }
+
+  return result
+}
 
 interface DecryptButtonProps {
   onDecrypt(secret: string): void
-  isEncrypted: boolean
 }
 
 function DecryptButton(props: DecryptButtonProps) {
-  if (!props.isEncrypted) {
-    return (
-      <button
-        disabled
-        className="w-40 py-2 px-3 border border-transparent rounded-md text-white font-semibold bg-green-500 sm:text-sm sm:leading-5 cursor-not-allowed"
-      >
-        Decrypted
-      </button>
-    )
-  }
-
   return (
     <button
       className="relative w-40 py-2 px-3 border border-transparent rounded-md text-white font-semibold bg-gray-500 hover:bg-gray-600 focus:bg-gray-800 focus:outline-none focus:shadow-outline sm:text-sm sm:leading-5"
       onClick={() => {
-        window.alert(
-          "This isn't working yet. If you need to decrypt your incidents _now_, contact Simon and he'll help you."
-        )
-
-        /*
         const secret = window.prompt(
           "Decryption will happen fully client-sided, your secret won't leave the browser.",
           "Please put in your encryption secret."
@@ -47,7 +40,6 @@ function DecryptButton(props: DecryptButtonProps) {
         }
 
         props.onDecrypt(secret)
-        */
       }}
     >
       <span className="absolute left-0 inset-y pl-3">
@@ -71,9 +63,10 @@ function DecryptButton(props: DecryptButtonProps) {
   )
 }
 
+type DecryptedIncident = PromiseReturnType<typeof getIncidents>[0] & { decryptedPayload?: string }
+
 interface IncidentTableProps {
-  incidents: PromiseReturnType<typeof getIncidents>
-  isEncrypted: boolean
+  incidents: DecryptedIncident[]
 }
 
 function IncidentTable(props: IncidentTableProps) {
@@ -116,11 +109,7 @@ function IncidentTable(props: IncidentTableProps) {
             <strong>Endpoint:</strong> {row.jobData.endpoint} <br />
             <strong>Date:</strong> {row.jobData.runAt.toLocaleString()} <br />
             <strong>Payload:</strong>{" "}
-            {props.isEncrypted ? (
-              <span title="Use the decrypt-button to read.">******</span>
-            ) : (
-              row.jobData.endpoint
-            )}{" "}
+            {row.decryptedPayload ?? <span title="Use the decrypt-button to read.">******</span>}{" "}
             <br />
             <strong>Error:</strong> <br />
             <code className="break-all">{JSON.stringify(row.incident.body)}</code>
@@ -135,38 +124,73 @@ const IncidentsDashboard: BlitzPage = () => {
   const slug = useParam("slug", "string")!
   const environment = useParam("environment", "string")!
 
-  const [incidents] = useQuery(getIncidents, {
+  const [encryptedIncidents] = useQuery(getIncidents, {
     environmentName: environment,
     projectSlug: slug,
   })
 
-  const [decryptedIncidents, setDecryptedIncidents] = useState<typeof incidents | undefined>()
-
-  const incidentsToUse = decryptedIncidents ?? incidents
+  const [incidents, setDecryptedIncidents] = useState<Record<string, DecryptedIncident>>(
+    keyBy(encryptedIncidents, (i) => i.id)
+  )
 
   const decrypt = useCallback(
     async (decryptionSecret: string) => {
-      const encryptor = new BrowserEncryptor(decryptionSecret)
+      const encryptor = new Encryptor(decryptionSecret)
 
-      const decrypted = await Promise.all(
-        incidents.map(async (incident) => {
-          const decryptedPayload = await encryptor.decrypt(incident.jobData.payload)
-          return {
-            ...incident,
-            jobData: {
-              ...incident.jobData,
-              payload: decryptedPayload,
-            },
+      const decryptedPayloads: Record<string, string> = {}
+
+      let someCouldNotBeDecryptedBecauseOfMissingAuthTag = false
+      let someCouldNotBeDecryptedBecauseOfWrongSecret = false
+
+      await Promise.all(
+        encryptedIncidents.map(async (incident) => {
+          try {
+            const decryptedPayload = await encryptor.decrypt(incident.jobData.payload)
+
+            decryptedPayloads[incident.id] = decryptedPayload
+          } catch (error) {
+            if (error.message === "Could not decrypt: Auth tag missing.") {
+              someCouldNotBeDecryptedBecauseOfMissingAuthTag = true
+            }
+
+            if (error.message === "Could not decrypt: No matching secret.") {
+              someCouldNotBeDecryptedBecauseOfWrongSecret = true
+            }
           }
         })
       )
 
-      setDecryptedIncidents(decrypted)
-    },
-    [incidents]
-  )
+      if (someCouldNotBeDecryptedBecauseOfMissingAuthTag) {
+        window.alert(
+          "Some of your jobs were encrypted using an old version of Quirrel that wasn't yet compatible with client-side decryption. If you need to access that payload, check out the secure-e2ee package or reach out to @skn0tt for further assistance."
+        )
+      }
 
-  const isEncrypted = !decryptedIncidents
+      const noneCouldBeDecrypted = Object.keys(decryptedPayloads).length === 0
+
+      if (noneCouldBeDecrypted) {
+        window.alert("Seems like this isn't the right secret. Maybe try another one?")
+      } else if (someCouldNotBeDecryptedBecauseOfWrongSecret) {
+        window.alert(
+          "Some of your jobs were encrypted using another secret. Repeat this process for your other encryption secrets."
+        )
+      }
+
+      setDecryptedIncidents((oldIncidents) => {
+        const newIncidents = { ...oldIncidents }
+
+        for (const [id, decryptedPayload] of Object.entries(decryptedPayloads)) {
+          newIncidents[id] = {
+            ...newIncidents[id],
+            decryptedPayload,
+          }
+        }
+
+        return newIncidents
+      })
+    },
+    [encryptedIncidents]
+  )
 
   return (
     <div className="mt-4 max-w-screen-md lg:mx-auto">
@@ -222,7 +246,7 @@ const IncidentsDashboard: BlitzPage = () => {
       </span>
 
       <section>
-        {incidents.length === 0 && (
+        {encryptedIncidents.length === 0 && (
           <div className="mt-4 rounded border-orange-300 border bg-orange-100 p-4 text-center max-w-lg m-auto">
             <p>This is the incident dashboard. At the moment, it's empty.</p>
 
@@ -239,16 +263,18 @@ const IncidentsDashboard: BlitzPage = () => {
           <span>
             <a
               download="incidents.json"
-              href={"data:application/json;base64," + btoa(JSON.stringify(incidentsToUse))}
+              href={
+                "data:application/json;base64," + btoa(JSON.stringify(Object.values(incidents)))
+              }
               className="px-8 font-semibold text-gray-500 hover:text-gray-700 transition ease-in-out duration-150 cursor-pointer"
             >
               Download as JSON
             </a>
-            <DecryptButton onDecrypt={decrypt} isEncrypted={isEncrypted} />
+            <DecryptButton onDecrypt={decrypt} />
           </span>
         </span>
 
-        <IncidentTable incidents={incidentsToUse} isEncrypted={isEncrypted} />
+        <IncidentTable incidents={Object.values(incidents)} />
       </section>
     </div>
   )

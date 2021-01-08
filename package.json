@@ -61,7 +61,7 @@
     "react-final-form": "6.5.1",
     "react-syntax-highlighter": "13.5.3",
     "react-typing-animation": "1.6.2",
-    "secure-e2ee": "0.2.0",
+    "secure-e2ee": "0.4.0",
     "secure-password": "4.0.0",
     "styled-components": "5.2.0",
     "tailwindcss": "1",
