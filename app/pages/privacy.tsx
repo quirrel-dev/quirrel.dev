@@ -267,6 +267,7 @@ const Privacy: BlitzPage = () => {
         <li>Functionality and Infrastructure Optimisation: Retool</li>
         <li>Invoice and Billing: Paddle</li>
         <li>Website Hosting: Heroku</li>
+        <li>Error Tracking: Sentry</li>
       </ul>
 
       <h2>5. IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?</h2>
