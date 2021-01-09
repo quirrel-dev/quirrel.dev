@@ -15,7 +15,7 @@ function Hero() {
           <h2 className="tracking-tight font-extrabold text-gray-900 text-6xl leading-none">
             Job Queueing for
             <br />
-            <span className="text-orange-600">Next.js x Vercel</span>
+            <span className="text-orange-600">Serverless</span>
           </h2>
           <p className="text-gray-500 mt-5 text-xl">Quirrel makes job queues simple as cake.</p>
           <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
