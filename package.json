@@ -1,7 +1,4 @@
 {
-  "engines": {
-    "node": "14.13.x"
-  },
   "scripts": {
     "start": "blitz start",
     "studio": "blitz db studio",
