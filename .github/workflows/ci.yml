@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm ci
       - run: npm run build
+        env:
+          MAILCHIMP_API_KEY: fakedmailchimpkey-eu
       - run: npm test -- --coverage
       - name: Coveralls
         uses: coverallsapp/github-action@master
