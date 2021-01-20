@@ -2,7 +2,7 @@ import { ServerClient, TemplatedMessage } from "postmark"
 
 const from = process.env.MAIL_FROM ?? "no-reply@quirrel.dev"
 
-export const postmark = new ServerClient(process.env.POSTMARK_TOKEN ?? "")
+export const postmark = () => new ServerClient(process.env.POSTMARK_TOKEN ?? "")
 
 export async function sendEmailWithTemplate(
   to: string,
@@ -11,5 +11,5 @@ export async function sendEmailWithTemplate(
 ) {
   const message = new TemplatedMessage(from, templateId, templateModel, to)
 
-  await postmark.sendEmailWithTemplate(message)
+  await postmark().sendEmailWithTemplate(message)
 }

@@ -26,5 +26,11 @@ module.exports = {
   watchPlugins: ["jest-watch-typeahead/filename", "jest-watch-typeahead/testname"],
   // Coverage output
   coverageDirectory: ".coverage",
-  collectCoverageFrom: ["**/*.{js,jsx,ts,tsx}", "!**/*.d.ts", "!**/node_modules/**"],
+  collectCoverageFrom: [
+    "**/*.{js,jsx,ts,tsx}",
+    "!**/*.d.ts",
+    "!**/node_modules/**",
+    "!**/.blitz/**",
+    "!**/.next/**",
+  ],
 }
