@@ -284,7 +284,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
       </Transition>
 
       <main className="lg:my-16 px-4 sm:px-8 max-w-6xl mx-auto" style={{ minHeight: "50vh" }}>
-        {children}
+        <Suspense fallback="Loading ...">{children}</Suspense>
       </main>
 
       <footer className="px-8 w-full py-8 bg-gray-100">
