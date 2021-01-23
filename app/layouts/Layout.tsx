@@ -3,7 +3,6 @@ import { Head, Link, useMutation, Image } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
 import subscribeToNewsletterMutation from "app/users/mutations/subscribeToNewsletter"
-import { FeedbackFish } from "@feedback-fish/react"
 import { useBetterUptime } from "app/hooks/useBetterUptime"
 
 export interface LayoutProps {
@@ -104,13 +103,15 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             {!hideLogin && (
               <Suspense fallback={null}>
                 <LoginState>
-                  {({ onClick, isLoggedIn, email }) => (
+                  {({ onClick, isLoggedIn }) => (
                     <span className="float-right">
-                      <FeedbackFish projectId="d9abf0d633a954" userId={email}>
-                        <a className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out cursor-pointer">
-                          Feedback
-                        </a>
-                      </FeedbackFish>
+                      <a
+                        href="https://github.com/quirrel-dev/quirrel/issues/new/choose"
+                        target="_blank"
+                        className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out cursor-pointer"
+                      >
+                        Feedback
+                      </a>
                       {isLoggedIn ? (
                         <>
                           <Link href="/dashboard">
@@ -223,16 +224,16 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 {!hideLogin && (
                   <Suspense fallback={null}>
                     <LoginState>
-                      {({ onClick, isLoggedIn, email }) => (
+                      {({ onClick, isLoggedIn }) => (
                         <>
-                          <FeedbackFish projectId="d9abf0d633a954" userId={email}>
-                            <a
-                              className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out cursor-pointer"
-                              role="menuitem"
-                            >
-                              Feedback
-                            </a>
-                          </FeedbackFish>
+                          <a
+                            href="https://github.com/quirrel-dev/quirrel/issues/new/choose"
+                            target="_blank"
+                            className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out cursor-pointer"
+                            role="menuitem"
+                          >
+                            Feedback
+                          </a>
 
                           {isLoggedIn ? (
                             <span className="flex">
