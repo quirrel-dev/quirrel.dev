@@ -6,8 +6,12 @@ import { github } from "react-syntax-highlighter/dist/cjs/styles/hljs"
 
 SyntaxHighlighter.registerLanguage("javascript", js)
 
+function useIsSignedIn() {
+  return !!useSession().userId
+}
+
 function Hero() {
-  const isSignedIn = !!useSession().userId
+  const isSignedIn = useIsSignedIn()
   return (
     <section className="mx-auto grid grid-cols-1 lg:grid-cols-2 row-gap-10 col-gap-10">
       <div className="mx-auto my-12">
@@ -492,7 +496,7 @@ function Pricing() {
 }
 
 function CTA() {
-  const isSignedIn = !!useSession().userId
+  const isSignedIn = useIsSignedIn()
   return (
     <section
       id="cta"

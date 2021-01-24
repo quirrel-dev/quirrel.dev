@@ -101,7 +101,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             </Link>
 
             {!hideLogin && (
-              <Suspense fallback={null}>
+              <Suspense fallback="Loading ...">
                 <LoginState>
                   {({ onClick, isLoggedIn }) => (
                     <span className="float-right">
@@ -222,7 +222,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 </Link>
 
                 {!hideLogin && (
-                  <Suspense fallback={null}>
+                  <Suspense fallback="Loading ...">
                     <LoginState>
                       {({ onClick, isLoggedIn }) => (
                         <>
@@ -330,23 +330,25 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               </a>
             </Link>
 
-            <LoginState>
-              {({ isLoggedIn }) =>
-                isLoggedIn ? (
-                  <Link href="/dashboard">
-                    <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
-                      Dashboard
-                    </a>
-                  </Link>
-                ) : (
-                  <Link href="/signup">
-                    <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
-                      Sign Up
-                    </a>
-                  </Link>
-                )
-              }
-            </LoginState>
+            <Suspense fallback="Loading ...">
+              <LoginState>
+                {({ isLoggedIn }) =>
+                  isLoggedIn ? (
+                    <Link href="/dashboard">
+                      <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
+                        Dashboard
+                      </a>
+                    </Link>
+                  ) : (
+                    <Link href="/signup">
+                      <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
+                        Sign Up
+                      </a>
+                    </Link>
+                  )
+                }
+              </LoginState>
+            </Suspense>
 
             <Link href="/#pricing">
               <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
