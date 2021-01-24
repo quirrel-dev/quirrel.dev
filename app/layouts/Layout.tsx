@@ -101,7 +101,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             </Link>
 
             {!hideLogin && (
-              <Suspense fallback="Loading ...">
+              <Suspense fallback={null}>
                 <LoginState>
                   {({ onClick, isLoggedIn }) => (
                     <span className="float-right">
@@ -222,7 +222,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 </Link>
 
                 {!hideLogin && (
-                  <Suspense fallback="Loading ...">
+                  <Suspense fallback={null}>
                     <LoginState>
                       {({ onClick, isLoggedIn }) => (
                         <>
@@ -330,7 +330,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               </a>
             </Link>
 
-            <Suspense fallback="Loading ...">
+            <Suspense fallback={null}>
               <LoginState>
                 {({ isLoggedIn }) =>
                   isLoggedIn ? (
