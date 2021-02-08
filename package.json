@@ -46,7 +46,7 @@
     "@tailwindcss/typography": "0.2.0",
     "@tailwindui/react": "0.1.1",
     "@zeit/next-source-maps": "0.0.4-canary.1",
-    "axios": "0.20.0",
+    "axios": "0.21.1",
     "babel-runtime": "6.26.0",
     "basic-auth": "2.0.1",
     "blitz": "0.27.1",
