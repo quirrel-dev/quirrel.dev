@@ -1,9 +1,10 @@
 import { ReactNode, Suspense, useState } from "react"
-import { Head, Link, useMutation, Image } from "blitz"
+import { Head, Link, useMutation, Image, useQuery } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
 import subscribeToNewsletterMutation from "app/users/mutations/subscribeToNewsletter"
-import { useBetterUptime } from "app/hooks/useBetterUptime"
+import getStatusQuery from "app/status/queries/getStatus"
+import { Query } from "app/components/Query"
 
 export interface LayoutProps {
   title?: string
@@ -14,7 +15,6 @@ export interface LayoutProps {
 const Layout = ({ title, children, hideLogin }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [subscribeToNewsletter] = useMutation(subscribeToNewsletterMutation)
-  const systemState = useBetterUptime()
 
   return (
     <div className="mx-auto mt-4 xl:mt-6">
@@ -390,13 +390,17 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
             >
               Status:{" "}
-              {typeof systemState === "undefined" ? (
-                <span className="text-gray-400">&nbsp;...</span>
-              ) : systemState ? (
-                <span className="text-green-400">&nbsp;Up!</span>
-              ) : (
-                <span className="text-red-400">&nbsp;Down</span>
-              )}
+              <Suspense fallback={<span className="text-gray-400">&nbsp;...</span>}>
+                <Query query={getStatusQuery} param={undefined}>
+                  {(state) =>
+                    state === "up" ? (
+                      <span className="text-green-400">&nbsp;Up!</span>
+                    ) : (
+                      <span className="text-red-400">&nbsp;Down</span>
+                    )
+                  }
+                </Query>
+              </Suspense>
             </a>
           </nav>
 
