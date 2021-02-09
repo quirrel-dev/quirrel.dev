@@ -39,7 +39,7 @@
   "dependencies": {
     "@prisma/cli": "2.9.0",
     "@prisma/client": "2.9.0",
-    "@sentry/browser": "5.29.2",
+    "@sentry/browser": "6.1.0",
     "@sentry/integrations": "5.29.2",
     "@sentry/node": "5.29.2",
     "@sentry/webpack-plugin": "1.14.0",
