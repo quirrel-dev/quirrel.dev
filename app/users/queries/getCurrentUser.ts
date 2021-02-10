@@ -1,7 +1,7 @@
 import db from "db"
-import { Ctx } from "blitz"
+import { resolver } from "blitz"
 
-export default async function getCurrentUser(_ = null, ctx: Ctx) {
+export default resolver.pipe(async (_, ctx) => {
   if (!ctx.session.userId) return null
 
   const user = await db.user.findUnique({
@@ -25,4 +25,4 @@ export default async function getCurrentUser(_ = null, ctx: Ctx) {
     cancelURL: user!.subscriptionCancelURL,
     updateURL: user!.subscriptionUpdateURL,
   }
-}
+})

@@ -1,5 +1,5 @@
 import { ReactNode, Suspense, useState } from "react"
-import { Head, Link, useMutation, Image, useQuery } from "blitz"
+import { Head, Link, useMutation, Image } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
 import subscribeToNewsletterMutation from "app/users/mutations/subscribeToNewsletter"

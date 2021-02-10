@@ -1,24 +1,19 @@
-import { Ctx } from "blitz"
+import { resolver } from "blitz"
 import db from "db"
+import * as z from "zod"
 
-interface AreThereIncidentsForEnvironmentArgs {
-  projectSlug: string
-  environmentName: string
-}
+export default resolver.pipe(
+  resolver.zod(z.object({ environmentName: z.string(), projectSlug: z.string() })),
+  resolver.authorize(),
+  async ({ projectSlug, environmentName }, { session: { userId } }) => {
+    const count = await db.incident.count({
+      where: {
+        tokenProjectOwnerId: userId,
+        tokenProjectSlug: projectSlug,
+        tokenName: environmentName,
+      },
+    })
 
-export default async function areThereIncidentsForEnvironment(
-  { environmentName, projectSlug }: AreThereIncidentsForEnvironmentArgs,
-  ctx: Ctx
-) {
-  ctx.session.authorize()
-
-  const count = await db.incident.count({
-    where: {
-      tokenProjectOwnerId: ctx.session.userId,
-      tokenProjectSlug: projectSlug,
-      tokenName: environmentName,
-    },
-  })
-
-  return count !== 0
-}
+    return count !== 0
+  }
+)

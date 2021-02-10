@@ -1,13 +1,11 @@
 import db from "db"
-import { Ctx } from "blitz"
+import { resolver } from "blitz"
 
-export default async function getProjectSlugs(params: any, ctx: Ctx) {
-  ctx.session.authorize()
-
+export default resolver.pipe(resolver.authorize(), async (_, { session: { userId } }) => {
   const result = await db.project.findMany({
-    where: { ownerId: ctx.session.userId!, isActive: true },
+    where: { ownerId: userId, isActive: true },
     select: { slug: true },
   })
 
   return result.map((r) => r.slug)
-}
+})
