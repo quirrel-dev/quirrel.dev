@@ -1,4 +1,4 @@
-const { sessionMiddleware, unstable_simpleRolesIsAuthorized } = require("@blitzjs/server")
+const { sessionMiddleware, simpleRolesIsAuthorized } = require("@blitzjs/server")
 
 const withSourceMaps = require("@zeit/next-source-maps")()
 
@@ -22,7 +22,7 @@ module.exports = withSourceMaps({
   },
   middleware: [
     sessionMiddleware({
-      unstable_isAuthorized: unstable_simpleRolesIsAuthorized,
+      isAuthorized: simpleRolesIsAuthorized,
     }),
   ],
   images: {

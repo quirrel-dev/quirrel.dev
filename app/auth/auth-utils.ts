@@ -1,15 +1,11 @@
-import { AuthenticationError } from "blitz"
-import SecurePassword from "secure-password"
+import { AuthenticationError, SecurePassword } from "blitz"
 import db from "db"
 
-const SP = new SecurePassword()
-
 export const hashPassword = async (password: string) => {
-  const hashedBuffer = await SP.hash(Buffer.from(password))
-  return hashedBuffer.toString("base64")
+  return await SecurePassword.hash(password)
 }
 export const verifyPassword = async (hashedPassword: string, password: string) => {
-  return await SP.verify(Buffer.from(password), Buffer.from(hashedPassword, "base64"))
+  return await SecurePassword.verify(hashedPassword, password)
 }
 
 export const authenticateUser = async (email: string, password: string) => {
