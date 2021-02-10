@@ -10,7 +10,7 @@ import ErrorComponent from "app/components/ErrorComponent"
 export default function App({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
 
-  const session = useSession()
+  const session = useSession({ suspense: false })
   const router = useRouter()
 
   useEffect(() => {
