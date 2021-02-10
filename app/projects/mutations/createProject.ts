@@ -1,8 +1,11 @@
-import { Ctx } from "blitz"
+import { resolver } from "blitz"
 import * as ProjectsRepo from "../projects-repo"
+import z from "zod"
 
-export default async function createProject(slug: string, ctx: Ctx) {
-  ctx.session.$authorize()
-
-  await ProjectsRepo.create(slug, ctx.session.userId)
-}
+export default resolver.pipe(
+  resolver.zod(z.string()),
+  resolver.authorize(),
+  async (slug, { session: { userId } }) => {
+    await ProjectsRepo.create(slug, userId)
+  }
+)

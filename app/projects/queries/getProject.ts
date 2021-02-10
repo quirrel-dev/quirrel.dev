@@ -1,30 +1,33 @@
 import db from "db"
-import { Ctx } from "blitz"
+import { resolver } from "blitz"
+import z from "zod"
 
-export default async function getProject({ slug }: { slug: string }, ctx: Ctx) {
-  ctx.session.$authorize()
-
-  const project = await db.project.findUnique({
-    where: {
-      ownerId_slug: {
-        ownerId: ctx.session?.userId,
-        slug,
-      },
-    },
-    include: {
-      tokens: {
-        select: {
-          name: true,
-        },
-        where: {
-          isActive: true,
+export default resolver.pipe(
+  resolver.zod(z.object({ slug: z.string() })),
+  resolver.authorize(),
+  async ({ slug }, { session: { userId } }) => {
+    const project = await db.project.findUnique({
+      where: {
+        ownerId_slug: {
+          ownerId: userId,
+          slug,
         },
       },
-    },
-  })
-  if (!project?.isActive) {
-    return null
+      include: {
+        tokens: {
+          select: {
+            name: true,
+          },
+          where: {
+            isActive: true,
+          },
+        },
+      },
+    })
+    if (!project?.isActive) {
+      return null
+    }
+
+    return project
   }
-
-  return project
-}
+)

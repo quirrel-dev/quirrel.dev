@@ -1,11 +1,11 @@
-import { Ctx } from "blitz"
+import { resolver } from "blitz"
 import * as TokensRepo from "../tokens-repo"
+import z from "zod"
 
-export default async function addToken(
-  { projectSlug, name }: { projectSlug: string; name: string },
-  ctx: Ctx
-) {
-  ctx.session.$authorize()
-
-  return await TokensRepo.add(projectSlug, name, ctx.session.userId)
-}
+export default resolver.pipe(
+  resolver.zod(z.object({ projectSlug: z.string(), name: z.string() })),
+  resolver.authorize(),
+  async ({ projectSlug, name }, { session: { userId } }) => {
+    return await TokensRepo.add(projectSlug, name, userId)
+  }
+)

@@ -1,12 +1,10 @@
 import { getBeginningOfCurrentMonth } from "app/cron/utils"
-import { Ctx } from "blitz"
+import { resolver } from "blitz"
 import db from "db"
 
-export default async function getUsageQuota(_ = undefined, ctx: Ctx) {
-  ctx.session.$authorize()
-
+export default resolver.pipe(resolver.authorize(), async (_, { session: { userId } }) => {
   const user = await db.user.findUnique({
-    where: { id: ctx.session.userId },
+    where: { id: userId },
     select: {
       freeInvocations: true,
       subscriptionId: true,
@@ -24,7 +22,7 @@ export default async function getUsageQuota(_ = undefined, ctx: Ctx) {
       invocations: true,
     },
     where: {
-      tokenProjectOwnerId: ctx.session.userId,
+      tokenProjectOwnerId: userId,
       timestamp: {
         gte: getBeginningOfCurrentMonth().toISOString(),
       },
@@ -35,4 +33,4 @@ export default async function getUsageQuota(_ = undefined, ctx: Ctx) {
     quota: freeInvocations,
     used: result.sum.invocations,
   }
-}
+})

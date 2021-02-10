@@ -1,10 +1,8 @@
 import * as account from "../"
-import { Ctx } from "blitz"
+import { resolver } from "blitz"
 
-export default async function deleteAccount(obj = undefined, ctx: Ctx) {
-  ctx.session.$authorize()
+export default resolver.pipe(resolver.authorize(), async (_, { session }) => {
+  await account.deactivate(session.userId)
 
-  await account.deactivate(ctx.session.userId)
-
-  await ctx.session!.$revoke()
-}
+  await session!.$revoke()
+})
