@@ -1,48 +1,43 @@
-import { Ctx } from "blitz"
+import { resolver } from "blitz"
 import db from "db"
+import * as z from "zod"
 
-interface GetIncidentsArgs {
-  projectSlug: string
-  environmentName: string
-}
-
-export default async function getIncidents(
-  { environmentName, projectSlug }: GetIncidentsArgs,
-  ctx: Ctx
-) {
-  ctx.session.$authorize()
-
-  const incidents = await db.incident.findMany({
-    where: {
-      tokenProjectOwnerId: ctx.session.userId,
-      tokenName: environmentName,
-      tokenProjectSlug: projectSlug,
-    },
-    select: {
-      id: true,
-      incident: true,
-      jobData: true,
-    },
-  })
-
-  const parsedIncidents = incidents.map((item) => {
-    const { body, status } = JSON.parse(item.incident)
-    const jobData = JSON.parse(item.jobData)
-
-    return {
-      id: item.id,
-      incident: {
-        body: body as any,
-        status: status as number,
+export default resolver.pipe(
+  resolver.zod(z.object({ environmentName: z.string(), projectSlug: z.string() })),
+  resolver.authorize(),
+  async ({ environmentName, projectSlug }, ctx) => {
+    const incidents = await db.incident.findMany({
+      where: {
+        tokenProjectOwnerId: ctx.session.userId,
+        tokenName: environmentName,
+        tokenProjectSlug: projectSlug,
       },
-      jobData: {
-        id: jobData.id as string,
-        payload: jobData.payload as string,
-        endpoint: jobData.endpoint as string,
-        runAt: new Date(jobData.runAt),
+      select: {
+        id: true,
+        incident: true,
+        jobData: true,
       },
-    }
-  })
+    })
 
-  return parsedIncidents
-}
+    const parsedIncidents = incidents.map((item) => {
+      const { body, status } = JSON.parse(item.incident)
+      const jobData = JSON.parse(item.jobData)
+
+      return {
+        id: item.id,
+        incident: {
+          body: body as any,
+          status: status as number,
+        },
+        jobData: {
+          id: jobData.id as string,
+          payload: jobData.payload as string,
+          endpoint: jobData.endpoint as string,
+          runAt: new Date(jobData.runAt),
+        },
+      }
+    })
+
+    return parsedIncidents
+  }
+)

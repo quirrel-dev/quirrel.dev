@@ -1,9 +1,7 @@
-import { Ctx } from "blitz"
+import { resolver } from "blitz"
 import db from "db"
 
-export default async function areThereIncidentsForUser(_ = undefined, ctx: Ctx) {
-  ctx.session.$authorize()
-
+export default resolver.pipe(resolver.authorize(), async (_, ctx) => {
   const count = await db.incident.count({
     where: {
       tokenProjectOwnerId: ctx.session.userId,
@@ -11,4 +9,4 @@ export default async function areThereIncidentsForUser(_ = undefined, ctx: Ctx) 
   })
 
   return count !== 0
-}
+})
