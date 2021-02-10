@@ -2,7 +2,7 @@ import { Ctx } from "blitz"
 import db from "db"
 
 export default async function areThereIncidentsForUser(_ = undefined, ctx: Ctx) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const count = await db.incident.count({
     where: {

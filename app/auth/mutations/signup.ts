@@ -34,7 +34,7 @@ export default async function signup(input: SignupInputType, ctx: Ctx) {
       name: email,
       verify_email_url: url`/verifyEmail/${emailCode}?subscribeToNewsletter=${input.subscribeToNewsletter}`,
     }),
-    ctx.session!.create({ userId: user.id, roles: [] }),
+    ctx.session.$create({ userId: user.id }),
   ])
 
   return "success"

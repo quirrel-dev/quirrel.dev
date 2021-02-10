@@ -15,8 +15,7 @@ export default async function setNewPassword(
 ) {
   const userId = await passwordReset.setPassword(email, code, newPassword)
   if (userId) {
-    await ctx.session?.create({
-      roles: [],
+    await ctx.session.$create({
       userId,
     })
 

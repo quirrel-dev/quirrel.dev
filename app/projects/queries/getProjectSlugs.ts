@@ -2,7 +2,7 @@ import db from "db"
 import { Ctx } from "blitz"
 
 export default async function getProjectSlugs(params: any, ctx: Ctx) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const result = await db.project.findMany({
     where: { ownerId: ctx.session.userId!, isActive: true },

@@ -10,7 +10,7 @@ export default async function getIncidents(
   { environmentName, projectSlug }: GetIncidentsArgs,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const incidents = await db.incident.findMany({
     where: {

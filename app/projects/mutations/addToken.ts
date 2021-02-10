@@ -5,7 +5,7 @@ export default async function addToken(
   { projectSlug, name }: { projectSlug: string; name: string },
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   return await TokensRepo.add(projectSlug, name, ctx.session.userId)
 }

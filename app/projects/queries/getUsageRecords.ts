@@ -10,7 +10,7 @@ export default async function getUsageRecords(
   { tokenName, projectSlug }: { projectSlug?: string; tokenName?: string },
   ctx: Ctx
 ): Promise<TimeSeriesRow[]> {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const records = await db.usageRecord.findMany({
     where: {

@@ -10,7 +10,7 @@ export default async function areThereIncidentsForEnvironment(
   { environmentName, projectSlug }: AreThereIncidentsForEnvironmentArgs,
   ctx: Ctx
 ) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   const count = await db.incident.count({
     where: {

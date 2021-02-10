@@ -6,7 +6,7 @@ interface DeleteIncidentArgs {
 }
 
 export default async function deleteIncident(args: DeleteIncidentArgs, ctx: Ctx) {
-  ctx.session.authorize()
+  ctx.session.$authorize()
 
   await db.incident.deleteMany({
     where: {
