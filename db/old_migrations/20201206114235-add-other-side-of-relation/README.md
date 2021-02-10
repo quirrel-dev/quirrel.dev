@@ -34,5 +34,3 @@ migration 20201206112819-add-incident-model..20201206114235-add-other-side-of-re
    @@id([projectSlug, projectOwnerId, name])
  }
 ```
-
-

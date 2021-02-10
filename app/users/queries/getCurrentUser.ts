@@ -4,7 +4,7 @@ import { Ctx } from "blitz"
 export default async function getCurrentUser(_ = null, ctx: Ctx) {
   if (!ctx.session.userId) return null
 
-  const user = await db.user.findOne({
+  const user = await db.user.findUnique({
     where: { id: ctx.session.userId },
     select: {
       email: true,

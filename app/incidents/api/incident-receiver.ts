@@ -42,7 +42,7 @@ export default async function incidentReceiver(req: BlitzApiRequest, res: BlitzA
   const { incident, job } = incidentPayload.parse(req.body)
   const token = parseToken(job.tokenId)
 
-  const owner = await db.user.findOne({ where: { id: token.ownerId } })
+  const owner = await db.user.findUnique({ where: { id: token.ownerId } })
   if (!owner || !owner.isActive) {
     throw new Error("Owner should exist!")
   }

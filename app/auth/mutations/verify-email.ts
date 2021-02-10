@@ -8,7 +8,7 @@ export default async function verifyEmail(
   ctx: Ctx
 ) {
   ctx.session.authorize()
-  const user = await db.user.findOne({
+  const user = await db.user.findUnique({
     where: { id: ctx.session.userId },
     select: { hashedPassword: true, email: true },
   })
