@@ -1,6 +1,8 @@
 import { resolver } from "blitz"
 import * as TokensRepo from "../tokens-repo"
-import z from "zod"
+import * as z from "zod"
+
+console.log({ z })
 
 export default resolver.pipe(
   resolver.zod(z.object({ projectSlug: z.string(), name: z.string() })),

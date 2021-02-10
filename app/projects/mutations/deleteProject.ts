@@ -1,6 +1,6 @@
 import { resolver } from "blitz"
 import * as ProjectsRepo from "../projects-repo"
-import z from "zod"
+import * as z from "zod"
 
 export default resolver.pipe(
   resolver.zod(z.object({ slug: z.string() })),

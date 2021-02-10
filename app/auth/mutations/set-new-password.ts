@@ -1,6 +1,6 @@
 import { resolver } from "blitz"
 import * as passwordReset from "../reset-password"
-import z from "zod"
+import * as z from "zod"
 
 export default resolver.pipe(
   resolver.zod(z.object({ email: z.string(), code: z.string(), newPassword: z.string() })),

@@ -1,6 +1,6 @@
 import { resolver } from "blitz"
 import db from "db"
-import z from "zod"
+import * as z from "zod"
 
 export default resolver.pipe(
   resolver.zod(z.object({ id: z.string() })),
