@@ -10,7 +10,7 @@ export default async function signup(input: SignupInputType, ctx: Ctx) {
   // This throws an error if input is invalid
   const { email, password } = SignupInput.parse(input)
 
-  const existingUser = await db.user.findOne({ where: { email } })
+  const existingUser = await db.user.findUnique({ where: { email } })
   if (existingUser?.isActive) {
     return "email_exists"
   }

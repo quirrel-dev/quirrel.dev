@@ -9,7 +9,7 @@ export const verifyPassword = async (hashedPassword: string, password: string) =
 }
 
 export const authenticateUser = async (email: string, password: string) => {
-  const user = await db.user.findOne({ where: { email } })
+  const user = await db.user.findUnique({ where: { email } })
 
   if (!user || !user.hashedPassword) throw new AuthenticationError()
 

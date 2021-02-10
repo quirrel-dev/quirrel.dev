@@ -1,8 +1,15 @@
-import { PromiseReturnType } from "@prisma/client"
 import deleteIncidentMutation from "app/incidents/mutations/deleteIncident"
 import getIncidents from "app/incidents/queries/getIncidents"
 import Layout from "app/layouts/Layout"
-import { BlitzPage, Link, useMutation, useParam, useQuery, invalidateQuery } from "blitz"
+import {
+  BlitzPage,
+  Link,
+  useMutation,
+  useParam,
+  useQuery,
+  invalidateQuery,
+  PromiseReturnType,
+} from "blitz"
 import { useCallback, useState } from "react"
 import Encryptor from "secure-e2ee"
 
