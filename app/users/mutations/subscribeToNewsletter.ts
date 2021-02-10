@@ -1,13 +1,10 @@
+import { resolver } from "@blitzjs/core"
 import * as mailchimp from "app/mailchimp"
+import * as z from "zod"
 
-interface SubscribeToNewsletterArgs {
-  email: string
-  hasConsented: boolean
-}
-
-export default async function subscribeToNewsletter({
-  email,
-  hasConsented,
-}: SubscribeToNewsletterArgs) {
-  await mailchimp.subscribeToNewsletter(email, hasConsented)
-}
+export default resolver.pipe(
+  resolver.zod(z.object({ email: z.string(), hasConsented: z.boolean() })),
+  async ({ email, hasConsented }) => {
+    await mailchimp.subscribeToNewsletter(email, hasConsented)
+  }
+)
