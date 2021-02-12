@@ -35,6 +35,9 @@ export default resolver.pipe(
             incident: true,
             jobData: true,
           },
+          orderBy: {
+            date: "desc",
+          },
         })
 
         const parsedIncidents = incidents.map((item) => {
