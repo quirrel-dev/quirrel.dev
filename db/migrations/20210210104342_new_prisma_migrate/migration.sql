@@ -98,7 +98,7 @@ ALTER TABLE "Project" ADD FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DEL
 ALTER TABLE "Token" ADD FOREIGN KEY ("projectSlug", "projectOwnerId") REFERENCES "Project"("slug", "ownerId") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Incident" ADD FOREIGN KEY ("tokenProjectOwnerId", "tokenProjectSlug", "tokenName") REFERENCES "Token"("projectSlug", "name", "projectOwnerId") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Incident" ADD FOREIGN KEY ("tokenProjectSlug", "tokenName", "tokenProjectOwnerId") REFERENCES "Token"("projectSlug", "name", "projectOwnerId") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UsageRecord" ADD FOREIGN KEY ("tokenProjectOwnerId", "tokenProjectSlug", "tokenName") REFERENCES "Token"("projectSlug", "name", "projectOwnerId") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "UsageRecord" ADD FOREIGN KEY ("tokenProjectSlug", "tokenName", "tokenProjectOwnerId") REFERENCES "Token"("projectSlug", "name", "projectOwnerId") ON DELETE CASCADE ON UPDATE CASCADE;
