@@ -60,6 +60,7 @@ export default async function incidentReceiver(req: BlitzApiRequest, res: BlitzA
       },
       incident: JSON.stringify(incident),
       jobData: JSON.stringify(job),
+      date: job.runAt,
     },
   })
 

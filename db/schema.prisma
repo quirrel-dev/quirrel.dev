@@ -70,21 +70,23 @@ model Token {
   isActive Boolean @default(true)
 
   usageRecords UsageRecord[]
-  incidents Incident[]
+  incidents    Incident[]
 
   @@id([projectSlug, projectOwnerId, name])
 }
 
 model Incident {
-  token               Token    @relation(fields: [tokenProjectSlug, tokenName, tokenProjectOwnerId], references: [projectSlug, name, projectOwnerId])
+  token               Token  @relation(fields: [tokenProjectSlug, tokenName, tokenProjectOwnerId], references: [projectSlug, name, projectOwnerId])
   tokenProjectOwnerId String
   tokenProjectSlug    String
   tokenName           String
 
-  id                  String  @unique @default(uuid())
+  id String @unique @default(uuid())
 
-  jobData             String
-  incident            String
+  jobData  String
+  incident String
+
+  date DateTime @default(now())
 
   @@id([tokenProjectSlug, tokenName, tokenProjectOwnerId, id])
 }
