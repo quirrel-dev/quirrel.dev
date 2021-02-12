@@ -9,6 +9,7 @@ export default resolver.pipe(
     if (userId) {
       await ctx.session.$create({
         userId,
+        roles: [],
       })
 
       return true

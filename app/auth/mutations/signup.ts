@@ -33,7 +33,7 @@ export default resolver.pipe(
         name: email,
         verify_email_url: url`/verifyEmail/${emailCode}?subscribeToNewsletter=${subscribeToNewsletter}`,
       }),
-      ctx.session.$create({ userId: user.id }),
+      ctx.session.$create({ userId: user.id, roles: [] }),
     ])
 
     return "success"
