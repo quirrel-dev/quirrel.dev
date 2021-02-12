@@ -6,22 +6,12 @@ import {
   Link,
   useMutation,
   useParam,
-  useQuery,
   invalidateQuery,
   PromiseReturnType,
+  useInfiniteQuery,
 } from "blitz"
-import { useCallback, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import Encryptor from "secure-e2ee"
-
-function keyBy<T>(arr: T[], keyer: (v: T) => string): Record<string, T> {
-  const result: Record<string, T> = {}
-
-  for (const item of arr) {
-    result[keyer(item)] = item
-  }
-
-  return result
-}
 
 interface DecryptButtonProps {
   onDecrypt(secret: string): void
@@ -70,7 +60,9 @@ function DecryptButton(props: DecryptButtonProps) {
   )
 }
 
-type DecryptedIncident = PromiseReturnType<typeof getIncidents>[0] & { decryptedPayload?: string }
+type DecryptedIncident = PromiseReturnType<typeof getIncidents>["items"][0] & {
+  decryptedPayload?: string
+}
 
 interface IncidentTableProps {
   incidents: DecryptedIncident[]
@@ -131,14 +123,31 @@ const IncidentsDashboard: BlitzPage = () => {
   const slug = useParam("slug", "string")!
   const environment = useParam("environment", "string")!
 
-  const [encryptedIncidents] = useQuery(getIncidents, {
-    environmentName: environment,
-    projectSlug: slug,
-  })
-
-  const [incidents, setDecryptedIncidents] = useState<Record<string, DecryptedIncident>>(
-    keyBy(encryptedIncidents, (i) => i.id)
+  const [encryptedIncidentsPages, { fetchMore, canFetchMore }] = useInfiniteQuery(
+    getIncidents,
+    (page = { take: 50, skip: 0 }) => ({
+      ...page,
+      environmentName: environment,
+      projectSlug: slug,
+    }),
+    {
+      getFetchMore: (lastPage) => lastPage.nextPage,
+    }
   )
+
+  const encryptedIncidents = useMemo(() => encryptedIncidentsPages.flatMap((page) => page.items), [
+    encryptedIncidentsPages,
+  ])
+
+  const [decryptedPayloads, setDecryptedPayloads] = useState<Record<string, string>>({})
+  const decryptedIncidents = useMemo(() => {
+    return encryptedIncidents.map(
+      (incident): DecryptedIncident => ({
+        ...incident,
+        decryptedPayload: decryptedPayloads[incident.id],
+      })
+    )
+  }, [encryptedIncidentsPages, decryptedPayloads])
 
   const decrypt = useCallback(
     async (decryptionSecret: string) => {
@@ -183,17 +192,11 @@ const IncidentsDashboard: BlitzPage = () => {
         )
       }
 
-      setDecryptedIncidents((oldIncidents) => {
-        const newIncidents = { ...oldIncidents }
-
-        for (const [id, decryptedPayload] of Object.entries(decryptedPayloads)) {
-          newIncidents[id] = {
-            ...newIncidents[id],
-            decryptedPayload,
-          }
+      setDecryptedPayloads((oldIncidents) => {
+        return {
+          ...oldIncidents,
+          ...decryptedPayloads,
         }
-
-        return newIncidents
       })
     },
     [encryptedIncidents]
@@ -271,7 +274,8 @@ const IncidentsDashboard: BlitzPage = () => {
             <a
               download="incidents.json"
               href={
-                "data:application/json;base64," + btoa(JSON.stringify(Object.values(incidents)))
+                "data:application/json;base64," +
+                btoa(JSON.stringify(Object.values(decryptedIncidents)))
               }
               className="px-8 font-semibold text-gray-500 hover:text-gray-700 transition ease-in-out duration-150 cursor-pointer"
             >
@@ -281,7 +285,13 @@ const IncidentsDashboard: BlitzPage = () => {
           </span>
         </span>
 
-        <IncidentTable incidents={Object.values(incidents)} />
+        <IncidentTable incidents={decryptedIncidents} />
+
+        {canFetchMore && (
+          <button className="pt-4 hover:text-gray-500" onClick={() => fetchMore()}>
+            Fetch More ...
+          </button>
+        )}
       </section>
     </div>
   )
