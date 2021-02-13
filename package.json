@@ -43,7 +43,7 @@
     "@sentry/integrations": "6.1.0",
     "@sentry/node": "6.1.0",
     "@sentry/webpack-plugin": "1.14.0",
-    "@tailwindcss/typography": "0.2.0",
+    "@tailwindcss/typography": "0.4.0",
     "@tailwindui/react": "0.1.1",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.5",
