@@ -59,7 +59,7 @@
     "polished": "3.6.6",
     "postmark": "2.7.1",
     "prisma": "2.16.1",
-    "quirrel": "1.0.4",
+    "quirrel": "1.1.0",
     "react": "0.0.0-experimental-7f28234f8",
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-error-boundary": "2.3.1",
