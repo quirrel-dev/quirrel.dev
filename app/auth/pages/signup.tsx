@@ -55,13 +55,8 @@ const SignupPage: BlitzPage = () => {
               Object.assign(errors, result.error.flatten().fieldErrors)
             }
 
-            if (!values.accept_terms) {
-              errors.accept_terms = ["👈"]
-            }
-
             return errors
           }}
-          validateOnBlur
           render={({ handleSubmit, submitError }) => (
             <form className="mt-5" onSubmit={handleSubmit}>
               <div>
