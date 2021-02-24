@@ -56,7 +56,7 @@
     "body-parser": "1.19.0",
     "final-form": "4.20.1",
     "php-serialize": "4.0.2",
-    "polished": "3.6.6",
+    "polished": "4.1.1",
     "postmark": "2.7.1",
     "prisma": "2.17.0",
     "quirrel": "1.2.0",
