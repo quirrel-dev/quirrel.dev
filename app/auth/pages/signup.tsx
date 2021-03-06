@@ -128,7 +128,7 @@ const SignupPage: BlitzPage = () => {
                   component="input"
                   type="checkbox"
                   className="mx-2 mt-2"
-                  initialValue={true}
+                  initialValue={false}
                 />
                 <label className="text-gray-600 text-sm" htmlFor="marketing">
                   Send me news & updates on Quirrel.
