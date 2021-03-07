@@ -54,7 +54,7 @@
     "basic-auth": "2.0.1",
     "blitz": "0.30.6",
     "body-parser": "1.19.0",
-    "final-form": "4.20.1",
+    "final-form": "4.20.2",
     "php-serialize": "4.0.2",
     "polished": "4.1.1",
     "postmark": "2.7.2",
