@@ -39,9 +39,9 @@
   },
   "dependencies": {
     "@prisma/client": "2.18.0",
-    "@sentry/browser": "6.2.1",
-    "@sentry/integrations": "6.2.1",
-    "@sentry/node": "6.2.1",
+    "@sentry/browser": "6.2.2",
+    "@sentry/integrations": "6.2.2",
+    "@sentry/node": "6.2.2",
     "@sentry/webpack-plugin": "1.14.1",
     "@tailwindcss/typography": "0.4.0",
     "@tailwindui/react": "0.1.1",
