@@ -1,6 +1,5 @@
 // types.ts
-import { DefaultCtx, SessionContext } from "blitz"
-import { simpleRolesIsAuthorized } from "@blitzjs/server"
+import { DefaultCtx, SessionContext, simpleRolesIsAuthorized } from "blitz"
 import { User } from "db"
 
 declare module "blitz" {

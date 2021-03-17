@@ -1,4 +1,4 @@
-import { resolver } from "@blitzjs/core"
+import { resolver } from "blitz"
 import * as mailchimp from "app/mailchimp"
 import * as z from "zod"
 
