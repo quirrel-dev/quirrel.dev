@@ -70,7 +70,7 @@
     "secure-password": "4.0.0",
     "styled-components": "5.2.1",
     "tailwindcss": "1",
-    "victory": "35.4.11",
+    "victory": "35.4.12",
     "zod": "1.11.11"
   },
   "devDependencies": {
