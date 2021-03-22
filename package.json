@@ -38,7 +38,7 @@
     "schema": "db/schema.prisma"
   },
   "dependencies": {
-    "@prisma/client": "2.18.0",
+    "@prisma/client": "2.19.0",
     "@sentry/browser": "6.2.3",
     "@sentry/integrations": "6.2.3",
     "@sentry/node": "6.2.3",
