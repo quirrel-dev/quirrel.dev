@@ -80,7 +80,7 @@
     "@types/react": "17.0.3",
     "@types/react-syntax-highlighter": "13.5.0",
     "@types/secure-password": "3.1.0",
-    "concurrently": "6.0.1",
+    "concurrently": "6.0.2",
     "eslint": "7.24.0",
     "husky": "6.0.0",
     "jest": "26.6.3",
