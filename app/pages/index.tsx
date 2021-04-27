@@ -178,7 +178,7 @@ function Features() {
         {
           title: "Fanout Jobs",
           description:
-            "Sometimes, you just need to offload some computation onto a diferent lambda. That's what fanout jobs are there for.",
+            "Sometimes, you just need to offload some computation onto a different lambda. That's what fanout jobs are there for.",
           svg: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
