@@ -3,12 +3,12 @@ import getConfig from "next/config"
 import { RewriteFrames } from "@sentry/integrations"
 
 if (process.env.SENTRY_DSN) {
-  const config = getConfig()
-  const distDir = `${config.serverRuntimeConfig.rootDir}/.next`
   Sentry.init({
     integrations: [
       new RewriteFrames({
         iteratee: (frame: any) => {
+          const config = getConfig()
+          const distDir = `${config.serverRuntimeConfig.rootDir}/.next`
           frame.filename = frame.filename.replace(distDir, "app:///_next")
           return frame
         },
