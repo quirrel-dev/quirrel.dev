@@ -24,7 +24,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@quirrel_dev" />
-        <meta name="twitter:title" content="Job Queueing for Next.js x Vercel" />
+        <meta name="twitter:title" content="Job Queueing for Serverless" />
         <meta
           name="twitter:description"
           content="Quirrel makes job queues simple as cake. Set up in 5 minutes - even works locally!"
@@ -306,7 +306,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               </a>
             </Link>
             <p className="text-md my-4 text-gray-500">
-              Job Queueing for Next.js x Vercel.
+              Job Queueing for Serverless.
               <br />
               <br />
               Simon Knott
