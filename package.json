@@ -47,7 +47,7 @@
     "@tailwindui/react": "0.1.1",
     "@testing-library/jest-dom": "5.12.0",
     "@testing-library/react": "11.2.7",
-    "@testing-library/react-hooks": "5.1.2",
+    "@testing-library/react-hooks": "7.0.1",
     "@zeit/next-source-maps": "0.0.4-canary.1",
     "axios": "0.21.1",
     "babel-runtime": "6.26.0",
