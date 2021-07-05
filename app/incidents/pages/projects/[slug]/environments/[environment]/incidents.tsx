@@ -135,9 +135,10 @@ const IncidentsDashboard: BlitzPage = () => {
     }
   )
 
-  const encryptedIncidents = useMemo(() => encryptedIncidentsPages.flatMap((page) => page.items), [
-    encryptedIncidentsPages,
-  ])
+  const encryptedIncidents = useMemo(
+    () => encryptedIncidentsPages.flatMap((page) => page.items),
+    [encryptedIncidentsPages]
+  )
 
   const [decryptedPayloads, setDecryptedPayloads] = useState<Record<string, string>>({})
   const decryptedIncidents = useMemo(() => {
@@ -275,7 +276,9 @@ const IncidentsDashboard: BlitzPage = () => {
               download="incidents.json"
               href={
                 "data:application/json;base64," +
-                btoa(JSON.stringify(Object.values(decryptedIncidents)))
+                btoa(
+                  unescape(encodeURIComponent(JSON.stringify(Object.values(decryptedIncidents))))
+                )
               }
               className="px-8 font-semibold text-gray-500 hover:text-gray-700 transition ease-in-out duration-150 cursor-pointer"
             >
