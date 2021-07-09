@@ -52,7 +52,7 @@
     "axios": "0.21.1",
     "babel-runtime": "6.26.0",
     "basic-auth": "2.0.1",
-    "blitz": "0.33.1",
+    "blitz": "0.38.5",
     "body-parser": "1.19.0",
     "final-form": "4.20.2",
     "php-serialize": "4.0.2",
