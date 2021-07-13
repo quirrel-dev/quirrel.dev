@@ -40,7 +40,7 @@
   "dependencies": {
     "@prisma/client": "2.20.1",
     "@sentry/browser": "6.4.0",
-    "@sentry/integrations": "6.3.6",
+    "@sentry/integrations": "6.9.0",
     "@sentry/node": "6.3.5",
     "@sentry/webpack-plugin": "1.15.1",
     "@tailwindcss/typography": "0.4.0",
