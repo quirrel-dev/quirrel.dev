@@ -21,7 +21,7 @@ const incidentPayload = z.object({
     runAt: z.string(),
   }),
   incident: z.object({
-    status: z.number(),
+    status: z.number().default(-1),
     body: z.any(),
   }),
 })
