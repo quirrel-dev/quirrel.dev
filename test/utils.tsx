@@ -83,6 +83,8 @@ export const mockRouter: BlitzRouter = {
   },
   isFallback: false,
   isReady: true,
+  isLocaleDomain: false,
+  isPreview: false,
 }
 
 type DefaultParams = Parameters<typeof defaultRender>
