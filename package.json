@@ -71,7 +71,7 @@
     "styled-components": "5.3.0",
     "tailwindcss": "1",
     "victory": "35.7.0",
-    "zod": "1.11.17"
+    "zod": "3.5.1"
   },
   "devDependencies": {
     "@types/basic-auth": "1.1.3",
