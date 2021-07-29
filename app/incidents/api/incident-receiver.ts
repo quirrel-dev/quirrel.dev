@@ -70,7 +70,7 @@ export default async function incidentReceiver(req: BlitzApiRequest, res: BlitzA
     endpoint: job.endpoint,
     jobId: job.id,
     incidentHttpStatus: "" + incident.status,
-    incident: ellipsize(JSON.stringify(incident.body)),
+    incident: ellipsize(JSON.stringify(incident.body ?? "n/a")),
   })
 
   return res.status(200).end()
