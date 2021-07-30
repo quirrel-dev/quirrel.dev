@@ -1,6 +1,6 @@
 [![Blitz.js](https://raw.githubusercontent.com/blitz-js/art/master/github-cover-photo.png)](https://blitzjs.com)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This is a [Blitz.js](https://github.com/blitz-js/blitz) app.
@@ -182,6 +182,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://0xflotus.github.io"><img src="https://avatars.githubusercontent.com/u/26602940?v=4?s=100" width="100px;" alt=""/><br /><sub><b>0xflotus</b></sub></a><br /><a href="#content-0xflotus" title="Content">🖋</a></td>
+    <td align="center"><a href="http://taloranderson.com"><img src="https://avatars.githubusercontent.com/u/11509865?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Talor Anderson</b></sub></a><br /><a href="https://github.com/quirrel-dev/quirrel.dev/issues?q=author%3ATalor-A" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
