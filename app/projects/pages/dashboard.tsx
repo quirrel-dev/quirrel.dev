@@ -330,7 +330,7 @@ const Dashboard: BlitzPage = () => {
         <h1 className="text-xl font-semibold text-gray-900 leading-7">Projects</h1>
 
         <CardList
-          emptyText="Once your ready to deploy, create your first project using the button below."
+          emptyText="Once you're ready to deploy, create your first project using the button below."
           items={projectSlugs.map((slug) => ({
             title: slug,
             href: `/projects/${slug}`,
