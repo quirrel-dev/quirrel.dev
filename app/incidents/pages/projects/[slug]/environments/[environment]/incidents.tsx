@@ -1,4 +1,5 @@
 import deleteIncidentMutation from "app/incidents/mutations/deleteIncident"
+import deleteAllIncidentsMutation from "app/incidents/mutations/deleteAllIncidents"
 import getIncidents from "app/incidents/queries/getIncidents"
 import Layout from "app/layouts/Layout"
 import {
@@ -122,8 +123,9 @@ function IncidentTable(props: IncidentTableProps) {
 const IncidentsDashboard: BlitzPage = () => {
   const slug = useParam("slug", "string")!
   const environment = useParam("environment", "string")!
+  const [deleteAllIncidents] = useMutation(deleteAllIncidentsMutation)
 
-  const [encryptedIncidentsPages, { fetchMore, canFetchMore }] = useInfiniteQuery(
+  const [encryptedIncidentsPages, { fetchMore, canFetchMore, refetch: refetchIncidents }] = useInfiniteQuery(
     getIncidents,
     (page = { take: 50, skip: 0 }) => ({
       ...page,
@@ -272,6 +274,20 @@ const IncidentsDashboard: BlitzPage = () => {
           <span>{/* Placeholder for Flex */}</span>
 
           <span>
+            <button
+              onClick={async () => {
+                const sure = window.confirm("Are you sure you want to delete all incidents?")
+                if (!sure) {
+                  return
+                }
+
+                await deleteAllIncidents({ projectSlug: slug, tokenName: environment })
+                await refetchIncidents()
+              }}
+              className="font-semibold text-red-500 hover:text-red-700 transition ease-in-out duration-150 cursor-pointer"
+            >
+              Delete all
+            </button>
             <a
               download="incidents.json"
               href={
