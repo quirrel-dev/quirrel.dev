@@ -125,7 +125,7 @@ const IncidentsDashboard: BlitzPage = () => {
   const environment = useParam("environment", "string")!
   const [deleteAllIncidents] = useMutation(deleteAllIncidentsMutation)
 
-  const [encryptedIncidentsPages, { fetchMore, canFetchMore }] = useInfiniteQuery(
+  const [encryptedIncidentsPages, { fetchMore, canFetchMore, refetch: refetchIncidents }] = useInfiniteQuery(
     getIncidents,
     (page = { take: 50, skip: 0 }) => ({
       ...page,
@@ -282,7 +282,7 @@ const IncidentsDashboard: BlitzPage = () => {
                 }
 
                 await deleteAllIncidents({ projectSlug: slug, tokenName: environment })
-                await invalidateQuery(getIncidents)
+                await refetchIncidents()
               }}
               className="font-semibold text-red-500 hover:text-red-700 transition ease-in-out duration-150 cursor-pointer"
             >
