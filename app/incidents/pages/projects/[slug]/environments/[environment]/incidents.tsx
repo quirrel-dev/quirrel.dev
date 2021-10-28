@@ -163,11 +163,18 @@ const IncidentsDashboard: BlitzPage = () => {
 
       await Promise.all(
         encryptedIncidents.map(async (incident) => {
+          const encryptedPayload = incident.jobData.payload
           try {
-            const decryptedPayload = await encryptor.decrypt(incident.jobData.payload)
+            const decryptedPayload = await encryptor.decrypt(encryptedPayload)
 
             decryptedPayloads[incident.id] = decryptedPayload
           } catch (error) {
+            if (encryptedPayload[4] !== ":") {
+              // not encrypted using secure-e2ee
+              decryptedPayloads[incident.id] = encryptedPayload
+              return
+            }
+            
             if (error.message === "Could not decrypt: Auth tag missing.") {
               someCouldNotBeDecryptedBecauseOfMissingAuthTag = true
             }
@@ -175,6 +182,7 @@ const IncidentsDashboard: BlitzPage = () => {
             if (error.message === "Could not decrypt: No matching secret.") {
               someCouldNotBeDecryptedBecauseOfWrongSecret = true
             }
+            
           }
         })
       )
