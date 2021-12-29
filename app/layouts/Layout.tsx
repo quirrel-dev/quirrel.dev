@@ -475,6 +475,15 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
             <p className="text-xs text-gray-600">
               Stay up-to-date on Quirrel development and get exclusive insights.
             </p>
+
+            <a target="_blank" href="https://betteruptime.com/">
+              <img
+                style={{ width: "130px", height: "52px" }}
+                className="mt-4"
+                alt="Better Uptime Website Monitoring"
+                src="https://betteruptime.com/assets/static_assets/badges/light.png"
+              />
+            </a>
           </div>
         </div>
         <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center border-t border-gray-200 pt-10 mt-10">
