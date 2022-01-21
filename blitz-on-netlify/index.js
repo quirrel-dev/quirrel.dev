@@ -16,6 +16,15 @@ function insert(value, { after, insert }) {
 module.exports = {
   ...essentialNextjs,
   async onBuild(args) {
+    const pathToRequiredServerFiles = path.join(".next", "required-server-files.json")
+    const requiredServerFiles = JSON.parse(
+      fs.readFileSync(pathToRequiredServerFiles, { encoding: "utf-8" })
+    )
+    requiredServerFiles.appDir = requiredServerFiles.appDir.replace("/.blitz/build", "/.next")
+    fs.writeFileSync(pathToRequiredServerFiles, JSON.stringify(requiredServerFiles), {
+      encoding: "utf-8",
+    })
+
     await essentialNextjs.onBuild(args)
 
     const pathToNetlifyHandler = path.join(
@@ -33,14 +42,5 @@ module.exports = {
   `,
     })
     fs.writeFileSync(pathToNetlifyHandler, blitzUpdatedContent, { encoding: "utf-8" })
-
-    const pathToRequiredServerFiles = path.join(".next", "required-server-files.json")
-    const requiredServerFiles = JSON.parse(
-      fs.readFileSync(pathToRequiredServerFiles, { encoding: "utf-8" })
-    )
-    requiredServerFiles.appDir = requiredServerFiles.appDir.replace("/.blitz/build", "/.next")
-    fs.writeFileSync(pathToRequiredServerFiles, JSON.stringify(requiredServerFiles), {
-      encoding: "utf-8",
-    })
   },
 }
