@@ -28,7 +28,7 @@ module.exports = {
     const blitzUpdatedContent = insert(currentContent, {
       after: `required-server-files.json")`,
       insert: `
-  const { middleware: blitzMiddleware } = require("../../../.blitz.config.compiled.js");
+  const { middleware: blitzMiddleware } = require("../../../blitz.config.js");
   config.middleware = blitzMiddleware;
   `,
     })
