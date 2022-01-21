@@ -30,6 +30,7 @@ module.exports = {
       insert: `
   const { middleware: blitzMiddleware } = require("../../../blitz.config.js");
   config.middleware = blitzMiddleware;
+  config.appDir = config.appDir.replace("/.blitz/build", "/.next")
   `,
     })
     fs.writeFileSync(pathToNetlifyHandler, blitzUpdatedContent, { encoding: "utf-8" })
