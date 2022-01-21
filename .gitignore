@@ -52,3 +52,6 @@ lib-cov
 .vscode-test
 
 .vercel
+
+# Local Netlify folder
+.netlify
