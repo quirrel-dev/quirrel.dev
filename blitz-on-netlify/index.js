@@ -20,7 +20,7 @@ module.exports = {
     const requiredServerFiles = JSON.parse(
       fs.readFileSync(pathToRequiredServerFiles, { encoding: "utf-8" })
     )
-    requiredServerFiles.appDir = requiredServerFiles.appDir.replace("/.blitz/build", "/.next")
+    requiredServerFiles.appDir = requiredServerFiles.appDir.replace("/.blitz/build", "/")
     fs.writeFileSync(pathToRequiredServerFiles, JSON.stringify(requiredServerFiles), {
       encoding: "utf-8",
     })
