@@ -31,11 +31,6 @@ module.exports = withSourceMaps({
   async redirects() {
     return [
       {
-        source: "/pricing",
-        destination: "/#pricing",
-        permanent: true,
-      },
-      {
         source: "/docs",
         destination: "https://docs.quirrel.dev",
         permanent: true,

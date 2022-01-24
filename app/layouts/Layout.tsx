@@ -82,11 +82,6 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 Features
               </a>
             </Link>
-            <Link href="/#pricing">
-              <a className="ml-8 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-                Pricing
-              </a>
-            </Link>
             <a
               href="https://docs.quirrel.dev"
               target="blank"
@@ -191,15 +186,6 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                     role="menuitem"
                   >
                     Features
-                  </a>
-                </Link>
-
-                <Link href="/#pricing">
-                  <a
-                    className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                    role="menuitem"
-                  >
-                    Pricing
                   </a>
                 </Link>
 
@@ -345,12 +331,6 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 }
               </LoginState>
             </Suspense>
-
-            <Link href="/#pricing">
-              <a className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
-                Pricing
-              </a>
-            </Link>
 
             <a
               href="https://status.quirrel.dev"
