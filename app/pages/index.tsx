@@ -388,7 +388,7 @@ function Pricing() {
 
               <Link href="/signup">
                 <a className="block mt-8 text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
-                  Sign Up
+                  Get Started
                 </a>
               </Link>
             </div>
@@ -511,11 +511,12 @@ function CTA() {
           </a>
         </Link>
       ) : (
-        <Link href="/signup">
-          <a className="block mt-4 sm:mt-0 text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out">
-            Sign Up
-          </a>
-        </Link>
+        <a
+          href="https://docs.quirrel.dev/"
+          className="block mt-4 sm:mt-0 text-center text-orange-600 px-8 py-3 text-base font-medium rounded-md bg-white hover:bg-orange-100 transition duration-150 ease-in-out"
+        >
+          Get Started
+        </a>
       )}
     </section>
   )

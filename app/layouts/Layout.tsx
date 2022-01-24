@@ -340,11 +340,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                       </a>
                     </Link>
                   ) : (
-                    <Link href="/signup">
-                      <a className="flex whitespace-nowrap mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in">
-                        Sign Up
-                      </a>
-                    </Link>
+                    <></>
                   )
                 }
               </LoginState>
