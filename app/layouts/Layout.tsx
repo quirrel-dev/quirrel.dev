@@ -32,7 +32,7 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               alt="netlify logo"
             />
             Quirrel joins Netlify.
-            <a href="https://netlify.com/TODO" target="_blank" className="ml-1 underline">
+            <a href="https://dev.to/quirrel/quirrel-is-acquired-and-i-am-joining-netlify-dha" target="_blank" className="ml-1 underline">
               Learn more
             </a>
           </div>
