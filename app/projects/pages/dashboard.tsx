@@ -126,7 +126,7 @@ function AccountSection() {
           </Suspense>
         </li>
 
-        {user?.isSubscriber ? (
+        {user?.isSubscriber && (
           <>
             <li>
               <a
@@ -149,20 +149,6 @@ function AccountSection() {
               </a>
             </li>
           </>
-        ) : (
-          <li>
-            <a
-              className="font-semibold text-teal-500 hover:text-teal-700 transition ease-in-out duration-150"
-              onClick={upgrade}
-              onKeyDown={upgrade}
-              role="button"
-              tabIndex={-1}
-              data-theme="none"
-              data-product="631848"
-            >
-              Upgrade to Pro plan
-            </a>
-          </li>
         )}
 
         <li>
