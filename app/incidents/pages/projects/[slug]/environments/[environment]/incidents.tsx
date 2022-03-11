@@ -127,7 +127,7 @@ const IncidentsDashboard: BlitzPage = () => {
 
   const [encryptedIncidentsPages, { fetchMore, canFetchMore, refetch: refetchIncidents }] = useInfiniteQuery(
     getIncidents,
-    (page = { take: 50, skip: 0 }) => ({
+    (page = { take: 20, skip: 0 }) => ({
       ...page,
       environmentName: environment,
       projectSlug: slug,
