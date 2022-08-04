@@ -275,6 +275,21 @@ const Dashboard: BlitzPage = () => {
           </Form>
         </Modal>
 
+        <div className="rounded border-red-300 border bg-red-100 p-4 text-center max-w-lg m-auto">
+          <p>
+            As notified, the hosted instance of Quirrel (this site!) is currently shutting down. If your application still relies on
+            it, please reach out to{" "}
+            <a
+              href="mailto:migration@quirrel.dev"
+              target="_blank"
+              className="text-red-600 hover:text-red-900"
+            >
+              migration@quirrel.dev
+            </a>
+            .
+          </p>
+        </div>
+
         {projectSlugs.length === 0 && (
           <div className="rounded border-orange-300 border bg-orange-100 p-4 text-center max-w-lg m-auto">
             <p>Thanks for signing up to Quirrel! Glad to have you here.</p>
