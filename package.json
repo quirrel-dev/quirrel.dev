@@ -38,7 +38,7 @@
     "schema": "db/schema.prisma"
   },
   "dependencies": {
-    "@netlify/plugin-nextjs": "4.2.0",
+    "@netlify/plugin-nextjs": "4.23.1",
     "@prisma/client": "2.20.1",
     "@sentry/browser": "6.4.0",
     "@sentry/integrations": "6.3.6",
