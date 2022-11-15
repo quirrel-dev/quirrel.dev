@@ -1,10 +1,7 @@
 import { ReactNode, Suspense, useState } from "react"
-import { Head, Link, useMutation, Image } from "blitz"
+import { Head, Link, Image } from "blitz"
 import { LoginState } from "app/components/LoginState"
 import { Transition } from "@tailwindui/react"
-import subscribeToNewsletterMutation from "app/users/mutations/subscribeToNewsletter"
-import getStatusQuery from "app/status/queries/getStatus"
-import { Query } from "app/components/Query"
 
 export interface LayoutProps {
   title?: string
@@ -14,7 +11,6 @@ export interface LayoutProps {
 
 const Layout = ({ title, children, hideLogin }: LayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [subscribeToNewsletter] = useMutation(subscribeToNewsletterMutation)
 
   return (
     <>
@@ -120,48 +116,6 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                   About
                 </a>
               </Link>
-
-              {!hideLogin && (
-                <Suspense fallback={null}>
-                  <LoginState>
-                    {({ onClick, isLoggedIn }) => (
-                      <span className="float-right">
-                        <a
-                          href="https://github.com/quirrel-dev/quirrel/issues/new/choose"
-                          target="_blank"
-                          className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out cursor-pointer"
-                        >
-                          Feedback
-                        </a>
-                        {isLoggedIn ? (
-                          <>
-                            <Link href="/dashboard">
-                              <a className="ml-8 font-medium text-gray-600 hover:text-gray-500 transition duration-150 ease-in-out">
-                                Dashboard
-                              </a>
-                            </Link>
-                            <a
-                              className="ml-8 font-medium text-orange-600 hover:text-orange-900 transition duration-150 ease-in-out"
-                              role="menuitem"
-                              tabIndex={-1}
-                              onClick={onClick}
-                              onKeyDown={onClick}
-                            >
-                              Log Out
-                            </a>
-                          </>
-                        ) : (
-                          <Link href="/login">
-                            <a className="ml-8 font-medium text-orange-600 hover:text-orange-900 transition duration-150 ease-in-out float-right">
-                              Log in
-                            </a>
-                          </Link>
-                        )}
-                      </span>
-                    )}
-                  </LoginState>
-                </Suspense>
-              )}
             </div>
           </nav>
         </div>
@@ -378,38 +332,11 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
               </p>
 
               <a
-                href="https://github.com/orgs/quirrel-dev/projects/1"
-                target="blank"
-                className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
-              >
-                Roadmap
-              </a>
-
-              <a
                 href="https://docs.quirrel.dev"
                 target="blank"
                 className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
               >
                 Documentation
-              </a>
-
-              <a
-                href="https://status.quirrel.dev"
-                target="blank"
-                className="flex mb-3 md:mb-2 text-sm font-medium text-gray-800 hover:text-gray-600 transition-colors duration-100 ease-in"
-              >
-                Status:{" "}
-                <Suspense fallback={<span className="text-gray-400">&nbsp;...</span>}>
-                  <Query query={getStatusQuery} param={undefined}>
-                    {(state) =>
-                      state === "up" ? (
-                        <span className="text-green-400">&nbsp;Up!</span>
-                      ) : (
-                        <span className="text-red-400">&nbsp;Down</span>
-                      )
-                    }
-                  </Query>
-                </Suspense>
               </a>
             </nav>
 
@@ -439,61 +366,6 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 Email
               </a>
             </nav>
-            <div className="col-span-4 sm:col-span-3">
-              <p className="uppercase text-gray-600 text-xs tracking-wider font-medium mb-3">
-                SUBSCRIBE TO OUR NEWSLETTER
-              </p>
-              <form
-                className="mb-2"
-                onSubmit={async (evt) => {
-                  evt.preventDefault()
-
-                  const target = evt.target as HTMLFormElement
-
-                  const form = new FormData(target)
-                  const email = form.get("email") as string
-
-                  await subscribeToNewsletter({
-                    email,
-                    hasConsented: false,
-                  })
-
-                  target.reset()
-
-                  window.alert("Awesome! You'll receive a confirmation e-mail shortly.")
-                }}
-              >
-                <label className="tag-label tag-label-sm">
-                  <div className="tag-append">
-                    <input
-                      name="email"
-                      className="w-40 inline-block placeholder-gray-500 appearance-none px-3 py-2 text-gray-900 rounded-l-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
-                      type="email"
-                      placeholder="Enter your email"
-                      required
-                    />
-                    <button
-                      className="text-center px-2 py-1 border border-transparent text-sm leading-6 font-medium rounded-r-md text-white bg-orange-600 hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-indigo transition duration-150 ease-in-out"
-                      type="submit"
-                    >
-                      Subscribe
-                    </button>
-                  </div>
-                </label>
-              </form>
-              <p className="text-xs text-gray-600">
-                Stay up-to-date on Quirrel development and get exclusive insights.
-              </p>
-
-              <a target="_blank" href="https://betteruptime.com/">
-                <img
-                  style={{ width: "130px", height: "52px" }}
-                  className="mt-4"
-                  alt="Better Uptime Website Monitoring"
-                  src="https://betteruptime.com/assets/static_assets/badges/light.png"
-                />
-              </a>
-            </div>
           </div>
           <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center border-t border-gray-200 pt-10 mt-10">
             <p className="text-gray-700 font-medium text-sm text-left mb-6 md:mb-0">
