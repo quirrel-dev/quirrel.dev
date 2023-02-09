@@ -40,16 +40,6 @@ function Hero() {
                 </a>
               )}
             </div>
-            <div className="mt-3 sm:mt-0 sm:ml-3">
-              <a
-                href="https://demo.quirrel.dev"
-                target="_blank"
-                rel="noreferrer"
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-orange-700 bg-orange-200 hover:text-orange-600 hover:bg-orange-50 focus:outline-none focus:shadow-outline-indigo focus:border-orange-300 transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
-              >
-                Try the Demo
-              </a>
-            </div>
           </div>
         </div>
       </div>

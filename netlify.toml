@@ -1,5 +1,5 @@
 [build]
-  command="prisma generate && blitz build && quirrel ci && prisma migrate deploy --preview-feature"
+  command="prisma generate && blitz build"
   publish=".next"
 
 [[plugins]]
