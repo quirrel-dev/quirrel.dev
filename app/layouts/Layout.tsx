@@ -282,9 +282,9 @@ const Layout = ({ title, children, hideLogin }: LayoutProps) => {
                 <br />
                 Simon Knott
                 <br />
-                Stahnsdorfer Straße 142b
+                Dreilindenstraße 34
                 <br />
-                14482 Potsdam
+                14109 Berlin
                 <br />
                 Germany
                 <br />
